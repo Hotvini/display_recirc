@@ -1,0 +1,8 @@
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.h:368:20:CLOCK_EnableClock	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.h:517:20:CTIMER_StartTimer	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.h:527:20:CTIMER_StopTimer	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c:17:6:buzzer_init	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c:32:6:buzzer_on	48	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c:54:6:buzzer_off	8	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c:62:6:buzzer_beep	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c:68:6:buzzer_task	8	static

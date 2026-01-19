@@ -1,0 +1,3 @@
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/armgcc/debug/CMakeFiles/recirc_display.dir
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/armgcc/debug/CMakeFiles/edit_cache.dir
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/armgcc/debug/CMakeFiles/rebuild_cache.dir

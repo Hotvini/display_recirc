@@ -1,0 +1,5 @@
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c:74:12:grace_map_set	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c:80:5:grace_icon_set	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c:84:5:grace_week_set	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c:88:5:grace_dot_set	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c:92:5:grace_digit_set	32	static

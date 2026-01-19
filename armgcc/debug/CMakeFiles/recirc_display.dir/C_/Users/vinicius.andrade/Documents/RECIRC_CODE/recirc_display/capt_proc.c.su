@@ -1,0 +1,16 @@
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.h:319:24:CAPT_GetInterruptStatusFlags	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.h:330:20:CAPT_ClearInterruptStatusFlags	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:14:6:CMP_CAPT_DriverIRQHandler	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:31:6:touch_proc_init	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:38:13:capt_poll_channel	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:44:6:capt_get_sample	24	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:70:6:touch_proc_push_sample	32	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:97:23:touch_proc_get_detect_avg	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:102:23:touch_proc_get_baseline_avg	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:111:6:touch_proc_update_baseline	32	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:122:13:touch_proc_update_detect	32	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:133:6:touch_proc_compute_fast_delta	32	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:149:5:touch_detect_key	32	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:184:6:touch_proc_is_stable	40	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:206:6:key_debounce_init	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:213:5:key_debounce_step	16	static

@@ -1,0 +1,9 @@
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.h:186:20:GPIO_PortSet	24	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.h:198:20:GPIO_PortClear	24	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c:11:13:hal_clk_rise	8	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c:16:13:hal_clk_down	8	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c:21:13:hal_data_set	8	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c:26:13:hal_data_clr	8	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c:31:13:hal_stb_set	8	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c:36:13:hal_stb_clr	8	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c:93:6:display_hal_init	8	static

@@ -1,0 +1,35 @@
+{
+  "configurations": [
+    {
+      "type": "mcuxpresso-debug",
+      "name": "Debug LPC804",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+
+      "executable": {
+        "elf": "${workspaceFolder}/armgcc/debug/recirc_display.elf"
+      },
+
+      "stopAtSymbol": "main",
+
+      "probeSerialNumber": "ALIPEHOQ25DLE",
+
+      "isAttach": false,
+      "skipBuildBeforeDebug": false,
+
+      "gdbInitCommands": [
+        "set remotetimeout 600",
+        "set non-stop off"
+      ],
+
+      "gdbServerConfigs": {
+        "linkserver": {
+          "device": "LPC804",
+          "core": "cm0plus"
+        }
+      },
+
+      "showDevDebugOutput": "none"
+    }
+  ]
+}

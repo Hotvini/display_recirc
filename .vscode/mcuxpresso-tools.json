@@ -1,0 +1,16 @@
+{
+  "version": "25.3",
+  "toolchainPath": "C:/NXP/MCUXpressoIDE_25.6.136/ide/tools",
+  "linkedProjects": [],
+  "trustZoneType": "none",
+  "multicoreType": "none",
+  "projectType": "sdk-freestanding",
+  "sdk": {
+    "version": "25.06.00",
+    "path": "c:\\Users\\vinicius.andrade\\Documents\\RECIRC_CODE\\sdks\\recirc_display_sdk",
+    "boardId": "recirculador_display",
+    "deviceId": "LPC804",
+    "coreId": "core0_LPC804",
+    "partId": "LPC804M101JHI33"
+  }
+}
