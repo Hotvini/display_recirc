@@ -3,3 +3,5 @@ C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c:8
 C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c:84:5:grace_week_set	16	static
 C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c:88:5:grace_dot_set	16	static
 C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c:92:5:grace_digit_set	32	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c:99:5:grace_all_on	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c:127:5:grace_all_off	16	static

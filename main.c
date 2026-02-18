@@ -17,31 +17,6 @@
 #include "capt_proc.h"
 #include "display_hal.h"
 
-/* ===================== FSM ===================== */
-typedef enum
-{
-    kAPP_TouchStateInit,
-    kAPP_TouchStateCalib,
-    kAPP_TouchStateDetect
-} app_touch_state_t;
-
-/* ===================== Globals ===================== */
-
-static app_touch_state_t appTouchState = kAPP_TouchStateInit;
-
-/* Touch processing */
-static touch_proc_t touchProc;
-
-/* Debounce (index-level) */
-static key_debounce_t keyDebounce;
-
-/* Raw CAPT snapshot */
-static int16_t captRaw[CAPT_BTN_COUNT];
-
-/* FSM helpers */
-static uint32_t initCounter = 0;
-static int32_t  lastKey     = CAPT_BTN_COUNT;
-
 
 /* ===================== Display maps ===================== */
 
@@ -59,6 +34,8 @@ static const grace_digit_id_t clock_digits[] = {
 };
 
 /* ===================== LED helpers ===================== */
+//LED DIMMER??
+
 
 static void leds_all_on(void)
 {
@@ -76,6 +53,15 @@ static void leds_all_off(void)
     led_ctrl(S4, LED_OFF);
 }
 
+static const buzzer_note_t melody_boot[] = {
+    { NOTE_C4, 150 },
+    { NOTE_E4, 150 },
+    { NOTE_G4, 200 },
+    { 0,       80  },
+    { NOTE_G4, 150 },
+    { NOTE_C5, 300 },
+};
+
 /* ===================== Main ===================== */
 
 int main(void)
@@ -85,37 +71,42 @@ int main(void)
 
     systick_init();
     buzzer_init();
-    capt_init();
-    key_debounce_init(&keyDebounce);
-    display_hal_init();
+	display_hal_init();
+    //capt_init(); // em task??
+    //key_debounce_init(&keyDebounce);
+    //capt_proc_init(&touchProc); // em task??
 
-    touch_proc_init(&touchProc);
-    appTouchState = kAPP_TouchStateInit;
+	//system_init(); ////////////////////
+    //capt_task_init();
+
+	//grace_all_on();
+	//buzzer_play_melody(melody_boot,sizeof(melody_boot)/sizeof(melody_boot[0]));
+	//grace_all_off();
 
 
     while (1)
     {
+		capt_task(); //o que fazer com ele retornando false ou true? (no keys no bitmap) retornar coisas que vamos escrever leds e display
+
     	/* ===================== CAPT task ===================== */
     	if (capt_get_sample(captRaw))
     	{
     		touch_proc_push_sample(&touchProc, captRaw);
-
 			switch (appTouchState)
 			{
 				/* ---------- INIT ---------- */
 				case kAPP_TouchStateInit:
-					leds_all_on();
-					if (initCounter <= TOUCH_BASELINE_WINDOW)
+					leds_all_off();
+					if (!touch_proc_is_stable(&touchProc))
 					{
-						initCounter++;
-					}
-					else
-					{
-						initCounter = 0u;
 						grace_digit_set(thermo_digits[0], seven_seg_symbols[SEG_C]);
 						grace_digit_set(thermo_digits[1], seven_seg_symbols[SEG_A]);
 						grace_digit_set(thermo_digits[2], seven_seg_symbols[SEG_L]);
 						tm1629a_display_refresh(); // display state
+						appTouchState = kAPP_TouchStateInit;
+					}
+					else
+					{
 						appTouchState = kAPP_TouchStateCalib;
 						leds_all_on();
 					}
@@ -123,35 +114,27 @@ int main(void)
 
 				/* ---------- CALIB ---------- */
 				case kAPP_TouchStateCalib:
-					if (!touch_proc_is_stable(&touchProc))
-					{
-						appTouchState = kAPP_TouchStateInit;
-						break;
-					}
 					touch_proc_update_baseline(&touchProc);
-
-					grace_digit_set(thermo_digits[0], seven_seg_symbols[SEG_B]);
-					grace_digit_set(thermo_digits[1], seven_seg_symbols[SEG_BLANK]);
-					grace_digit_set(thermo_digits[2], seven_seg_symbols[SEG_D]);
-					tm1629a_display_refresh();
+					grace_all_on();
+					//grace_digit_set(thermo_digits[0], seven_seg_symbols[SEG_B]);
+					//grace_digit_set(thermo_digits[1], seven_seg_symbols[SEG_BLANK]);
+					//grace_digit_set(thermo_digits[2], seven_seg_symbols[SEG_D]);
+					//tm1629a_display_refresh();
 					appTouchState = kAPP_TouchStateDetect;
 					break;
 
 				/* ---------- DETECT ---------- */
 				case kAPP_TouchStateDetect:
-//					if (!touch_proc_is_stable(&touchProc))
-//					{
-//						appTouchState = kAPP_TouchStateCalib;
-//						break;
-//					}
 					touch_proc_compute_fast_delta(&touchProc, captRaw);
 					int key_raw = touch_detect_key(&touchProc);
-					int key     = key_debounce_step(&keyDebounce, key_raw);
-					//int key = key_raw; // no key debounce
+					//int key     = key_debounce_step(&keyDebounce, key_raw);
+					int key = key_raw; // no key debounce
 
 					if (key >= CAPT_BTN_COUNT)
 					{
-						leds_all_off();
+						leds_all_on();
+						grace_all_on();
+						buzzer_off();
 					}
 					else
 					{
@@ -161,6 +144,9 @@ int main(void)
 						}
 						else
 						{
+						buzzer_on();
+						leds_all_off();
+						grace_all_off();
 						led_ctrl(key, LED_ON);
 						grace_digit_set(thermo_digits[0], seven_seg_symbols[SEG_BLANK]);
 						grace_digit_set(thermo_digits[1], seven_seg_symbols[SEG_5]);

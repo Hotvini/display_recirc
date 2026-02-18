@@ -19,13 +19,6 @@ typedef enum {
     CAPT_BTN_COUNT
 } capt_button_t;
 
-typedef enum {
-    CAPT_SCAN_ALL,
-    CAPT_FOCUS_ONE,
-    CAPT_ACTIVE,
-	CAPT_CALIB
-} capt_mode_t;
-
 typedef struct //separar em duas structs diferentes?
 {
     /* Baseline (lento) */
@@ -63,7 +56,7 @@ void CMP_CAPT_DriverIRQHandler(void);
 
 bool capt_get_sample(int16_t *raw);
 bool touch_proc_is_stable(const touch_proc_t *ctx);
-void touch_proc_init(touch_proc_t *ctx);
+void capt_proc_init(touch_proc_t *ctx);
 void touch_proc_push_sample(touch_proc_t *ctx, const int16_t *raw);
 void touch_proc_update_baseline(touch_proc_t *ctx);
 void touch_proc_compute_fast_delta(touch_proc_t *ctx, const int16_t *raw);
@@ -71,4 +64,4 @@ int touch_detect_key(touch_proc_t *ctx);
 void key_debounce_init(key_debounce_t *d);
 int key_debounce_step(key_debounce_t *d, int key_raw);
 
-#endif /* CAPT_APP_H_ */
+#endif /* CAPT_PROC_H_ */

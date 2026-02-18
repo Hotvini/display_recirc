@@ -28,7 +28,7 @@ void CMP_CAPT_DriverIRQHandler(void) // flag de outras interrupções pra debug
 /* --------------------------------------------------------------------------
  * Inicialização
  * -------------------------------------------------------------------------- */
-void touch_proc_init(touch_proc_t *ctx)
+void capt_proc_init(touch_proc_t *ctx)
 {
     /* Zera tudo o contexto: janelas, somatórios, baseline e índice */
     memset(ctx, 0, sizeof(touch_proc_t));
@@ -41,18 +41,18 @@ static void capt_poll_channel(capt_button_t ch)
 }
 
 
-bool capt_get_sample(int16_t *raw) //CAPT TASK - reset pins after??
+bool capt_get_sample(int16_t *raw)
 {
-	while(captState.busy) // troquei de if return false
-	{}
+	//while(captState.busy)
+	//{}
+    if (captState.busy)
+        return false;
+
     captState.pending_ch = captState.current_ch;
     captState.busy = true;
-    //ENABLE_CAPT_INTERRUPTS;
-    //CAPT_PollNow(CAPT_PERIPHERAL, captEnabledPins[captState.current_ch]);
     capt_poll_channel(captState.current_ch);
-    //CAPT_SetPollMode(CAPT_PERIPHERAL, kCAPT_PollInactiveMode);
-    //CAPT_SetPollMode(CAPT_PERIPHERAL, kCAPT_PollContinuousMode);
     captState.current_ch++;
+
 	if (captState.current_ch == CAPT_BTN_COUNT)
 	{
 		for (uint8_t i = 0; i < CAPT_BTN_COUNT; i++)
@@ -83,11 +83,11 @@ void touch_proc_push_sample(touch_proc_t *ctx, const int16_t *raw)
 	}
 
 	ctx->baseline_idx++;
-	if (ctx->baseline_idx >= TOUCH_BASELINE_WINDOW)
+	if (ctx->baseline_idx > TOUCH_BASELINE_WINDOW)
 		ctx->baseline_idx = 0;
 
 	ctx->detect_idx++;
-	if (ctx->detect_idx >= TOUCH_DETECT_WINDOW)
+	if (ctx->detect_idx > TOUCH_DETECT_WINDOW)
 		ctx->detect_idx = 0;
 }
 
@@ -136,8 +136,8 @@ void touch_proc_compute_fast_delta(touch_proc_t *ctx, const int16_t *raw)
 	touch_proc_update_detect(ctx);
 	for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
 	{
-		int32_t delta = ctx->detect[ch] - ctx->baseline[ch];
-		//int32_t delta = raw[ch] - ctx->baseline[ch];
+		//int32_t delta = ctx->detect[ch] - ctx->baseline[ch];
+		int32_t delta = raw[ch] - ctx->baseline[ch];
 		ctx->delta[ch] = (delta >= 0) ? delta : -delta;
 		//ctx->fast_delta[ch] += (delta - ctx->fast_delta[ch]) >> TOUCH_FAST_ALPHA_SHIFT;
 	}
@@ -183,18 +183,22 @@ int touch_detect_key(touch_proc_t *ctx)
  * -------------------------------------------------------------------------- */
 bool touch_proc_is_stable(const touch_proc_t *ctx)
 {
+    // ainda não encheu a janela (falso negativo após init)
+    if (ctx->baseline_idx < TOUCH_BASELINE_WINDOW)
+        return (false);
+
     for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
     {
-        int32_t avg = touch_proc_get_detect_avg(ctx, ch);
+        int32_t avg = touch_proc_get_baseline_avg(ctx, ch);
         int32_t variance = 0;
 
-        for (uint8_t i = 0; i < TOUCH_DETECT_WINDOW; i++)
+        for (uint8_t i = 0; i < TOUCH_BASELINE_WINDOW; i++)
         {
-            int32_t diff = ctx->detect_window[ch][i] - avg;
+            int32_t diff = ctx->baseline_window[ch][i] - avg;
             variance += diff * diff;
         }
 
-        variance /= TOUCH_DETECT_WINDOW;
+        variance /= TOUCH_BASELINE_WINDOW;
 
         /* Se qualquer canal estiver instável, rejeita */
         if (variance > ((avg*APP_CHANNEL_STABLE_VARIANCE)/100))

@@ -118,6 +118,20 @@ int grace_dot_set(grace_dot_id_t dot, bool state);
  */
 int grace_digit_set(grace_digit_id_t digit, uint8_t value);
 
+/**
+ * @brief Liga todos os segmentos do display.
+ *
+ * @return 0 em sucesso, -1 se ocorrer erro.
+ */
+int grace_all_on(void);
+
+/**
+ * @brief Desliga todos os segmentos do display.
+ *
+ * @return 0 em sucesso, -1 se ocorrer erro.
+ */
+int grace_all_off(void);
+
 GRACE_END
 
 #endif

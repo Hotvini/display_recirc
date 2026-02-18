@@ -96,4 +96,59 @@ int grace_digit_set(grace_digit_id_t digit, uint8_t value) {
     return 0;
 }
 
+int grace_all_on(void)
+{
+    uint32_t i;
+
+    /* Liga todos os ícones */
+    for (i = 0; i < GRACE_ICON_COUNT; i++) {
+        grace_icon_set((grace_icon_id_t)i, TRUE);
+    }
+
+    /* Liga todos os dias da semana */
+    for (i = 0; i < GRACE_WEEK_COUNT; i++) {
+        grace_week_set((grace_week_id_t)i, TRUE);
+    }
+
+    /* Liga todos os pontos */
+    for (i = 0; i < GRACE_DOT_COUNT; i++) {
+        grace_dot_set((grace_dot_id_t)i, TRUE);
+    }
+
+    /* Liga todos os segmentos dos dígitos */
+    for (i = 0; i < GRACE_DIGIT_COUNT; i++) {
+        grace_digit_set((grace_digit_id_t)i, 0x7F);  // todos os segmentos
+    }
+    tm1629a_display_refresh();
+    return 0;
+}
+
+
+int grace_all_off(void)
+{
+    uint32_t i;
+
+    /* Desliga todos os ícones */
+    for (i = 0; i < GRACE_ICON_COUNT; i++) {
+        grace_icon_set((grace_icon_id_t)i, FALSE);
+    }
+
+    /* Desliga todos os dias da semana */
+    for (i = 0; i < GRACE_WEEK_COUNT; i++) {
+        grace_week_set((grace_week_id_t)i, FALSE);
+    }
+
+    /* Desliga todos os pontos */
+    for (i = 0; i < GRACE_DOT_COUNT; i++) {
+        grace_dot_set((grace_dot_id_t)i, FALSE);
+    }
+
+    /* Apaga todos os segmentos dos dígitos */
+    for (i = 0; i < GRACE_DIGIT_COUNT; i++) {
+        grace_digit_set((grace_digit_id_t)i, 0x00);
+    }
+    tm1629a_display_refresh();
+    return 0;
+}
+
 
