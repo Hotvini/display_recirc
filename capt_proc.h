@@ -39,7 +39,7 @@ typedef struct //separar em duas structs diferentes?
 typedef struct {
 	capt_button_t current_ch;
 	capt_button_t pending_ch;
-    capt_mode_t mode;
+    //capt_mode_t mode;
     uint8_t     debounce_cnt;
     bool    busy;
 } capt_state_t;

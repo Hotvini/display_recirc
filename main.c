@@ -15,6 +15,7 @@
 #include "gpio_app.h"
 #include "buzzer.h"
 #include "capt_proc.h"
+#include "capt_task.h"
 #include "display_hal.h"
 
 
@@ -62,6 +63,13 @@ static const buzzer_note_t melody_boot[] = {
     { NOTE_C5, 300 },
 };
 
+/* ===================== Touch context ===================== */
+
+static touch_proc_t touchProc;
+static int16_t captRaw[CAPT_BTN_COUNT];
+static app_touch_state_t appTouchState = kAPP_TouchStateInit;
+static int32_t lastKey = CAPT_BTN_COUNT;
+
 /* ===================== Main ===================== */
 
 int main(void)
@@ -72,7 +80,8 @@ int main(void)
     systick_init();
     buzzer_init();
 	display_hal_init();
-    //capt_init(); // em task??
+    capt_init();
+    capt_proc_init(&touchProc);
     //key_debounce_init(&keyDebounce);
     //capt_proc_init(&touchProc); // em task??
 
@@ -86,8 +95,6 @@ int main(void)
 
     while (1)
     {
-		capt_task(); //o que fazer com ele retornando false ou true? (no keys no bitmap) retornar coisas que vamos escrever leds e display
-
     	/* ===================== CAPT task ===================== */
     	if (capt_get_sample(captRaw))
     	{

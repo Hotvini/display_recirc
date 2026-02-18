@@ -1,0 +1,28 @@
+# Build output directories
+armgcc/debug/
+armgcc/release/
+
+# CMake/Ninja generated files
+**/CMakeFiles/
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/build.ninja
+**/.ninja_deps
+**/.ninja_log
+**/compile_commands.json
+**/.cmake/
+
+# Generated binaries/maps/objects
+*.elf
+*.bin
+*.map
+*.obj
+*.o
+*.a
+*.su
+
+# Common local IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.tmp

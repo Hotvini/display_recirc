@@ -105,6 +105,8 @@ Discarded input sections
  .text          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
  .data          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
  .bss           0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+ .text.key_debounce_init
+                0x00000000       0x22 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
  .text.key_debounce_step
                 0x00000000       0xa0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
  .text          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/semihost_hardfault.c.obj
@@ -119,14 +121,6 @@ Discarded input sections
                 0x00000000       0x40 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
  .text.buzzer_play_melody
                 0x00000000       0x7c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
- .text          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_app.c.obj
- .data          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_app.c.obj
- .bss           0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_app.c.obj
- .debug_line    0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_app.c.obj
- .debug_str     0x00000000      0x16c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_app.c.obj
- .comment       0x00000000       0x46 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_app.c.obj
- .ARM.attributes
-                0x00000000       0x2c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_app.c.obj
  .text          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
  .data          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
  .bss           0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
@@ -136,14 +130,6 @@ Discarded input sections
  .text          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
  .data          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
  .bss           0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
- .text          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_recirculador.c.obj
- .data          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_recirculador.c.obj
- .bss           0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_recirculador.c.obj
- .debug_line    0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_recirculador.c.obj
- .debug_str     0x00000000      0x177 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_recirculador.c.obj
- .comment       0x00000000       0x46 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_recirculador.c.obj
- .ARM.attributes
-                0x00000000       0x2c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_recirculador.c.obj
  .text          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
  .data          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
  .bss           0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
@@ -151,7 +137,7 @@ Discarded input sections
  .data          0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/i2c_app.c.obj
  .bss           0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/i2c_app.c.obj
  .debug_line    0x00000000        0x0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/i2c_app.c.obj
- .debug_str     0x00000000      0x16a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/i2c_app.c.obj
+ .debug_str     0x00000000      0x163 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/i2c_app.c.obj
  .comment       0x00000000       0x46 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/i2c_app.c.obj
  .ARM.attributes
                 0x00000000       0x2c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/i2c_app.c.obj
@@ -211,7 +197,7 @@ Discarded input sections
  .debug_rnglists
                 0x00000000       0x3a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/components/uart/fsl_adapter_miniusart.c.obj
  .debug_line    0x00000000      0x47c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/components/uart/fsl_adapter_miniusart.c.obj
- .debug_str     0x00000000     0x1413 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/components/uart/fsl_adapter_miniusart.c.obj
+ .debug_str     0x00000000     0x140c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/components/uart/fsl_adapter_miniusart.c.obj
  .comment       0x00000000       0x46 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/components/uart/fsl_adapter_miniusart.c.obj
  .debug_frame   0x00000000       0xf0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/components/uart/fsl_adapter_miniusart.c.obj
  .ARM.attributes
@@ -252,7 +238,7 @@ Discarded input sections
  .debug_rnglists
                 0x00000000       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common.c.obj
  .debug_line    0x00000000      0x286 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common.c.obj
- .debug_str     0x00000000      0x30e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common.c.obj
+ .debug_str     0x00000000      0x307 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common.c.obj
  .comment       0x00000000       0x46 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common.c.obj
  .debug_frame   0x00000000       0x50 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common.c.obj
  .ARM.attributes
@@ -274,7 +260,7 @@ Discarded input sections
  .debug_rnglists
                 0x00000000       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common_arm.c.obj
  .debug_line    0x00000000      0x1d5 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common_arm.c.obj
- .debug_str     0x00000000      0x296 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common_arm.c.obj
+ .debug_str     0x00000000      0x28f CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common_arm.c.obj
  .comment       0x00000000       0x46 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common_arm.c.obj
  .debug_frame   0x00000000       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common_arm.c.obj
  .ARM.attributes
@@ -431,7 +417,7 @@ Discarded input sections
  .debug_rnglists
                 0x00000000       0x4b CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_power.c.obj
  .debug_line    0x00000000      0x66d CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_power.c.obj
- .debug_str     0x00000000      0x958 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_power.c.obj
+ .debug_str     0x00000000      0x951 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_power.c.obj
  .comment       0x00000000       0x46 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_power.c.obj
  .debug_frame   0x00000000      0x150 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_power.c.obj
  .ARM.attributes
@@ -458,7 +444,7 @@ Discarded input sections
  .debug_rnglists
                 0x00000000       0x13 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_syscon.c.obj
  .debug_line    0x00000000      0x1e8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_syscon.c.obj
- .debug_str     0x00000000      0x883 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_syscon.c.obj
+ .debug_str     0x00000000      0x87c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_syscon.c.obj
  .comment       0x00000000       0x46 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_syscon.c.obj
  .debug_frame   0x00000000       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_syscon.c.obj
  .ARM.attributes
@@ -485,7 +471,7 @@ Discarded input sections
  .debug_rnglists
                 0x00000000       0x55 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/fsl_syscall_stub.c.obj
  .debug_line    0x00000000      0x30e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/fsl_syscall_stub.c.obj
- .debug_str     0x00000000      0x3f7 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/fsl_syscall_stub.c.obj
+ .debug_str     0x00000000      0x3f0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/fsl_syscall_stub.c.obj
  .comment       0x00000000       0x46 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/fsl_syscall_stub.c.obj
  .debug_frame   0x00000000      0x18c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/fsl_syscall_stub.c.obj
  .ARM.attributes
@@ -503,7 +489,7 @@ Discarded input sections
  .debug_rnglists
                 0x00000000       0x13 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/fsl_sbrk.c.obj
  .debug_line    0x00000000      0x1e1 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/fsl_sbrk.c.obj
- .debug_str     0x00000000      0x277 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/fsl_sbrk.c.obj
+ .debug_str     0x00000000      0x270 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/fsl_sbrk.c.obj
  .comment       0x00000000       0x46 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/fsl_sbrk.c.obj
  .debug_frame   0x00000000       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/fsl_sbrk.c.obj
  .ARM.attributes
@@ -588,7 +574,7 @@ Discarded input sections
  .debug_rnglists
                 0x00000000       0xca CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/str/fsl_str.c.obj
  .debug_line    0x00000000      0xb31 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/str/fsl_str.c.obj
- .debug_str     0x00000000      0x691 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/str/fsl_str.c.obj
+ .debug_str     0x00000000      0x68a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/str/fsl_str.c.obj
  .comment       0x00000000       0x46 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/str/fsl_str.c.obj
  .debug_frame   0x00000000      0x35c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/str/fsl_str.c.obj
  .ARM.attributes
@@ -930,11 +916,9 @@ LOAD CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CO
 LOAD CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
 LOAD CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/semihost_hardfault.c.obj
 LOAD CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
-LOAD CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_app.c.obj
 LOAD CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
 LOAD CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
 LOAD CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
-LOAD CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_recirculador.c.obj
 LOAD CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
 LOAD CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/i2c_app.c.obj
 LOAD CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
@@ -984,7 +968,7 @@ LOAD C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1
 LOAD C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtn.o
                 0x00000040                        HEAP_SIZE = DEFINED (__heap_size__)?__heap_size__:0x40
                 0x00000040                        STACK_SIZE = DEFINED (__stack_size__)?__stack_size__:0x40
-                0xefffd5d5                        __valid_user_code_checksum = (0x0 - ((((__StackTop + Reset_Handler) + NMI_Handler) + HardFault_Handler) + 0x3))
+                0xefffd61d                        __valid_user_code_checksum = (0x0 - ((((__StackTop + Reset_Handler) + NMI_Handler) + HardFault_Handler) + 0x3))
 
 .interrupts     0x00000000       0xc0
                 0x00000000                        . = ALIGN (0x4)
@@ -999,7 +983,7 @@ LOAD C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1
  .crp           0x000002fc        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/gcc/startup_LPC804.S.obj
                 0x00000300                        . = ALIGN (0x4)
 
-.text           0x00000300     0x3ef4
+.text           0x00000300     0x3eac
                 0x00000300                        . = ALIGN (0x4)
  *(.text)
  .text          0x00000300       0x80 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crt0.o
@@ -1105,517 +1089,514 @@ LOAD C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1
                 0x00000924       0x2a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
  .text.leds_all_off
                 0x0000094e       0x2a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
- .text.main     0x00000978      0x268 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
+ .text.main     0x00000978      0x238 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
                 0x00000978                main
  .text.__NVIC_EnableIRQ
-                0x00000be0       0x34 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
+                0x00000bb0       0x34 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
  .text.EnableIRQ
-                0x00000c14       0x36 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
+                0x00000be4       0x36 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
  .text.CAPT_EnableInterrupts
-                0x00000c4a       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
- *fill*         0x00000c62        0x2 
+                0x00000c1a       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
+ *fill*         0x00000c32        0x2 
  .text.capt_init
-                0x00000c64       0x74 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
-                0x00000c64                capt_init
+                0x00000c34       0x74 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
+                0x00000c34                capt_init
  .text.CAPT_GetInterruptStatusFlags
-                0x00000cd8       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x00000ca8       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
  .text.CAPT_ClearInterruptStatusFlags
-                0x00000cec       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x00000cbc       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
  .text.CMP_CAPT_DriverIRQHandler
-                0x00000d04       0x64 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
-                0x00000d04                CMP_CAPT_DriverIRQHandler
+                0x00000cd4       0x64 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x00000cd4                CMP_CAPT_DriverIRQHandler
  .text.capt_proc_init
-                0x00000d68       0x2c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
-                0x00000d68                capt_proc_init
+                0x00000d38       0x2c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x00000d38                capt_proc_init
  .text.capt_poll_channel
-                0x00000d94       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x00000d64       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
  .text.capt_get_sample
-                0x00000dc4       0x90 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
-                0x00000dc4                capt_get_sample
+                0x00000d94       0x94 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x00000d94                capt_get_sample
  .text.touch_proc_push_sample
-                0x00000e54      0x198 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
-                0x00000e54                touch_proc_push_sample
+                0x00000e28      0x198 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x00000e28                touch_proc_push_sample
  .text.touch_proc_get_detect_avg
-                0x00000fec       0x2e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x00000fc0       0x2e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
  .text.touch_proc_get_baseline_avg
-                0x0000101a       0x2a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x00000fee       0x2a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
  .text.touch_proc_update_baseline
-                0x00001044       0x50 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
-                0x00001044                touch_proc_update_baseline
+                0x00001018       0x50 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x00001018                touch_proc_update_baseline
  .text.touch_proc_update_detect
-                0x00001094       0x50 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x00001068       0x50 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
  .text.touch_proc_compute_fast_delta
-                0x000010e4       0x72 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
-                0x000010e4                touch_proc_compute_fast_delta
+                0x000010b8       0x72 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x000010b8                touch_proc_compute_fast_delta
  .text.touch_detect_key
-                0x00001156       0xc2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
-                0x00001156                touch_detect_key
+                0x0000112a       0xc2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x0000112a                touch_detect_key
  .text.touch_proc_is_stable
-                0x00001218       0xbc CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
-                0x00001218                touch_proc_is_stable
- .text.key_debounce_init
-                0x000012d4       0x22 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
-                0x000012d4                key_debounce_init
- *fill*         0x000012f6        0x2 
+                0x000011ec       0xc2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x000011ec                touch_proc_is_stable
+ *fill*         0x000012ae        0x2 
  .text.HardFault_Handler
-                0x000012f8       0x38 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/semihost_hardfault.c.obj
-                0x000012f8                HardFault_Handler
+                0x000012b0       0x38 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/semihost_hardfault.c.obj
+                0x000012b0                HardFault_Handler
  .text.CLOCK_EnableClock
-                0x00001330       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
+                0x000012e8       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
  .text.CTIMER_StartTimer
-                0x00001384       0x1c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
+                0x0000133c       0x1c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
  .text.CTIMER_StopTimer
-                0x000013a0       0x1e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
- *fill*         0x000013be        0x2 
+                0x00001358       0x1e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
+ *fill*         0x00001376        0x2 
  .text.buzzer_init
-                0x000013c0       0x64 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
-                0x000013c0                buzzer_init
+                0x00001378       0x64 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
+                0x00001378                buzzer_init
  .text.buzzer_on
-                0x00001424       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
-                0x00001424                buzzer_on
+                0x000013dc       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
+                0x000013dc                buzzer_on
  .text.buzzer_off
-                0x0000143c       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
-                0x0000143c                buzzer_off
+                0x000013f4       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
+                0x000013f4                buzzer_off
  .text.CLOCK_Select
-                0x00001454       0x38 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
+                0x0000140c       0x38 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
  .text.CLOCK_SetCoreSysClkDiv
-                0x0000148c       0x4c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
+                0x00001444       0x4c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
  .text.POWER_DisablePD
-                0x000014d8       0x2c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
+                0x00001490       0x2c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
  .text.BOARD_InitBootClocks
-                0x00001504        0xe CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
-                0x00001504                BOARD_InitBootClocks
- *fill*         0x00001512        0x2 
+                0x000014bc        0xe CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
+                0x000014bc                BOARD_InitBootClocks
+ *fill*         0x000014ca        0x2 
  .text.BOARD_BootClockRUN
-                0x00001514       0x7c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
-                0x00001514                BOARD_BootClockRUN
+                0x000014cc       0x7c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
+                0x000014cc                BOARD_BootClockRUN
  .text.grace_map_set
-                0x00001590       0x50 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+                0x00001548       0x50 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
  .text.grace_icon_set
-                0x000015e0       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
-                0x000015e0                grace_icon_set
+                0x00001598       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+                0x00001598                grace_icon_set
  .text.grace_week_set
-                0x00001610       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
-                0x00001610                grace_week_set
+                0x000015c8       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+                0x000015c8                grace_week_set
  .text.grace_dot_set
-                0x00001640       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
-                0x00001640                grace_dot_set
+                0x000015f8       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+                0x000015f8                grace_dot_set
  .text.grace_digit_set
-                0x00001670       0x58 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
-                0x00001670                grace_digit_set
+                0x00001628       0x58 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+                0x00001628                grace_digit_set
  .text.grace_all_on
-                0x000016c8       0x8c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
-                0x000016c8                grace_all_on
+                0x00001680       0x8c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+                0x00001680                grace_all_on
  .text.grace_all_off
-                0x00001754       0x8c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
-                0x00001754                grace_all_off
+                0x0000170c       0x8c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+                0x0000170c                grace_all_off
  .text.GPIO_PortSet
-                0x000017e0       0x26 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+                0x00001798       0x26 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
  .text.GPIO_PortClear
-                0x00001806       0x26 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+                0x000017be       0x26 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
  .text.hal_clk_rise
-                0x0000182c       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+                0x000017e4       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
  .text.hal_clk_down
-                0x00001846       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+                0x000017fe       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
  .text.hal_data_set
-                0x00001860       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+                0x00001818       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
  .text.hal_data_clr
-                0x0000187a       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+                0x00001832       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
  .text.hal_stb_set
-                0x00001894       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+                0x0000184c       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
  .text.hal_stb_clr
-                0x000018ae       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+                0x00001866       0x1a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
  .text.display_hal_init
-                0x000018c8       0x1c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
-                0x000018c8                display_hal_init
+                0x00001880       0x1c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+                0x00001880                display_hal_init
  .text.GPIO_PinWrite
-                0x000018e4       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
+                0x0000189c       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
  .text.led_ctrl
-                0x00001914       0x80 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
-                0x00001914                led_ctrl
+                0x000018cc       0x80 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
+                0x000018cc                led_ctrl
  .text.CLOCK_EnableClock
-                0x00001994       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
+                0x0000194c       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
  .text.CLOCK_DisableClock
-                0x000019e8       0x58 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
+                0x000019a0       0x58 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
  .text.IOCON_PinMuxSet
-                0x00001a40       0x26 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
+                0x000019f8       0x26 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
  .text.BOARD_InitBootPins
-                0x00001a66        0xe CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
-                0x00001a66                BOARD_InitBootPins
+                0x00001a1e        0xe CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
+                0x00001a1e                BOARD_InitBootPins
  .text.BOARD_InitPins
-                0x00001a74      0x23c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
-                0x00001a74                BOARD_InitPins
+                0x00001a2c      0x23c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
+                0x00001a2c                BOARD_InitPins
  .text.__NVIC_SetPriority
-                0x00001cb0       0xdc CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
+                0x00001c68       0xdc CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
  .text.SysTick_Config
-                0x00001d8c       0x48 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
+                0x00001d44       0x48 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
  .text.SysTick_Handler
-                0x00001dd4       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
-                0x00001dd4                SysTick_Handler
+                0x00001d8c       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
+                0x00001d8c                SysTick_Handler
  .text.systick_init
-                0x00001dec       0x28 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
-                0x00001dec                systick_init
+                0x00001da4       0x28 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
+                0x00001da4                systick_init
  .text.tm1629a_register_hal_driver
-                0x00001e14       0x60 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
-                0x00001e14                tm1629a_register_hal_driver
+                0x00001dcc       0x60 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x00001dcc                tm1629a_register_hal_driver
  .text.delay_ns
-                0x00001e74       0x38 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x00001e2c       0x38 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
  .text.write_byte
-                0x00001eac       0x84 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
- .text.start    0x00001f30       0x1c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
- .text.end      0x00001f4c       0x1c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x00001e64       0x84 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+ .text.start    0x00001ee8       0x1c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+ .text.end      0x00001f04       0x1c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
  .text.set_addr
-                0x00001f68       0x2c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x00001f20       0x2c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
  .text.set_mode
-                0x00001f94       0x32 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x00001f4c       0x32 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
  .text.display_ctrl
-                0x00001fc6       0x34 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x00001f7e       0x34 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
  .text.display_data
-                0x00001ffa       0x1e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x00001fb2       0x1e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
  .text.tm1629a_display_refresh
-                0x00002018       0x50 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
-                0x00002018                tm1629a_display_refresh
+                0x00001fd0       0x50 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x00001fd0                tm1629a_display_refresh
  .text.tm1629a_buffer_clean
-                0x00002068       0x38 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
-                0x00002068                tm1629a_buffer_clean
+                0x00002020       0x38 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x00002020                tm1629a_buffer_clean
  .text.tm1629a_buffer_update_bit_state
-                0x000020a0       0x88 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
-                0x000020a0                tm1629a_buffer_update_bit_state
+                0x00002058       0x88 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x00002058                tm1629a_buffer_update_bit_state
  .text.tm1629a_buffer_update_masked
-                0x00002128       0x70 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
-                0x00002128                tm1629a_buffer_update_masked
+                0x000020e0       0x70 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x000020e0                tm1629a_buffer_update_masked
  .text.tm1629a_brightness
-                0x00002198       0x56 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
-                0x00002198                tm1629a_brightness
- *fill*         0x000021ee        0x2 
+                0x00002150       0x56 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x00002150                tm1629a_brightness
+ *fill*         0x000021a6        0x2 
  .text.tm1629a_init
-                0x000021f0       0x6c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
-                0x000021f0                tm1629a_init
+                0x000021a8       0x6c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x000021a8                tm1629a_init
  .text.SystemInit
-                0x0000225c       0x2c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
-                0x0000225c                SystemInit
+                0x00002214       0x2c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
+                0x00002214                SystemInit
  .text.SystemCoreClockUpdate
-                0x00002288       0x84 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
-                0x00002288                SystemCoreClockUpdate
+                0x00002240       0x84 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
+                0x00002240                SystemCoreClockUpdate
  .text.SystemInitHook
-                0x0000230c        0xa CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
-                0x0000230c                SystemInitHook
- *fill*         0x00002316        0x2 
+                0x000022c4        0xa CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
+                0x000022c4                SystemInitHook
+ *fill*         0x000022ce        0x2 
  .text.CLOCK_GetCoreSysClkFreq
-                0x00002318       0x24 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x000022d0       0x24 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
  .text.CLOCK_GetLPOscFreq
-                0x0000233c       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x000022f4       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
  .text.CLOCK_GetExtClkFreq
-                0x00002350       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x00002308       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
  .text.CLOCK_GetFRGInputClkFreq
-                0x00002364       0x42 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
- *fill*         0x000023a6        0x2 
+                0x0000231c       0x42 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+ *fill*         0x0000235e        0x2 
  .text.CLOCK_SetFRGClkFreq
-                0x000023a8       0xac CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x00002360       0xac CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
  .text.CLOCK_UpdateClkSrc
-                0x00002454       0x58 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x0000240c       0x58 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
  .text.CLOCK_SetFRG0ClkFreq
-                0x000024ac       0x24 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
-                0x000024ac                CLOCK_SetFRG0ClkFreq
+                0x00002464       0x24 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x00002464                CLOCK_SetFRG0ClkFreq
  .text.CLOCK_GetFRG0ClkFreq
-                0x000024d0       0x58 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
-                0x000024d0                CLOCK_GetFRG0ClkFreq
+                0x00002488       0x58 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x00002488                CLOCK_GetFRG0ClkFreq
  .text.CLOCK_GetMainClkFreq
-                0x00002528       0x74 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
-                0x00002528                CLOCK_GetMainClkFreq
+                0x000024e0       0x74 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x000024e0                CLOCK_GetMainClkFreq
  .text.CLOCK_GetFroFreq
-                0x0000259c       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
-                0x0000259c                CLOCK_GetFroFreq
+                0x00002554       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x00002554                CLOCK_GetFroFreq
  .text.CLOCK_GetFreq
-                0x000025b0       0x7c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
-                0x000025b0                CLOCK_GetFreq
+                0x00002568       0x7c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x00002568                CLOCK_GetFreq
  .text.CLOCK_SetMainClkSrc
-                0x0000262c       0x4c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
-                0x0000262c                CLOCK_SetMainClkSrc
+                0x000025e4       0x4c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x000025e4                CLOCK_SetMainClkSrc
  .text.CLOCK_SetFroOscFreq
-                0x00002678       0x44 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
-                0x00002678                CLOCK_SetFroOscFreq
+                0x00002630       0x44 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x00002630                CLOCK_SetFroOscFreq
  .text.CLOCK_EnableClock
-                0x000026bc       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
+                0x00002674       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
  .text.GPIO_EnablePortClock
-                0x00002710       0x38 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
+                0x000026c8       0x38 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
  .text.GPIO_PinInit
-                0x00002748       0xc0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
-                0x00002748                GPIO_PinInit
+                0x00002700       0xc0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
+                0x00002700                GPIO_PinInit
  .text.USART0_DriverIRQHandler
-                0x00002808       0x24 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
-                0x00002808                USART0_DriverIRQHandler
+                0x000027c0       0x24 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
+                0x000027c0                USART0_DriverIRQHandler
  .text.USART1_DriverIRQHandler
-                0x0000282c       0x24 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
-                0x0000282c                USART1_DriverIRQHandler
+                0x000027e4       0x24 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
+                0x000027e4                USART1_DriverIRQHandler
  .text.RESET_SetPeripheralReset
-                0x00002850       0x7c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
-                0x00002850                RESET_SetPeripheralReset
+                0x00002808       0x7c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
+                0x00002808                RESET_SetPeripheralReset
  .text.RESET_ClearPeripheralReset
-                0x000028cc       0x78 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
-                0x000028cc                RESET_ClearPeripheralReset
+                0x00002884       0x78 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
+                0x00002884                RESET_ClearPeripheralReset
  .text.RESET_PeripheralReset
-                0x00002944       0x20 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
-                0x00002944                RESET_PeripheralReset
+                0x000028fc       0x20 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
+                0x000028fc                RESET_PeripheralReset
  .text.SWM_SetMovablePinSelect
-                0x00002964       0xa8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
-                0x00002964                SWM_SetMovablePinSelect
+                0x0000291c       0xa8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
+                0x0000291c                SWM_SetMovablePinSelect
  .text.SWM_SetFixedPinSelect
-                0x00002a0c       0x78 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
-                0x00002a0c                SWM_SetFixedPinSelect
+                0x000029c4       0x78 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
+                0x000029c4                SWM_SetFixedPinSelect
  .text.fsl_assert_hook
-                0x00002a84       0x16 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
-                0x00002a84                fsl_assert_hook
- *fill*         0x00002a9a        0x2 
+                0x00002a3c       0x16 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
+                0x00002a3c                fsl_assert_hook
+ *fill*         0x00002a52        0x2 
  .text.__assert_func
-                0x00002a9c       0x34 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
-                0x00002a9c                __assert_func
+                0x00002a54       0x34 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
+                0x00002a54                __assert_func
  .text.DbgConsole_Printf
-                0x00002ad0       0x32 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
-                0x00002ad0                DbgConsole_Printf
- *fill*         0x00002b02        0x2 
+                0x00002a88       0x32 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
+                0x00002a88                DbgConsole_Printf
+ *fill*         0x00002aba        0x2 
  .text.DbgConsole_Vprintf
-                0x00002b04       0x40 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
-                0x00002b04                DbgConsole_Vprintf
+                0x00002abc       0x40 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
+                0x00002abc                DbgConsole_Vprintf
  .text.DbgConsole_Putchar
-                0x00002b44       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
-                0x00002b44                DbgConsole_Putchar
+                0x00002afc       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
+                0x00002afc                DbgConsole_Putchar
  .text.DbgConsole_PrintfPaddingCharacter
-                0x00002b74       0x48 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
+                0x00002b2c       0x48 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
  .text.DbgConsole_ConvertRadixNumToString
-                0x00002bbc       0xc2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
+                0x00002b74       0xc2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
  .text.DbgConsole_PrintfFormattedData
-                0x00002c7e      0x3da CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
+                0x00002c36      0x3da CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
  .text.CLOCK_EnableClock
-                0x00003058       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+                0x00003010       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
  .text.CAPT_GetInstance
-                0x000030ac       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+                0x00003064       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
  .text.CAPT_Init
-                0x00003100      0x118 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
-                0x00003100                CAPT_Init
+                0x000030b8      0x118 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+                0x000030b8                CAPT_Init
  .text.CAPT_GetDefaultConfig
-                0x00003218       0x78 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
-                0x00003218                CAPT_GetDefaultConfig
+                0x000031d0       0x78 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+                0x000031d0                CAPT_GetDefaultConfig
  .text.CAPT_GetTouchData
-                0x00003290       0xb4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
-                0x00003290                CAPT_GetTouchData
+                0x00003248       0xb4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+                0x00003248                CAPT_GetTouchData
  .text.CAPT_PollNow
-                0x00003344       0x62 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
-                0x00003344                CAPT_PollNow
- *fill*         0x000033a6        0x2 
+                0x000032fc       0x62 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+                0x000032fc                CAPT_PollNow
+ *fill*         0x0000335e        0x2 
  .text.__NVIC_EnableIRQ
-                0x000033a8       0x34 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x00003360       0x34 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
  .text.CLOCK_EnableClock
-                0x000033dc       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x00003394       0x54 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
  .text.EnableIRQ
-                0x00003430       0x36 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x000033e8       0x36 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
  .text.CTIMER_GetStatusFlags
-                0x00003466       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x0000341e       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
  .text.CTIMER_ClearStatusFlags
-                0x0000347a       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
- *fill*         0x00003492        0x2 
+                0x00003432       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+ *fill*         0x0000344a        0x2 
  .text.CTIMER_GetInstance
-                0x00003494       0x5c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x0000344c       0x5c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
  .text.CTIMER_Init
-                0x000034f0       0x80 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
-                0x000034f0                CTIMER_Init
+                0x000034a8       0x80 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x000034a8                CTIMER_Init
  .text.CTIMER_GetDefaultConfig
-                0x00003570       0x4c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
-                0x00003570                CTIMER_GetDefaultConfig
+                0x00003528       0x4c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x00003528                CTIMER_GetDefaultConfig
  .text.CTIMER_SetupPwm
-                0x000035bc      0x220 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
-                0x000035bc                CTIMER_SetupPwm
+                0x00003574      0x220 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x00003574                CTIMER_SetupPwm
  .text.CTIMER_GenericIRQHandler
-                0x000037dc       0xb0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x00003794       0xb0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
  .text.CTIMER0_DriverIRQHandler
-                0x0000388c       0x10 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
-                0x0000388c                CTIMER0_DriverIRQHandler
+                0x00003844       0x10 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x00003844                CTIMER0_DriverIRQHandler
  .text.__muldi3
-                0x0000389c       0x5c C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libgcc.a(_muldi3.o)
-                0x0000389c                __muldi3
-                0x0000389c                __aeabi_lmul
+                0x00003854       0x5c C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libgcc.a(_muldi3.o)
+                0x00003854                __muldi3
+                0x00003854                __aeabi_lmul
  .text.__udivmoddi4
-                0x000038f8      0x198 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libgcc.a(_udivmoddi4.o)
-                0x000038f8                __udivmoddi4
- .text.exit     0x00003a90       0x28 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libc_nano.a(libc_a-exit.o)
-                0x00003a90                exit
- .text.memset   0x00003ab8       0x10 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libc_nano.a(libc_a-memset.o)
-                0x00003ab8                memset
+                0x000038b0      0x198 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libgcc.a(_udivmoddi4.o)
+                0x000038b0                __udivmoddi4
+ .text.exit     0x00003a48       0x28 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libc_nano.a(libc_a-exit.o)
+                0x00003a48                exit
+ .text.memset   0x00003a70       0x10 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libc_nano.a(libc_a-memset.o)
+                0x00003a70                memset
  .text.__libc_init_array
-                0x00003ac8       0x48 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libc_nano.a(libc_a-init.o)
-                0x00003ac8                __libc_init_array
- .text.memcpy   0x00003b10       0x12 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libc_nano.a(libc_a-memcpy-stub.o)
-                0x00003b10                memcpy
- .text._exit    0x00003b22        0x2 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_newlib_nohost.a(_exit.o)
-                0x00003b22                _exit
+                0x00003a80       0x48 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libc_nano.a(libc_a-init.o)
+                0x00003a80                __libc_init_array
+ .text.memcpy   0x00003ac8       0x12 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libc_nano.a(libc_a-memcpy-stub.o)
+                0x00003ac8                memcpy
+ .text._exit    0x00003ada        0x2 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_newlib_nohost.a(_exit.o)
+                0x00003ada                _exit
  *(.rodata)
- .rodata        0x00003b24       0x77 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
- *fill*         0x00003b9b        0x1 
- .rodata        0x00003b9c        0x2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
- *fill*         0x00003b9e        0x2 
- .rodata        0x00003ba0       0x82 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
- *fill*         0x00003c22        0x2 
- .rodata        0x00003c24       0x8e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
- *fill*         0x00003cb2        0x2 
- .rodata        0x00003cb4       0x7b CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
- *fill*         0x00003d2f        0x1 
- .rodata        0x00003d30       0xca CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
- *fill*         0x00003dfa        0x2 
- .rodata        0x00003dfc       0x3e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
- *fill*         0x00003e3a        0x2 
- .rodata        0x00003e3c       0xbd CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
- *fill*         0x00003ef9        0x3 
- .rodata        0x00003efc       0xc1 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+ .rodata        0x00003adc       0x77 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
+ *fill*         0x00003b53        0x1 
+ .rodata        0x00003b54        0x2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
+ *fill*         0x00003b56        0x2 
+ .rodata        0x00003b58       0x82 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+ *fill*         0x00003bda        0x2 
+ .rodata        0x00003bdc       0x8e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
+ *fill*         0x00003c6a        0x2 
+ .rodata        0x00003c6c       0x7b CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
+ *fill*         0x00003ce7        0x1 
+ .rodata        0x00003ce8       0xca CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
+ *fill*         0x00003db2        0x2 
+ .rodata        0x00003db4       0x3e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
+ *fill*         0x00003df2        0x2 
+ .rodata        0x00003df4       0xbd CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+ *fill*         0x00003eb1        0x3 
+ .rodata        0x00003eb4       0xc1 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
  *(.rodata*)
- *fill*         0x00003fbd        0x3 
+ *fill*         0x00003f75        0x3 
  .rodata.captEnabledPins
-                0x00003fc0        0x8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
-                0x00003fc0                captEnabledPins
+                0x00003f78        0x8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x00003f78                captEnabledPins
  .rodata.__func__.0
-                0x00003fc8       0x17 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
- *fill*         0x00003fdf        0x1 
+                0x00003f80       0x17 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
+ *fill*         0x00003f97        0x1 
  .rodata.grace_icon_map
-                0x00003fe0        0xe CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
- *fill*         0x00003fee        0x2 
+                0x00003f98        0xe CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+ *fill*         0x00003fa6        0x2 
  .rodata.grace_week_map
-                0x00003ff0        0xe CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
- *fill*         0x00003ffe        0x2 
+                0x00003fa8        0xe CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+ *fill*         0x00003fb6        0x2 
  .rodata.grace_dot_map
-                0x00004000        0x8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+                0x00003fb8        0x8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
  .rodata.grace_digit_map
-                0x00004008        0xe CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
- *fill*         0x00004016        0x2 
+                0x00003fc0        0xe CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+ *fill*         0x00003fce        0x2 
  .rodata.seven_seg_symbols
-                0x00004018       0x22 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
-                0x00004018                seven_seg_symbols
- *fill*         0x0000403a        0x2 
- .rodata.leds   0x0000403c       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
+                0x00003fd0       0x22 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+                0x00003fd0                seven_seg_symbols
+ *fill*         0x00003ff2        0x2 
+ .rodata.leds   0x00003ff4       0x30 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
  .rodata.CLOCK_GetFreq
-                0x0000406c       0x1c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x00004024       0x1c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
  .rodata.__func__.5
-                0x00004088       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x00004040       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
  .rodata.__func__.4
-                0x0000409c       0x13 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
- *fill*         0x000040af        0x1 
+                0x00004054       0x13 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+ *fill*         0x00004067        0x1 
  .rodata.__func__.3
-                0x000040b0       0x15 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
- *fill*         0x000040c5        0x3 
+                0x00004068       0x15 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+ *fill*         0x0000407d        0x3 
  .rodata.__func__.0
-                0x000040c8       0x15 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
- *fill*         0x000040dd        0x3 
+                0x00004080       0x15 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
+ *fill*         0x00004095        0x3 
  .rodata.__func__.1
-                0x000040e0       0x19 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
- *fill*         0x000040f9        0x3 
+                0x00004098       0x19 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
+ *fill*         0x000040b1        0x3 
  .rodata.__func__.0
-                0x000040fc       0x1b CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
- *fill*         0x00004117        0x1 
+                0x000040b4       0x1b CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
+ *fill*         0x000040cf        0x1 
  .rodata.__func__.2
-                0x00004118       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
+                0x000040d0       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
  .rodata.__func__.0
-                0x00004130       0x16 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
- *fill*         0x00004146        0x2 
+                0x000040e8       0x16 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
+ *fill*         0x000040fe        0x2 
  .rodata.__func__.3
-                0x00004148       0x11 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
- *fill*         0x00004159        0x3 
+                0x00004100       0x11 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+ *fill*         0x00004111        0x3 
  .rodata.__func__.2
-                0x0000415c        0xa CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
- *fill*         0x00004166        0x2 
+                0x00004114        0xa CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+ *fill*         0x0000411e        0x2 
  .rodata.__func__.1
-                0x00004168       0x16 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
- *fill*         0x0000417e        0x2 
+                0x00004120       0x16 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+ *fill*         0x00004136        0x2 
  .rodata.__func__.0
-                0x00004180       0x12 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
- *fill*         0x00004192        0x2 
+                0x00004138       0x12 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+ *fill*         0x0000414a        0x2 
  .rodata.__func__.4
-                0x00004194       0x13 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
- *fill*         0x000041a7        0x1 
+                0x0000414c       0x13 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+ *fill*         0x0000415f        0x1 
  .rodata.__func__.3
-                0x000041a8        0xc CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x00004160        0xc CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
  .rodata.__func__.2
-                0x000041b4       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x0000416c       0x18 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
  .rodata.__func__.1
-                0x000041cc       0x10 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x00004184       0x10 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
  *(.glue_7)
- .glue_7        0x000041dc        0x0 linker stubs
+ .glue_7        0x00004194        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x000041dc        0x0 linker stubs
+ .glue_7t       0x00004194        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x000041dc        0x0 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
+ .eh_frame      0x00004194        0x0 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
  *(.init)
- .init          0x000041dc        0x4 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crti.o
-                0x000041dc                _init
- .init          0x000041e0        0x8 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtn.o
+ .init          0x00004194        0x4 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crti.o
+                0x00004194                _init
+ .init          0x00004198        0x8 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtn.o
  *(.fini)
- .fini          0x000041e8        0x4 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crti.o
-                0x000041e8                _fini
- .fini          0x000041ec        0x8 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtn.o
-                0x000041f4                        . = ALIGN (0x4)
+ .fini          0x000041a0        0x4 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crti.o
+                0x000041a0                _fini
+ .fini          0x000041a4        0x8 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtn.o
+                0x000041ac                        . = ALIGN (0x4)
 
-.vfp11_veneer   0x000041f4        0x0
- .vfp11_veneer  0x000041f4        0x0 linker stubs
+.vfp11_veneer   0x000041ac        0x0
+ .vfp11_veneer  0x000041ac        0x0 linker stubs
 
-.v4_bx          0x000041f4        0x0
- .v4_bx         0x000041f4        0x0 linker stubs
+.v4_bx          0x000041ac        0x0
+ .v4_bx         0x000041ac        0x0 linker stubs
 
-.iplt           0x000041f4        0x0
- .iplt          0x000041f4        0x0 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
+.iplt           0x000041ac        0x0
+ .iplt          0x000041ac        0x0 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x000041f4        0x8
-                0x000041f4                        __exidx_start = .
+.ARM            0x000041ac        0x8
+                0x000041ac                        __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x000041f4        0x8 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crt0.o
+ .ARM.exidx     0x000041ac        0x8 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crt0.o
                                  0x10 (size before relaxing)
  .ARM.exidx.text.__udivmoddi4
-                0x000041fc        0x0 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libgcc.a(_udivmoddi4.o)
+                0x000041b4        0x0 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libgcc.a(_udivmoddi4.o)
                                   0x8 (size before relaxing)
-                0x000041fc                        __exidx_end = .
+                0x000041b4                        __exidx_end = .
 
-.rel.dyn        0x000041fc        0x0
- .rel.iplt      0x000041fc        0x0 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
+.rel.dyn        0x000041b4        0x0
+ .rel.iplt      0x000041b4        0x0 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
 
-.ctors          0x000041fc        0x0
-                0x000041fc                        __CTOR_LIST__ = .
+.ctors          0x000041b4        0x0
+                0x000041b4                        __CTOR_LIST__ = .
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
  *(SORT_BY_NAME(.ctors.*))
  *(.ctors)
-                0x000041fc                        __CTOR_END__ = .
+                0x000041b4                        __CTOR_END__ = .
 
-.dtors          0x000041fc        0x0
-                0x000041fc                        __DTOR_LIST__ = .
+.dtors          0x000041b4        0x0
+                0x000041b4                        __DTOR_LIST__ = .
  *crtbegin.o(.dtors)
  *crtbegin?.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
-                0x000041fc                        __DTOR_END__ = .
+                0x000041b4                        __DTOR_END__ = .
 
-.preinit_array  0x000041fc        0x0
-                0x000041fc                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x000041b4        0x0
+                0x000041b4                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x000041fc                        PROVIDE (__preinit_array_end = .)
+                0x000041b4                        PROVIDE (__preinit_array_end = .)
 
-.init_array     0x000041fc        0x4
-                0x000041fc                        PROVIDE (__init_array_start = .)
+.init_array     0x000041b4        0x4
+                0x000041b4                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x000041fc        0x4 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
-                0x00004200                        PROVIDE (__init_array_end = .)
+ .init_array    0x000041b4        0x4 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
+                0x000041b8                        PROVIDE (__init_array_end = .)
 
-.fini_array     0x00004200        0x4
+.fini_array     0x000041b8        0x4
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x00004200        0x4 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
+ .fini_array    0x000041b8        0x4 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x00004204                        __etext = .
-                0x00004204                        __DATA_ROM = .
+                0x000041bc                        __etext = .
+                0x000041bc                        __DATA_ROM = .
 
-.data           0x10000000       0x24 load address 0x00004204
+.data           0x10000000       0x24 load address 0x000041bc
                 0x10000000                        . = ALIGN (0x4)
                 0x10000000                        __DATA_RAM = .
                 0x10000000                        __data_start__ = .
@@ -1634,21 +1615,21 @@ LOAD C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1
  *(.jcr*)
                 0x10000024                        . = ALIGN (0x4)
                 0x10000024                        __data_end__ = .
-                0x00004228                        __DATA_END = (__DATA_ROM + (__data_end__ - __data_start__))
+                0x000041e0                        __DATA_END = (__DATA_ROM + (__data_end__ - __data_start__))
                 0x00007f00                        text_end = (ORIGIN (m_text) + LENGTH (m_text))
                 0x00000001                        ASSERT ((__DATA_END <= text_end), region m_text overflowed with text and data)
 
 .tm_clone_table
-                0x10000024        0x0 load address 0x00004228
+                0x10000024        0x0 load address 0x000041e0
  .tm_clone_table
                 0x10000024        0x0 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
  .tm_clone_table
                 0x10000024        0x0 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtend.o
 
-.igot.plt       0x10000024        0x0 load address 0x00004228
+.igot.plt       0x10000024        0x0 load address 0x000041e0
  .igot.plt      0x10000024        0x0 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
 
-.bss            0x10000024      0x15c load address 0x00004228
+.bss            0x10000024      0x150 load address 0x000041e0
                 0x10000024                        . = ALIGN (0x4)
                 0x10000024                        __START_BSS = .
                 0x10000024                        __bss_start__ = .
@@ -1658,73 +1639,68 @@ LOAD C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1
                 0x10000024        0x1 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
  *fill*         0x10000025        0x3 
  .bss.object.0  0x10000028       0x18 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o
- .bss.appTouchState
-                0x10000040        0x1 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
- *fill*         0x10000041        0x3 
  .bss.touchProc
-                0x10000044       0xb8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
- .bss.keyDebounce
-                0x100000fc        0x3 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
- *fill*         0x100000ff        0x1 
- .bss.captRaw   0x10000100        0x8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
- .bss.initCounter
-                0x10000108        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
+                0x10000040       0xb8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
+ .bss.captRaw   0x100000f8        0x8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
+ .bss.appTouchState
+                0x10000100        0x1 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
+ *fill*         0x10000101        0x3 
  .bss.CAPT_config.0
-                0x1000010c        0xc CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
+                0x10000104        0xc CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
  .bss.captRawData
-                0x10000118        0x8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x10000110        0x8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
  .bss.captState
-                0x10000120        0x5 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
-                0x10000120                captState
- *fill*         0x10000125        0x3 
- .bss.data      0x10000128        0x6 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
-                0x10000128                data
- *fill*         0x1000012e        0x2 
- .bss.ms_ticks  0x10000130        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
- .bss.driver    0x10000134        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
- .bss.buffer    0x10000138       0x10 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+                0x10000118        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x10000118                captState
+ .bss.data      0x1000011c        0x6 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+                0x1000011c                data
+ *fill*         0x10000122        0x2 
+ .bss.ms_ticks  0x10000124        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
+ .bss.driver    0x10000128        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+ .bss.buffer    0x1000012c       0x10 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
  .bss.clk_delay
-                0x10000148        0x2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
- *fill*         0x1000014a        0x2 
+                0x1000013c        0x2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+ *fill*         0x1000013e        0x2 
  .bss.g_Ext_Clk_Freq
-                0x1000014c        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
-                0x1000014c                g_Ext_Clk_Freq
+                0x10000140        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x10000140                g_Ext_Clk_Freq
  .bss.g_Fro_Osc_Freq
-                0x10000150        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
-                0x10000150                g_Fro_Osc_Freq
+                0x10000144        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+                0x10000144                g_Fro_Osc_Freq
  .bss.s_usartHandle
-                0x10000154        0x8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
+                0x10000148        0x8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
  .bss.s_usartIsr
-                0x1000015c        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
+                0x10000150        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
  .bss.s_debugConsole
-                0x10000160       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
+                0x10000154       0x14 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
  .bss.s_ctimerCallback
-                0x10000174        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+                0x10000168        0x4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
  .bss.ctimerCallbackType
-                0x10000178        0x1 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
- *fill*         0x10000179        0x3 
+                0x1000016c        0x1 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+ *fill*         0x1000016d        0x3 
  .bss.__stdio_exit_handler
-                0x1000017c        0x4 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libc_nano.a(libc_a-findfp.o)
-                0x1000017c                __stdio_exit_handler
+                0x10000170        0x4 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libc_nano.a(libc_a-findfp.o)
+                0x10000170                __stdio_exit_handler
  *(COMMON)
-                0x10000180                        . = ALIGN (0x4)
-                0x10000180                        __bss_end__ = .
-                0x10000180                        __END_BSS = .
+                0x10000174                        . = ALIGN (0x4)
+                0x10000174                        __bss_end__ = .
+                0x10000174                        __END_BSS = .
 
-.heap           0x10000180       0x40 load address 0x00004384
-                0x10000180                        . = ALIGN (0x8)
-                0x10000180                        __end__ = .
-                0x10000180                        PROVIDE (end = .)
-                0x10000180                        __HeapBase = .
-                0x100001c0                        . = (. + HEAP_SIZE)
- *fill*         0x10000180       0x40 
-                0x100001c0                        __HeapLimit = .
-                0x100001c0                        __heap_limit = .
+.heap           0x10000174       0x44 load address 0x00004330
+                0x10000178                        . = ALIGN (0x8)
+ *fill*         0x10000174        0x4 
+                0x10000178                        __end__ = .
+                0x10000178                        PROVIDE (end = .)
+                0x10000178                        __HeapBase = .
+                0x100001b8                        . = (. + HEAP_SIZE)
+ *fill*         0x10000178       0x40 
+                0x100001b8                        __HeapLimit = .
+                0x100001b8                        __heap_limit = .
 
-.stack          0x100001c0       0x40 load address 0x000043c4
-                0x100001c0                        . = ALIGN (0x8)
-                0x10000200                        . = (. + STACK_SIZE)
- *fill*         0x100001c0       0x40 
+.stack          0x100001b8       0x40 load address 0x00004374
+                0x100001b8                        . = ALIGN (0x8)
+                0x100001f8                        . = (. + STACK_SIZE)
+ *fill*         0x100001b8       0x40 
                 0x10000fe0                        __StackTop = (ORIGIN (m_data) + LENGTH (m_data))
                 0x10000fa0                        __StackLimit = (__StackTop - STACK_SIZE)
                 0x10000fe0                        PROVIDE (__stack = __StackTop)
@@ -1844,57 +1820,57 @@ LOAD linker stubs
  .debug_line_str
                 0x00000352       0xeb C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp\libc_nano.a(libc_a-strlen.o)
 
-.debug_info     0x00000000     0xdfd9
- .debug_info    0x00000000      0xa2b CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
- .debug_info    0x00000a2b      0x874 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
- .debug_info    0x0000129f      0xcac CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
- .debug_info    0x00001f4b       0x39 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/semihost_hardfault.c.obj
- .debug_info    0x00001f84      0xa47 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
- .debug_info    0x000029cb      0x6f6 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
- .debug_info    0x000030c1      0x41e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
- .debug_info    0x000034df      0x847 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
- .debug_info    0x00003d26      0x6e5 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
- .debug_info    0x0000440b      0xce6 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
- .debug_info    0x000050f1      0x78d CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
- .debug_info    0x0000587e      0x453 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
- .debug_info    0x00005cd1      0x37b CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/gcc/startup_LPC804.S.obj
- .debug_info    0x0000604c      0x50d CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
- .debug_info    0x00006559      0xfec CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
- .debug_info    0x00007545      0xc88 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
- .debug_info    0x000081cd     0x1c42 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
- .debug_info    0x00009e0f      0x5e8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
- .debug_info    0x0000a3f7      0x7c9 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
- .debug_info    0x0000abc0      0x126 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
- .debug_info    0x0000ace6      0xce5 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
- .debug_info    0x0000b9cb      0xec2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
- .debug_info    0x0000c88d     0x16a9 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
- .debug_info    0x0000df36       0xa3 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_newlib_nohost.a(_exit.o)
+.debug_info     0x00000000     0xdf10
+ .debug_info    0x00000000      0x99a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
+ .debug_info    0x0000099a      0x874 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
+ .debug_info    0x0000120e      0xc74 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+ .debug_info    0x00001e82       0x39 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/semihost_hardfault.c.obj
+ .debug_info    0x00001ebb      0xa47 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
+ .debug_info    0x00002902      0x6f6 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
+ .debug_info    0x00002ff8      0x41e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+ .debug_info    0x00003416      0x847 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+ .debug_info    0x00003c5d      0x6e5 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
+ .debug_info    0x00004342      0xce6 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
+ .debug_info    0x00005028      0x78d CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
+ .debug_info    0x000057b5      0x453 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+ .debug_info    0x00005c08      0x37b CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/gcc/startup_LPC804.S.obj
+ .debug_info    0x00005f83      0x50d CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
+ .debug_info    0x00006490      0xfec CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+ .debug_info    0x0000747c      0xc88 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
+ .debug_info    0x00008104     0x1c42 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
+ .debug_info    0x00009d46      0x5e8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
+ .debug_info    0x0000a32e      0x7c9 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
+ .debug_info    0x0000aaf7      0x126 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
+ .debug_info    0x0000ac1d      0xce5 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
+ .debug_info    0x0000b902      0xec2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+ .debug_info    0x0000c7c4     0x16a9 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+ .debug_info    0x0000de6d       0xa3 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_newlib_nohost.a(_exit.o)
 
-.debug_abbrev   0x00000000     0x2c95
- .debug_abbrev  0x00000000      0x1ba CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
- .debug_abbrev  0x000001ba      0x271 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
- .debug_abbrev  0x0000042b      0x2b6 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
- .debug_abbrev  0x000006e1       0x2d CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/semihost_hardfault.c.obj
- .debug_abbrev  0x0000070e      0x241 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
- .debug_abbrev  0x0000094f      0x21d CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
- .debug_abbrev  0x00000b6c      0x15a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
- .debug_abbrev  0x00000cc6      0x1ea CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
- .debug_abbrev  0x00000eb0      0x175 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
- .debug_abbrev  0x00001025      0x219 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
- .debug_abbrev  0x0000123e      0x1f0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
- .debug_abbrev  0x0000142e      0x1bd CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
- .debug_abbrev  0x000015eb       0x26 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/gcc/startup_LPC804.S.obj
- .debug_abbrev  0x00001611      0x16f CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
- .debug_abbrev  0x00001780      0x33c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
- .debug_abbrev  0x00001abc      0x1e8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
- .debug_abbrev  0x00001ca4      0x392 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
- .debug_abbrev  0x00002036      0x153 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
- .debug_abbrev  0x00002189      0x182 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
- .debug_abbrev  0x0000230b       0xa8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
- .debug_abbrev  0x000023b3      0x242 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
- .debug_abbrev  0x000025f5      0x289 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
- .debug_abbrev  0x0000287e      0x3b0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
- .debug_abbrev  0x00002c2e       0x67 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_newlib_nohost.a(_exit.o)
+.debug_abbrev   0x00000000     0x2c81
+ .debug_abbrev  0x00000000      0x1aa CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
+ .debug_abbrev  0x000001aa      0x271 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
+ .debug_abbrev  0x0000041b      0x2b2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+ .debug_abbrev  0x000006cd       0x2d CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/semihost_hardfault.c.obj
+ .debug_abbrev  0x000006fa      0x241 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
+ .debug_abbrev  0x0000093b      0x21d CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
+ .debug_abbrev  0x00000b58      0x15a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+ .debug_abbrev  0x00000cb2      0x1ea CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+ .debug_abbrev  0x00000e9c      0x175 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
+ .debug_abbrev  0x00001011      0x219 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
+ .debug_abbrev  0x0000122a      0x1f0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
+ .debug_abbrev  0x0000141a      0x1bd CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+ .debug_abbrev  0x000015d7       0x26 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/gcc/startup_LPC804.S.obj
+ .debug_abbrev  0x000015fd      0x16f CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
+ .debug_abbrev  0x0000176c      0x33c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+ .debug_abbrev  0x00001aa8      0x1e8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
+ .debug_abbrev  0x00001c90      0x392 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
+ .debug_abbrev  0x00002022      0x153 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
+ .debug_abbrev  0x00002175      0x182 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
+ .debug_abbrev  0x000022f7       0xa8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
+ .debug_abbrev  0x0000239f      0x242 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
+ .debug_abbrev  0x000025e1      0x289 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+ .debug_abbrev  0x0000286a      0x3b0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+ .debug_abbrev  0x00002c1a       0x67 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_newlib_nohost.a(_exit.o)
 
 .debug_aranges  0x00000000      0x848
  .debug_aranges
@@ -1993,58 +1969,58 @@ LOAD linker stubs
  .debug_rnglists
                 0x00000530       0x92 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
 
-.debug_line     0x00000000     0x6001
- .debug_line    0x00000000      0x36a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
- .debug_line    0x0000036a      0x416 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
- .debug_line    0x00000780      0x66b CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
- .debug_line    0x00000deb       0x8e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/semihost_hardfault.c.obj
- .debug_line    0x00000e79      0x3a8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
- .debug_line    0x00001221      0x371 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
- .debug_line    0x00001592      0x2c7 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
- .debug_line    0x00001859      0x2f6 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
- .debug_line    0x00001b4f      0x25f CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
- .debug_line    0x00001dae      0x34f CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
- .debug_line    0x000020fd      0x386 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
- .debug_line    0x00002483      0x439 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
- .debug_line    0x000028bc      0x136 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/gcc/startup_LPC804.S.obj
- .debug_line    0x000029f2      0x2a1 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
- .debug_line    0x00002c93      0x618 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
- .debug_line    0x000032ab      0x2eb CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
- .debug_line    0x00003596      0xd29 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
- .debug_line    0x000042bf      0x28c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
- .debug_line    0x0000454b      0x2df CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
- .debug_line    0x0000482a      0x135 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
- .debug_line    0x0000495f      0x7df CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
- .debug_line    0x0000513e      0x545 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
- .debug_line    0x00005683      0x93a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
- .debug_line    0x00005fbd       0x44 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_newlib_nohost.a(_exit.o)
+.debug_line     0x00000000     0x5ffb
+ .debug_line    0x00000000      0x363 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
+ .debug_line    0x00000363      0x416 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
+ .debug_line    0x00000779      0x66c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+ .debug_line    0x00000de5       0x8e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/semihost_hardfault.c.obj
+ .debug_line    0x00000e73      0x3a8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
+ .debug_line    0x0000121b      0x371 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
+ .debug_line    0x0000158c      0x2c7 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+ .debug_line    0x00001853      0x2f6 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+ .debug_line    0x00001b49      0x25f CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
+ .debug_line    0x00001da8      0x34f CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
+ .debug_line    0x000020f7      0x386 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
+ .debug_line    0x0000247d      0x439 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+ .debug_line    0x000028b6      0x136 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/gcc/startup_LPC804.S.obj
+ .debug_line    0x000029ec      0x2a1 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
+ .debug_line    0x00002c8d      0x618 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+ .debug_line    0x000032a5      0x2eb CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
+ .debug_line    0x00003590      0xd29 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
+ .debug_line    0x000042b9      0x28c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
+ .debug_line    0x00004545      0x2df CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
+ .debug_line    0x00004824      0x135 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
+ .debug_line    0x00004959      0x7df CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
+ .debug_line    0x00005138      0x545 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+ .debug_line    0x0000567d      0x93a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+ .debug_line    0x00005fb7       0x44 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_newlib_nohost.a(_exit.o)
 
-.debug_str      0x00000000     0x6ae4
- .debug_str     0x00000000     0x6ae4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
-                               0x123e (size before relaxing)
- .debug_str     0x00006ae4      0xc9d CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
- .debug_str     0x00006ae4     0x12e4 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
- .debug_str     0x00006ae4      0x187 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/semihost_hardfault.c.obj
- .debug_str     0x00006ae4      0xaf7 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
- .debug_str     0x00006ae4      0x98a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
- .debug_str     0x00006ae4      0x5a9 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
- .debug_str     0x00006ae4      0xf73 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
- .debug_str     0x00006ae4      0xdf8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
- .debug_str     0x00006ae4      0xede CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
- .debug_str     0x00006ae4     0x1003 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
- .debug_str     0x00006ae4      0x491 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
- .debug_str     0x00006ae4      0x6ae CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/gcc/startup_LPC804.S.obj
- .debug_str     0x00006ae4      0x4e8 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
- .debug_str     0x00006ae4     0x1412 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
- .debug_str     0x00006ae4     0x13a5 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
- .debug_str     0x00006ae4     0x2262 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
- .debug_str     0x00006ae4      0x6e2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
- .debug_str     0x00006ae4     0x1088 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
- .debug_str     0x00006ae4      0x275 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
- .debug_str     0x00006ae4     0x145f CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
- .debug_str     0x00006ae4     0x170f CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
- .debug_str     0x00006ae4     0x1cce CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
- .debug_str     0x00006ae4      0x1b8 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_newlib_nohost.a(_exit.o)
+.debug_str      0x00000000     0x6a8a
+ .debug_str     0x00000000     0x6a8a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj
+                               0x11de (size before relaxing)
+ .debug_str     0x00006a8a      0xc96 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj
+ .debug_str     0x00006a8a     0x1297 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj
+ .debug_str     0x00006a8a      0x180 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/semihost_hardfault.c.obj
+ .debug_str     0x00006a8a      0xaf0 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/buzzer.c.obj
+ .debug_str     0x00006a8a      0x983 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c.obj
+ .debug_str     0x00006a8a      0x5a2 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_grace.c.obj
+ .debug_str     0x00006a8a      0xf6c CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/display_hal.c.obj
+ .debug_str     0x00006a8a      0xdf1 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/gpio_app.c.obj
+ .debug_str     0x00006a8a      0xed7 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c.obj
+ .debug_str     0x00006a8a      0xffc CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c.obj
+ .debug_str     0x00006a8a      0x48a CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/tm1629a.c.obj
+ .debug_str     0x00006a8a      0x6ae CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/gcc/startup_LPC804.S.obj
+ .debug_str     0x00006a8a      0x4e1 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/system_LPC804.c.obj
+ .debug_str     0x00006a8a     0x140b CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.c.obj
+ .debug_str     0x00006a8a     0x139e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_gpio.c.obj
+ .debug_str     0x00006a8a     0x225b CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_usart.c.obj
+ .debug_str     0x00006a8a      0x6db CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_reset.c.obj
+ .debug_str     0x00006a8a     0x1081 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_swm.c.obj
+ .debug_str     0x00006a8a      0x26e CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_assert.c.obj
+ .debug_str     0x00006a8a     0x1458 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/utilities/debug_console_lite/fsl_debug_console.c.obj
+ .debug_str     0x00006a8a     0x1708 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.c.obj
+ .debug_str     0x00006a8a     0x1cc7 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_ctimer.c.obj
+ .debug_str     0x00006a8a      0x1b8 C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_newlib_nohost.a(_exit.o)
 
 .comment        0x00000000       0x45
  .comment       0x00000000       0x45 CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj

@@ -12,5 +12,5 @@ C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:122:1
 C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:133:6:touch_proc_compute_fast_delta	32	static
 C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:149:5:touch_detect_key	32	static
 C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:184:6:touch_proc_is_stable	40	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:206:6:key_debounce_init	16	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:213:5:key_debounce_step	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:210:6:key_debounce_init	16	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c:217:5:key_debounce_step	16	static
