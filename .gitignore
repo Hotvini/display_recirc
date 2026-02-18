@@ -1,6 +1,6 @@
 # Build output directories
-armgcc/debug/
-armgcc/release/
+armgcc/
+
 
 # CMake/Ninja generated files
 **/CMakeFiles/
