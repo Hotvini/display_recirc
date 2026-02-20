@@ -6,7 +6,7 @@
  */
 #include "capt_proc.h"
 
-static int16_t captRawData[CAPT_BTN_COUNT];
+static uint16_t captRawData[CAPT_BTN_COUNT];
 const uint16_t captEnabledPins[CAPT_BTN_COUNT] = CAPT_ENABLE_PINS_ARRAY;
 capt_state_t captState;
 capt_touch_data_t data;
@@ -41,7 +41,7 @@ static void capt_poll_channel(capt_button_t ch)
 }
 
 
-bool capt_get_sample(int16_t *raw)
+bool capt_get_sample(uint16_t *raw)
 {
 	//while(captState.busy)
 	//{}
@@ -67,7 +67,7 @@ bool capt_get_sample(int16_t *raw)
 /* --------------------------------------------------------------------------
  * Atualização da janela deslizante (moving average)
  * -------------------------------------------------------------------------- */
-void touch_proc_push_sample(touch_proc_t *ctx, const int16_t *raw)
+void touch_proc_push_sample(touch_proc_t *ctx, const uint16_t *raw)
 {
 	for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
 	{
@@ -83,23 +83,27 @@ void touch_proc_push_sample(touch_proc_t *ctx, const int16_t *raw)
 	}
 
 	ctx->baseline_idx++;
-	if (ctx->baseline_idx > TOUCH_BASELINE_WINDOW)
+	if (ctx->baseline_idx >= TOUCH_BASELINE_WINDOW)
 		ctx->baseline_idx = 0;
+	if (ctx->baseline_samples < TOUCH_BASELINE_WINDOW)
+		ctx->baseline_samples++;
 
 	ctx->detect_idx++;
-	if (ctx->detect_idx > TOUCH_DETECT_WINDOW)
+	if (ctx->detect_idx >= TOUCH_DETECT_WINDOW)
 		ctx->detect_idx = 0;
+    if (ctx->detect_samples < TOUCH_DETECT_WINDOW)
+		ctx->detect_samples++;
 }
 
 /* --------------------------------------------------------------------------
  * Cálculo de média
  * -------------------------------------------------------------------------- */
-static inline int32_t touch_proc_get_detect_avg(const touch_proc_t *ctx, uint8_t ch)
+static inline uint32_t touch_proc_get_detect_avg(const touch_proc_t *ctx, uint8_t ch)
 {
     return (ctx->detect_sum[ch] / TOUCH_DETECT_WINDOW);
 }
 
-static inline int32_t touch_proc_get_baseline_avg(const touch_proc_t *ctx, uint8_t ch)
+static inline uint32_t touch_proc_get_baseline_avg(const touch_proc_t *ctx, uint8_t ch)
 {
     //return (ctx->sum[ch] / TOUCH_WINDOW_LENGTH);
     return (ctx->baseline_sum[ch] / TOUCH_BASELINE_WINDOW);
@@ -130,16 +134,17 @@ static void touch_proc_update_detect(touch_proc_t *ctx)
 /* --------------------------------------------------------------------------
  * Delta = média atual - baseline
  * -------------------------------------------------------------------------- */
-void touch_proc_compute_fast_delta(touch_proc_t *ctx, const int16_t *raw)
+void touch_proc_compute_fast_delta(touch_proc_t *ctx, const uint16_t *raw)
 {
 	/* Pré-condição: touch_proc_push_sample() já foi chamado */
 	touch_proc_update_detect(ctx);
+    static uint32_t deltaA[CAPT_BTN_COUNT];
+    static uint32_t deltaB[CAPT_BTN_COUNT];
 	for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
 	{
-		//int32_t delta = ctx->detect[ch] - ctx->baseline[ch];
-		int32_t delta = raw[ch] - ctx->baseline[ch];
-		ctx->delta[ch] = (delta >= 0) ? delta : -delta;
-		//ctx->fast_delta[ch] += (delta - ctx->fast_delta[ch]) >> TOUCH_FAST_ALPHA_SHIFT;
+		deltaA[ch] = (raw[ch] >= ctx->baseline[ch]) ? (raw[ch] - ctx->baseline[ch]) : (ctx->baseline[ch] - raw[ch]);
+        deltaB[ch] = (ctx->detect[ch] >= ctx->baseline[ch]) ? (ctx->detect[ch] - ctx->baseline[ch]) : (ctx->baseline[ch] - ctx->detect[ch]);
+        ctx->delta[ch] = (deltaA[ch] > deltaB[ch]) ? deltaA[ch] : deltaB[ch]; // why though
 	}
 }
 
@@ -148,8 +153,8 @@ void touch_proc_compute_fast_delta(touch_proc_t *ctx, const int16_t *raw)
  * -------------------------------------------------------------------------- */
 int touch_detect_key(touch_proc_t *ctx)
 {
-    int32_t max_delta = 0;
-    int32_t sum_delta = 0;
+    uint32_t max_delta = 0;
+    uint32_t sum_delta = 0;
     uint8_t max_delta_key   = CAPT_BTN_COUNT;
     //uint8_t min_delta_key   = CAPT_BTN_COUNT;
 
@@ -164,7 +169,7 @@ int touch_detect_key(touch_proc_t *ctx)
         }
     }
 
-    int32_t avg_delta = sum_delta / CAPT_BTN_COUNT;
+    uint32_t out_delta = sum_delta - max_delta;
 
     /* rejeita ruído global */
     if (max_delta < ((ctx->baseline[max_delta_key] * TOUCH_RELATIVE_THRESHOLD)/1000))
@@ -172,7 +177,7 @@ int touch_detect_key(touch_proc_t *ctx)
     	return (CAPT_BTN_COUNT);
 
     /* rejeita se não se destaca dos outros */
-    if (max_delta < (avg_delta * TOUCH_RELATIVE_THRESHOLD)/10)
+    if (max_delta < out_delta)
 		return (CAPT_BTN_COUNT);
     //captState.current_ch = delta_key;
     return (max_delta_key);
@@ -184,18 +189,18 @@ int touch_detect_key(touch_proc_t *ctx)
 bool touch_proc_is_stable(const touch_proc_t *ctx)
 {
     // ainda não encheu a janela (falso negativo após init)
-    if (ctx->baseline_idx < TOUCH_BASELINE_WINDOW)
+    if (ctx->baseline_samples < TOUCH_BASELINE_WINDOW)
         return (false);
 
     for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
     {
-        int32_t avg = touch_proc_get_baseline_avg(ctx, ch);
-        int32_t variance = 0;
+        uint32_t avg = touch_proc_get_baseline_avg(ctx, ch);
+        uint32_t variance = 0;
 
         for (uint8_t i = 0; i < TOUCH_BASELINE_WINDOW; i++)
         {
-            int32_t diff = ctx->baseline_window[ch][i] - avg;
-            variance += diff * diff;
+            int32_t diff = (int32_t)ctx->baseline_window[ch][i] - (int32_t)avg;
+            variance += (uint32_t)(diff * diff);
         }
 
         variance /= TOUCH_BASELINE_WINDOW;

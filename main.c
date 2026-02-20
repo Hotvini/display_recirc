@@ -66,9 +66,12 @@ static const buzzer_note_t melody_boot[] = {
 /* ===================== Touch context ===================== */
 
 static touch_proc_t touchProc;
-static int16_t captRaw[CAPT_BTN_COUNT];
+static uint16_t captRaw[CAPT_BTN_COUNT];
 static app_touch_state_t appTouchState = kAPP_TouchStateInit;
 static int32_t lastKey = CAPT_BTN_COUNT;
+static key_debounce_t keyDebounce;
+static uint32_t now = 0;
+static uint32_t lastTouchTime = 0;
 
 /* ===================== Main ===================== */
 
@@ -82,14 +85,11 @@ int main(void)
 	display_hal_init();
     capt_init();
     capt_proc_init(&touchProc);
-    //key_debounce_init(&keyDebounce);
+    key_debounce_init(&keyDebounce);
 
     //capt_task_init();
-
 	//grace_all_on();
 	//buzzer_play_melody(melody_boot,sizeof(melody_boot)/sizeof(melody_boot[0]));
-	//grace_all_off();
-
 
     while (1)
     {
@@ -101,7 +101,7 @@ int main(void)
 			{
 				/* ---------- INIT ---------- */
 				case kAPP_TouchStateInit:
-					leds_all_off();
+					leds_all_on();
 					if (!touch_proc_is_stable(&touchProc))
 					{
 						grace_digit_set(thermo_digits[0], seven_seg_symbols[SEG_C]);
@@ -113,7 +113,7 @@ int main(void)
 					else
 					{
 						appTouchState = kAPP_TouchStateCalib;
-						leds_all_on();
+						//leds_all_off();
 					}
 					break;
 
@@ -125,6 +125,7 @@ int main(void)
 					//grace_digit_set(thermo_digits[1], seven_seg_symbols[SEG_BLANK]);
 					//grace_digit_set(thermo_digits[2], seven_seg_symbols[SEG_D]);
 					//tm1629a_display_refresh();
+					lastTouchTime = systick_get_ms();
 					appTouchState = kAPP_TouchStateDetect;
 					break;
 
@@ -132,36 +133,44 @@ int main(void)
 				case kAPP_TouchStateDetect:
 					touch_proc_compute_fast_delta(&touchProc, captRaw);
 					int key_raw = touch_detect_key(&touchProc);
-					//int key     = key_debounce_step(&keyDebounce, key_raw);
-					int key = key_raw; // no key debounce
+					int key     = key_debounce_step(&keyDebounce, key_raw);
+					//int key = key_raw; // no key debounce
 
 					if (key >= CAPT_BTN_COUNT)
 					{
 						leds_all_on();
-						grace_all_on();
+						grace_all_off();
 						buzzer_off();
+						now = systick_get_ms();
+						if (now - lastTouchTime > 5000) // 5 segundos
+						{
+							touch_proc_update_baseline(&touchProc);
+							lastTouchTime = now;
+						}
 					}
 					else
 					{
 						if (key != lastKey && lastKey < CAPT_BTN_COUNT)
 						{
-							led_ctrl(lastKey, LED_OFF);
+							led_ctrl(lastKey, LED_ON);
+							lastTouchTime = systick_get_ms();
 						}
-						else
-						{
-						buzzer_on();
-						leds_all_off();
-						grace_all_off();
-						led_ctrl(key, LED_ON);
+						//buzzer_on();
+						//grace_all_off();
+						led_ctrl(key, LED_OFF);
 						grace_digit_set(thermo_digits[0], seven_seg_symbols[SEG_BLANK]);
 						grace_digit_set(thermo_digits[1], seven_seg_symbols[SEG_5]);
 						grace_digit_set(thermo_digits[2], seven_seg_symbols[key + 1]);
-						uint16_t v = captRaw[key];
-						grace_digit_set(clock_digits[0], seven_seg_symbols[(v / 1000) % 10]);
-						grace_digit_set(clock_digits[1], seven_seg_symbols[(v / 100) % 10]);
-						grace_digit_set(clock_digits[2], seven_seg_symbols[(v / 10) % 10]);
-						grace_digit_set(clock_digits[3], seven_seg_symbols[v % 10]);
+						grace_digit_set(clock_digits[0], seven_seg_symbols[(captRaw[key] / 1000) % 10]);
+						grace_digit_set(clock_digits[1], seven_seg_symbols[(captRaw[key] / 100) % 10]);
+						grace_digit_set(clock_digits[2], seven_seg_symbols[(captRaw[key] / 10) % 10]);
+						grace_digit_set(clock_digits[3], seven_seg_symbols[(captRaw[key]) % 10]);
 						tm1629a_display_refresh();
+						now = systick_get_ms();
+						if (now - lastTouchTime > 10000) // 10 segundos
+						{
+							touch_proc_update_baseline(&touchProc);
+							lastTouchTime = now;
 						}
 					}
 					lastKey = key;

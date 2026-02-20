@@ -14,7 +14,7 @@ static touch_proc_t touchProc;
 static key_debounce_t keyDebounce;
 
 /* Raw CAPT snapshot */
-static int16_t captRaw[CAPT_BTN_COUNT];
+static uint16_t captRaw[CAPT_BTN_COUNT];
 
 /* FSM helpers */
 static int32_t  lastKey;

@@ -55,13 +55,7 @@
 #define APP_CHANNEL_STABLE_VARIANCE 20
 
 /* Debounce level used in pressed key detection. (armotecedor final) */
-#define APP_GLITCH_FILTER_LEVEL 3
-
-#define TOUCH_FAST_ALPHA_SHIFT  1
-/* alpha = 1 / (2^SHIFT)
-   SHIFT=2 → alpha=0.25 (rápido)
-   SHIFT=3 → alpha=0.125 (mais suave)
-*/
+#define APP_GLITCH_FILTER_LEVEL 2
 
 #define CAPT_ENABLE_PINS (kCAPT_X0Pin | kCAPT_X1Pin | kCAPT_X2Pin | kCAPT_X3Pin)
 //#define CAPT_ENABLE_PINS (kCAPT_X0Pin) //debug
@@ -69,11 +63,11 @@
 #define CAPT_ENABLE_PINS_ARRAY {kCAPT_X0Pin, kCAPT_X1Pin, kCAPT_X2Pin, kCAPT_X3Pin}
 
 // How many samples are saved and used to determine touch result.
-#define TOUCH_BASELINE_WINDOW   8   // lento, estável
+#define TOUCH_BASELINE_WINDOW   16   // lento, estável
 
-#define TOUCH_DETECT_WINDOW      4   // rápido
+#define TOUCH_DETECT_WINDOW    8   // rápido
 
-#define TOUCH_RELATIVE_THRESHOLD 20
+#define TOUCH_RELATIVE_THRESHOLD 5 // quanto menor mais sensivel
 
 void capt_init(void);
 
