@@ -1,5 +1,5 @@
 C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.h:368:20:CLOCK_EnableClock	16	static
 C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.h:379:20:CLOCK_DisableClock	16	static
 C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_iocon.h:102:22:IOCON_PinMuxSet	24	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c:61:6:BOARD_InitBootPins	8	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c:109:6:BOARD_InitPins	40	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c:14:6:BOARD_InitBootPins	8	static
+C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/pin_mux.c:26:6:BOARD_InitPins	40	static

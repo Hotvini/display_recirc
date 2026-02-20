@@ -83,9 +83,7 @@ int main(void)
     capt_init();
     capt_proc_init(&touchProc);
     //key_debounce_init(&keyDebounce);
-    //capt_proc_init(&touchProc); // em task??
 
-	//system_init(); ////////////////////
     //capt_task_init();
 
 	//grace_all_on();
