@@ -7,7 +7,7 @@
       "cwd": "${workspaceFolder}",
 
       "executable": {
-        "elf": "${workspaceFolder}/armgcc/debug/recirc_display.elf"
+        "elf": "${workspaceFolder}/armgcc/debug/${workspaceFolderBasename}.elf"
       },
 
       "stopAtSymbol": "main",
