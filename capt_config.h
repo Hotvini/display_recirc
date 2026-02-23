@@ -42,7 +42,8 @@
 #define CAPT_IRQHANDLER CMP_CAPT_DriverIRQHandler
 
 /* Calculate the clock divider to make sure CAPT work in 2Mhz FCLK. */
-#define CAPT_CLK_DIVIDER ((CLOCK_GetFroFreq() / 2000000U) - 1U)
+//#define CAPT_CLK_DIVIDER ((CLOCK_GetFroFreq() / 2000000U) - 1U)
+#define CAPT_CLK_DIVIDER ((CLOCK_GetFroFreq() / 4000000U) - 1U)
 
 /* Delay between poll round, the delay time between two poll round
  * is CAPT_DELAY_BETWEEN_POLL * 4096 * FCLK period
@@ -55,7 +56,7 @@
 #define APP_CHANNEL_STABLE_VARIANCE 20
 
 /* Debounce level used in pressed key detection. (armotecedor final) */
-#define APP_GLITCH_FILTER_LEVEL 2
+#define APP_GLITCH_FILTER_LEVEL 4
 
 #define CAPT_ENABLE_PINS (kCAPT_X0Pin | kCAPT_X1Pin | kCAPT_X2Pin | kCAPT_X3Pin)
 //#define CAPT_ENABLE_PINS (kCAPT_X0Pin) //debug
@@ -67,7 +68,7 @@
 
 #define TOUCH_DETECT_WINDOW    8   // rápido
 
-#define TOUCH_RELATIVE_THRESHOLD 5 // quanto menor mais sensivel
+#define TOUCH_RELATIVE_THRESHOLD 10 // quanto menor mais sensivel
 
 void capt_init(void);
 

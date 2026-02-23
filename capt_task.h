@@ -33,7 +33,7 @@ typedef enum {
 typedef struct {
     capt_mode_t mode;
     app_touch_state_t task_state;
-    uint8_t     key_bitmap; // parei aqui 
+    uint8_t     key_bitmap; // parei aqui
     uint32_t    last_touch_ms;
     uint32_t    last_sample_ms;
     uint32_t    last_baseline_ms;

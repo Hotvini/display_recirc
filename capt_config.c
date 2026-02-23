@@ -7,7 +7,7 @@
 
 #include "capt_config.h"
 
-
+/*
 static void acomp_init(void)
 {
 	static acomp_config_t ACOMP_config;
@@ -24,6 +24,7 @@ static void acomp_init(void)
 	ACOMP_ladder_config.referenceVoltage = kACOMP_LadderRefVoltagePinVDD;
 	ACOMP_SetLadderConfig(ACOMP_PERIPHERAL, &ACOMP_ladder_config);
 }
+*/
 
 void capt_init(void)
 {

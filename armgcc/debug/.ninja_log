@@ -66,3 +66,11 @@
 214	486	7933195092810233	recirc_display.elf	6acc270988c2e4f4
 4	137	7933197285550908	CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj	f006af0c8316fa3e
 137	388	7933197287402303	recirc_display.elf	6acc270988c2e4f4
+22	898	7935564429706846	CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj	f006af0c8316fa3e
+179	907	7935564429802243	CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj	7147113b9c80d1a9
+193	924	7935564429958477	CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj	8bfc6561fcacee01
+924	1858	7935564437857015	recirc_display.elf	6acc270988c2e4f4
+4	184	7935567255355426	CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/main.c.obj	f006af0c8316fa3e
+23	201	7935567255515422	CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c.obj	7147113b9c80d1a9
+42	234	7935567255845416	CMakeFiles/recirc_display.dir/C_/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_proc.c.obj	8bfc6561fcacee01
+234	487	7935567257855939	recirc_display.elf	6acc270988c2e4f4

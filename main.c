@@ -46,6 +46,7 @@ static void leds_all_on(void)
 	led_ctrl(S4, LED_ON);
 }
 
+/*
 static void leds_all_off(void)
 {
     led_ctrl(S1, LED_OFF);
@@ -62,6 +63,7 @@ static const buzzer_note_t melody_boot[] = {
     { NOTE_G4, 150 },
     { NOTE_C5, 300 },
 };
+*/
 
 /* ===================== Touch context ===================== */
 
@@ -125,8 +127,8 @@ int main(void)
 					//grace_digit_set(thermo_digits[1], seven_seg_symbols[SEG_BLANK]);
 					//grace_digit_set(thermo_digits[2], seven_seg_symbols[SEG_D]);
 					//tm1629a_display_refresh();
-					lastTouchTime = systick_get_ms();
-					appTouchState = kAPP_TouchStateDetect;
+					//lastTouchTime = systick_get_ms();
+					//appTouchState = kAPP_TouchStateDetect;
 					break;
 
 				/* ---------- DETECT ---------- */
@@ -141,19 +143,19 @@ int main(void)
 						leds_all_on();
 						grace_all_off();
 						buzzer_off();
-						now = systick_get_ms();
-						if (now - lastTouchTime > 5000) // 5 segundos
-						{
-							touch_proc_update_baseline(&touchProc);
-							lastTouchTime = now;
-						}
+						//now = systick_get_ms();
+						//if (now - lastTouchTime > 5000) // 5 segundos
+						//{
+						//	touch_proc_update_baseline(&touchProc);
+						//	lastTouchTime = now;
+						//}
 					}
 					else
 					{
 						if (key != lastKey && lastKey < CAPT_BTN_COUNT)
 						{
 							led_ctrl(lastKey, LED_ON);
-							lastTouchTime = systick_get_ms();
+							//lastTouchTime = systick_get_ms();
 						}
 						//buzzer_on();
 						//grace_all_off();
@@ -166,12 +168,12 @@ int main(void)
 						grace_digit_set(clock_digits[2], seven_seg_symbols[(captRaw[key] / 10) % 10]);
 						grace_digit_set(clock_digits[3], seven_seg_symbols[(captRaw[key]) % 10]);
 						tm1629a_display_refresh();
-						now = systick_get_ms();
-						if (now - lastTouchTime > 10000) // 10 segundos
-						{
-							touch_proc_update_baseline(&touchProc);
-							lastTouchTime = now;
-						}
+						//now = systick_get_ms();
+						//if (now - lastTouchTime > 10000) // 10 segundos
+						//{
+						//	touch_proc_update_baseline(&touchProc);
+						//	lastTouchTime = now;
+						//}
 					}
 					lastKey = key;
 

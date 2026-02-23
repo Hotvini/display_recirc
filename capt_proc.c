@@ -105,7 +105,6 @@ static inline uint32_t touch_proc_get_detect_avg(const touch_proc_t *ctx, uint8_
 
 static inline uint32_t touch_proc_get_baseline_avg(const touch_proc_t *ctx, uint8_t ch)
 {
-    //return (ctx->sum[ch] / TOUCH_WINDOW_LENGTH);
     return (ctx->baseline_sum[ch] / TOUCH_BASELINE_WINDOW);
 }
 
