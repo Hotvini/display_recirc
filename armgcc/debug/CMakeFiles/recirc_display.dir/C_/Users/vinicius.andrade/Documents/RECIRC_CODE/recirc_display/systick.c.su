@@ -1,6 +1,0 @@
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/CMSIS/Core/Include/core_cm0plus.h:866:22:__NVIC_SetPriority	24	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/CMSIS/Core/Include/core_cm0plus.h:1074:26:SysTick_Config	16	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c:17:6:SysTick_Handler	8	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c:23:6:systick_init	8	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c:29:10:systick_get_ms	8	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/systick.c:34:6:delay_ms	24	static

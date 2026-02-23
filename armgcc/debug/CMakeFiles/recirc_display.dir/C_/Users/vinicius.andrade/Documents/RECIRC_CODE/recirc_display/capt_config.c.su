@@ -1,6 +1,0 @@
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/CMSIS/Core/Include/core_cm0plus.h:757:22:__NVIC_EnableIRQ	16	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_common_arm.h:672:24:EnableIRQ	24	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_acomp.h:166:20:ACOMP_SetInputChannel	24	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_capt.h:297:20:CAPT_EnableInterrupts	16	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c:11:13:acomp_init	8	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/capt_config.c:28:6:capt_init	8	static

@@ -1,5 +1,0 @@
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.h:390:20:CLOCK_Select	16	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_clock.h:422:20:CLOCK_SetCoreSysClkDiv	16	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk/devices/LPC804/drivers/fsl_power.h:152:20:POWER_DisablePD	16	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c:35:6:BOARD_InitBootClocks	8	static
-C:/Users/vinicius.andrade/Documents/RECIRC_CODE/recirc_display/clock_config.c:66:6:BOARD_BootClockRUN	8	static
