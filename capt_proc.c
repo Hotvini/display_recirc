@@ -5,6 +5,7 @@
  *      Author: vinicius.andrade
  */
 #include "capt_proc.h"
+#include <limits.h>
 
 static uint16_t captRawData[CAPT_BTN_COUNT];
 const uint16_t captEnabledPins[CAPT_BTN_COUNT] = CAPT_ENABLE_PINS_ARRAY;
@@ -15,13 +16,20 @@ void CMP_CAPT_DriverIRQHandler(void) // flag de outras interrupções pra debug
 {
 	uint32_t intStat = CAPT_GetInterruptStatusFlags(CAPT_PERIPHERAL);
 	CAPT_ClearInterruptStatusFlags(CAPT_PERIPHERAL, intStat);
-	CAPT_GetTouchData(CAPT_PERIPHERAL, &data);
-	captRawData[captState.pending_ch] = data.count;
-	//DISABLE_CAPT_INTERRUPTS;
-	//reset pins?
 
     if (intStat & kCAPT_InterruptOfPollDoneStatusFlag)
     {
+        if (CAPT_GetTouchData(CAPT_PERIPHERAL, &data))
+        {
+            if (data.XpinsIndex < CAPT_BTN_COUNT)
+            {
+                captRawData[data.XpinsIndex] = data.count;
+            }
+            else
+            {
+                captRawData[captState.pending_ch] = data.count;
+            }
+        }
     	captState.busy = false;
     }
 }
@@ -48,18 +56,27 @@ bool capt_get_sample(uint16_t *raw)
     if (captState.busy)
         return false;
 
+    if (captState.frame_ready)
+    {
+        for (uint8_t i = 0; i < CAPT_BTN_COUNT; i++)
+            raw[i] = captRawData[i];
+
+        captState.frame_ready = false;
+        return true;
+    }
+
     captState.pending_ch = captState.current_ch;
     captState.busy = true;
     capt_poll_channel(captState.current_ch);
-    captState.current_ch++;
 
-	if (captState.current_ch == CAPT_BTN_COUNT)
+	if (captState.current_ch == (CAPT_BTN_COUNT - 1U))
 	{
-		for (uint8_t i = 0; i < CAPT_BTN_COUNT; i++)
-			raw[i] = captRawData[i];
-
 		captState.current_ch = 0;
-		return (true);
+		captState.frame_ready = true;
+	}
+	else
+	{
+		captState.current_ch++;
 	}
 	return (false);
 }
@@ -108,6 +125,20 @@ static inline uint32_t touch_proc_get_baseline_avg(const touch_proc_t *ctx, uint
     return (ctx->baseline_sum[ch] / TOUCH_BASELINE_WINDOW);
 }
 
+static uint32_t touch_proc_get_detect_var(const touch_proc_t *ctx, uint8_t ch)
+{
+    uint32_t variance = 0U;
+    int32_t avg = (int32_t)ctx->detect[ch];
+
+    for (uint8_t i = 0; i < TOUCH_DETECT_WINDOW; i++)
+    {
+        int32_t diff = (int32_t)ctx->detect_window[ch][i] - avg;
+        variance += (uint32_t)(diff * diff);
+    }
+
+    return (variance / TOUCH_DETECT_WINDOW);
+}
+
 /* --------------------------------------------------------------------------
  * Baseline (nível sem toque)
  * -------------------------------------------------------------------------- */
@@ -136,14 +167,13 @@ static void touch_proc_update_detect(touch_proc_t *ctx)
 void touch_proc_compute_fast_delta(touch_proc_t *ctx, const uint16_t *raw)
 {
 	/* Pré-condição: touch_proc_push_sample() já foi chamado */
+    (void)raw;
 	touch_proc_update_detect(ctx);
     static uint32_t deltaA[CAPT_BTN_COUNT];
     static uint32_t deltaB[CAPT_BTN_COUNT];
 	for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
 	{
-		deltaA[ch] = (raw[ch] >= ctx->baseline[ch]) ? (raw[ch] - ctx->baseline[ch]) : (ctx->baseline[ch] - raw[ch]);
-        deltaB[ch] = (ctx->detect[ch] >= ctx->baseline[ch]) ? (ctx->detect[ch] - ctx->baseline[ch]) : (ctx->baseline[ch] - ctx->detect[ch]);
-        ctx->delta[ch] = (deltaA[ch] > deltaB[ch]) ? deltaA[ch] : deltaB[ch]; // why though
+        ctx->variance[ch] = touch_proc_get_detect_var(ctx, ch);
 	}
 }
 
@@ -152,34 +182,58 @@ void touch_proc_compute_fast_delta(touch_proc_t *ctx, const uint16_t *raw)
  * -------------------------------------------------------------------------- */
 int touch_detect_key(touch_proc_t *ctx)
 {
-    uint32_t max_delta = 0;
-    uint32_t sum_delta = 0;
-    uint8_t max_delta_key   = CAPT_BTN_COUNT;
-    //uint8_t min_delta_key   = CAPT_BTN_COUNT;
+    if (ctx->detect_samples < TOUCH_DETECT_WINDOW)
+        return (CAPT_BTN_COUNT);
 
-    /* Procura apenas deltas positivos */
+    uint32_t avg_variance = 0U;
     for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
     {
-    	sum_delta += ctx->delta[ch];
-    	if (ctx->delta[ch] > max_delta)
+        avg_variance += ctx->variance[ch];
+    }
+    avg_variance /= CAPT_BTN_COUNT;
+
+    if (avg_variance == 0U)
+        return (CAPT_BTN_COUNT);
+
+    uint32_t best_score = UINT32_MAX;
+    uint32_t second_score = UINT32_MAX;
+    uint8_t best_key = CAPT_BTN_COUNT;
+
+    /* Variance-only rule: detect key after full detect window, choose quietest channel. */
+    for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
+    {
+        bool quieter = (avg_variance == 0U) ? false :
+                       (ctx->variance[ch] * 100U <= avg_variance * TOUCH_QUIET_VARIANCE_RATIO_PCT);
+        bool enough_quiet_gain = (avg_variance == 0U) ? false :
+                                 ((avg_variance - ((avg_variance < ctx->variance[ch]) ? avg_variance : ctx->variance[ch])) * 100U >=
+                                  avg_variance * TOUCH_MIN_QUIET_GAIN_PCT);
+
+        if (!quieter || !enough_quiet_gain)
+            continue;
+
+        uint32_t score = (ctx->variance[ch] / TOUCH_VARIANCE_SCALE);
+        if (score < best_score)
         {
-            max_delta = ctx->delta[ch];
-            max_delta_key   = ch;
+            second_score = best_score;
+            best_score = score;
+            best_key = ch;
+        }
+        else if (score < second_score)
+        {
+            second_score = score;
         }
     }
 
-    uint32_t out_delta = sum_delta - max_delta;
+    if (best_key >= CAPT_BTN_COUNT)
+        return (CAPT_BTN_COUNT);
 
-    /* rejeita ruído global */
-    if (max_delta < ((ctx->baseline[max_delta_key] * TOUCH_RELATIVE_THRESHOLD)/1000))
-    	//captState.current_ch = CAPT_BTN_COUNT;
-    	return (CAPT_BTN_COUNT);
+    if (second_score != UINT32_MAX)
+    {
+        if ((second_score - best_score) < TOUCH_NOISY_SCORE_MARGIN)
+            return (CAPT_BTN_COUNT);
+    }
 
-    /* rejeita se não se destaca dos outros */
-    if (max_delta < out_delta)
-		return (CAPT_BTN_COUNT);
-    //captState.current_ch = delta_key;
-    return (max_delta_key);
+    return (best_key);
 }
 
 /* --------------------------------------------------------------------------
@@ -213,33 +267,91 @@ bool touch_proc_is_stable(const touch_proc_t *ctx)
 
 void key_debounce_init(key_debounce_t *d)
 {
-    d->acc = 0;
-    d->acc_max = APP_GLITCH_FILTER_LEVEL;              // ajuste conforme ruído
+    d->candidate = CAPT_BTN_COUNT;
+    d->count = 0U;
+    d->press_needed = APP_DEBOUNCE_PRESS_LEVEL;
+    d->release_needed = APP_DEBOUNCE_RELEASE_LEVEL;
+    d->switch_needed = APP_DEBOUNCE_SWITCH_LEVEL;
+    d->release_count = 0U;
     d->stable = CAPT_BTN_COUNT;  // NO_KEY
 }
 
 int key_debounce_step(key_debounce_t *d, int key_raw)
 {
-    if (key_raw == d->stable)
+    if (key_raw >= CAPT_BTN_COUNT)
+        key_raw = CAPT_BTN_COUNT;
+
+    if (d->stable >= CAPT_BTN_COUNT)
     {
-        d->acc = 0;
+        /* Idle -> pressed transition requires consecutive confirmations. */
+        if (key_raw >= CAPT_BTN_COUNT)
+        {
+            d->candidate = CAPT_BTN_COUNT;
+            d->count = 0U;
+            return (CAPT_BTN_COUNT);
+        }
+
+        if (key_raw != d->candidate)
+        {
+            d->candidate = (int8_t)key_raw;
+            d->count = 1U;
+        }
+        else if (d->count < 255U)
+        {
+            d->count++;
+        }
+
+        if (d->count >= d->press_needed)
+        {
+            d->stable = d->candidate;
+            d->candidate = CAPT_BTN_COUNT;
+            d->count = 0U;
+            d->release_count = 0U;
+        }
         return (d->stable);
     }
 
-    if (key_raw == CAPT_BTN_COUNT)   // soltando
-        d->acc--;
-    else                             // pressionando
-        d->acc++;
-
-    if (d->acc > d->acc_max)
+    /* Stable pressed key: keep latched unless release/switch is persistent. */
+    if (key_raw == d->stable)
     {
-        d->stable = key_raw;
-        d->acc = 0;
+        d->candidate = CAPT_BTN_COUNT;
+        d->count = 0U;
+        d->release_count = 0U;
+        return (d->stable);
     }
-    else if (d->acc < -d->acc_max)
+
+    if (key_raw >= CAPT_BTN_COUNT)
     {
-        d->stable = CAPT_BTN_COUNT;
-        d->acc = 0;
+        if (d->release_count < 255U)
+            d->release_count++;
+
+        if (d->release_count >= d->release_needed)
+        {
+            d->stable = CAPT_BTN_COUNT;
+            d->candidate = CAPT_BTN_COUNT;
+            d->count = 0U;
+            d->release_count = 0U;
+        }
+        return (d->stable);
+    }
+
+    /* Different pressed key: switch only with stronger persistence. */
+    d->release_count = 0U;
+    if (key_raw != d->candidate)
+    {
+        d->candidate = (int8_t)key_raw;
+        d->count = 1U;
+    }
+    else if (d->count < 255U)
+    {
+        d->count++;
+    }
+
+    if (d->count >= d->switch_needed)
+    {
+        d->stable = d->candidate;
+        d->candidate = CAPT_BTN_COUNT;
+        d->count = 0U;
     }
 
     return (d->stable);

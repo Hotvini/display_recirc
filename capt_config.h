@@ -15,13 +15,14 @@
 #include "fsl_reset.h"
 #include "systick.h"
 
+/* Currently unused in Poll-Now flow; kept for optional critical sections/debug. */
 #define DISABLE_CAPT_INTERRUPTS                                                                     \
     CAPT_DisableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfYesTouchEnable | kCAPT_InterruptOfNoTouchEnable | \
                                                kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
 
 #define ENABLE_CAPT_INTERRUPTS CAPT_EnableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfPollDoneEnable); // POll Now mode
 
-#define ACOMP_ON 0 //com ou sem acomp
+#define ACOMP_ON 1 //com ou sem acomp
 
 #define CONTINUOS_POLL 0 //cont poll vs poll now
 
@@ -42,12 +43,16 @@
 #define CAPT_IRQHANDLER CMP_CAPT_DriverIRQHandler
 
 /* Calculate the clock divider to make sure CAPT work in 2Mhz FCLK. */
-//#define CAPT_CLK_DIVIDER ((CLOCK_GetFroFreq() / 2000000U) - 1U)
-#define CAPT_CLK_DIVIDER ((CLOCK_GetFroFreq() / 4000000U) - 1U)
+#define CAPT_CLK_DIVIDER ((CLOCK_GetFroFreq() / 2000000U) - 1U)
+
+/* Conservative CAPT timings; helps avoid premature trigger (count ~= 1) on some channels. */
+#define CAPT_MEASURE_DELAY kCAPT_MeasureDelayWait9FCLKs
+#define CAPT_RESET_DELAY   kCAPT_ResetDelayWait9FCLKs
 
 /* Delay between poll round, the delay time between two poll round
  * is CAPT_DELAY_BETWEEN_POLL * 4096 * FCLK period
  */
+/* Used only when CONTINUOS_POLL == 1 (continuous mode); currently not used. */
 #define CAPT_DELAY_BETWEEN_POLL 60
 
 /* If the channel sample data variance is less than this value, then the channel
@@ -56,8 +61,13 @@
 #define APP_CHANNEL_STABLE_VARIANCE 20
 
 /* Debounce level used in pressed key detection. (armotecedor final) */
-#define APP_GLITCH_FILTER_LEVEL 4
+#define APP_GLITCH_FILTER_LEVEL 2
+/* Debounce hysteresis: stronger filtering against flicker/false positives. */
+#define APP_DEBOUNCE_PRESS_LEVEL   (APP_GLITCH_FILTER_LEVEL + 2U)
+#define APP_DEBOUNCE_RELEASE_LEVEL (APP_GLITCH_FILTER_LEVEL + 3U)
+#define APP_DEBOUNCE_SWITCH_LEVEL  (APP_GLITCH_FILTER_LEVEL + 5U)
 
+/* Used only when CONTINUOS_POLL == 1 (continuous mode); currently not used. */
 #define CAPT_ENABLE_PINS (kCAPT_X0Pin | kCAPT_X1Pin | kCAPT_X2Pin | kCAPT_X3Pin)
 //#define CAPT_ENABLE_PINS (kCAPT_X0Pin) //debug
 
@@ -68,7 +78,14 @@
 
 #define TOUCH_DETECT_WINDOW    8   // rápido
 
-#define TOUCH_RELATIVE_THRESHOLD 10 // quanto menor mais sensivel
+/* Divide raw variance before scoring to keep values in a practical range. */
+#define TOUCH_VARIANCE_SCALE 32U
+
+/* Variance-only detection after detect window is full. */
+#define TOUCH_QUIET_VARIANCE_RATIO_PCT 75U
+/* Require minimum improvement vs channel average before accepting a key. */
+#define TOUCH_MIN_QUIET_GAIN_PCT       15U
+#define TOUCH_NOISY_SCORE_MARGIN        8U
 
 void capt_init(void);
 

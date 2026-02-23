@@ -72,8 +72,8 @@ static uint16_t captRaw[CAPT_BTN_COUNT];
 static app_touch_state_t appTouchState = kAPP_TouchStateInit;
 static int32_t lastKey = CAPT_BTN_COUNT;
 static key_debounce_t keyDebounce;
-static uint32_t now = 0;
-static uint32_t lastTouchTime = 0;
+//static uint32_t now = 0;
+//static uint32_t lastTouchTime = 0;
 
 /* ===================== Main ===================== */
 
@@ -128,7 +128,7 @@ int main(void)
 					//grace_digit_set(thermo_digits[2], seven_seg_symbols[SEG_D]);
 					//tm1629a_display_refresh();
 					//lastTouchTime = systick_get_ms();
-					//appTouchState = kAPP_TouchStateDetect;
+					appTouchState = kAPP_TouchStateDetect;
 					break;
 
 				/* ---------- DETECT ---------- */

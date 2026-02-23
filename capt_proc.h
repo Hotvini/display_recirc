@@ -35,21 +35,28 @@ typedef struct //separar em duas structs diferentes?
 
     uint32_t baseline[CAPT_BTN_COUNT];
     uint32_t detect[CAPT_BTN_COUNT];
-    uint32_t delta[CAPT_BTN_COUNT];
+    /* Short-window detect variance per channel. Lower means quieter channel. */
+    uint32_t variance[CAPT_BTN_COUNT];
 } touch_proc_t;
 
 typedef struct {
 	capt_button_t current_ch;
 	capt_button_t pending_ch;
     //capt_mode_t mode;
+    /* Currently unused; reserved for future per-channel debounce in CAPT scheduler. */
     uint8_t     debounce_cnt;
+    bool    frame_ready;
     bool    busy;
 } capt_state_t;
 
 
 typedef struct {
-    int8_t acc;
-    int8_t acc_max;
+    int8_t candidate;
+    uint8_t count;
+    uint8_t press_needed;
+    uint8_t release_needed;
+    uint8_t switch_needed;
+    uint8_t release_count;
     int8_t stable;
 } key_debounce_t;
 

@@ -7,7 +7,7 @@
 
 #include "capt_config.h"
 
-/*
+
 static void acomp_init(void)
 {
 	static acomp_config_t ACOMP_config;
@@ -24,7 +24,7 @@ static void acomp_init(void)
 	ACOMP_ladder_config.referenceVoltage = kACOMP_LadderRefVoltagePinVDD;
 	ACOMP_SetLadderConfig(ACOMP_PERIPHERAL, &ACOMP_ladder_config);
 }
-*/
+
 
 void capt_init(void)
 {
@@ -52,8 +52,8 @@ void capt_init(void)
 #else
 {
 	CAPT_config.enableXpins = 0;
-	CAPT_config.mDelay       = kCAPT_MeasureDelayWait5FCLKs;
-	CAPT_config.rDelay       = kCAPT_ResetDelayWait5FCLKs;
+	CAPT_config.mDelay       = CAPT_MEASURE_DELAY;
+	CAPT_config.rDelay       = CAPT_RESET_DELAY;
 }
 #endif
 	CAPT_config.clockDivider = CAPT_CLK_DIVIDER;

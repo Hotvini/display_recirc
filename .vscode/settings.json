@@ -11,5 +11,20 @@
   "cmake.buildTask": true,
   "cmake.skipConfigureIfCachePresent": true,
   "cmake.buildDirectory": "${workspaceFolder}/build",
-  "cmake.sourceDirectory": "${workspaceFolder}/armgcc"
+  "cmake.sourceDirectory": "${workspaceFolder}/armgcc",
+  "terminal.integrated.env.windows": {
+    "ARMGCC_DIR": "C:/NXP/MCUXpressoIDE_25.6.136/ide/tools",
+    "SdkRootDirPath": "C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk",
+    "POSTPROCESS_UTILITY": "C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin"
+  },
+  "cmake.configureEnvironment": {
+    "ARMGCC_DIR": "C:/NXP/MCUXpressoIDE_25.6.136/ide/tools",
+    "SdkRootDirPath": "C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk",
+    "POSTPROCESS_UTILITY": "C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin"
+  },
+  "cmake.buildEnvironment": {
+    "ARMGCC_DIR": "C:/NXP/MCUXpressoIDE_25.6.136/ide/tools",
+    "SdkRootDirPath": "C:/Users/vinicius.andrade/Documents/RECIRC_CODE/sdks/recirc_display_sdk",
+    "POSTPROCESS_UTILITY": "C:/NXP/MCUXpressoIDE_25.6.136/ide/tools/bin"
+  }
 }
