@@ -102,6 +102,9 @@ void BOARD_InitPins(void)
     /* CAPT_X3 connect to P0_10 */
     SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_X3, kSWM_PortPin_P0_10);
 
+    /* CAPT_X4 connect to P0_30 */
+    SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_X4, kSWM_PortPin_P0_30);
+
     /* CAPT_YL connect to P0_15 */
     SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_YL, kSWM_PortPin_P0_15);
 

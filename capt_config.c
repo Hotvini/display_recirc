@@ -13,8 +13,9 @@ static void acomp_init(void)
 	static acomp_config_t ACOMP_config;
 	static acomp_ladder_config_t ACOMP_ladder_config;
 
-	ACOMP_config.enableSyncToBusClk = false;
-	ACOMP_config.hysteresisSelection = kACOMP_Hysteresis20MVSelection;
+	ACOMP_config.enableSyncToBusClk = ACOMP_SYNC_TO_BUS_CLK;
+	ACOMP_config.hysteresisSelection = ACOMP_HYSTERESIS;
+
 	ACOMP_Init(ACOMP_PERIPHERAL, &ACOMP_config);
 
 	ACOMP_EnableInterrupts(ACOMP_PERIPHERAL, kACOMP_InterruptsDisable);
@@ -47,6 +48,8 @@ void capt_init(void)
 {
 	CAPT_config.pollCount = CAPT_DELAY_BETWEEN_POLL;
 	CAPT_config.enableXpins = CAPT_ENABLE_PINS;
+	CAPT_config.mDelay       = CAPT_MEASURE_DELAY;
+	CAPT_config.rDelay       = CAPT_RESET_DELAY;
 
 }
 #else

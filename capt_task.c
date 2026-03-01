@@ -79,7 +79,7 @@ bool capt_task(capt_task_t *ctx)
         /* ---------- DETECT ---------- */
         case kAPP_TouchStateDetect:
         {
-            touch_proc_compute_fast_delta(&touchProc, captRaw);
+            touch_proc_compute_delta(&touchProc, captRaw);
 
             int key_raw = touch_detect_key(&touchProc);
             int key = key_raw;
