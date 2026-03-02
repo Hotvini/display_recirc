@@ -19,7 +19,7 @@
                                 kCAPT_X3Pin, \
                                 kCAPT_X4Pin}
 
-#define TOUCH_FRAME_WINDOW     4U // maior mais estável - segunda window para baseline?
+#define TOUCH_FRAME_WINDOW     4U // todo: 1U para sistema sem média?
 
 #define CAPT_POLL_TIMEOUT_MS  5U //??
 
@@ -31,6 +31,12 @@ typedef enum {
     CAPT_BTN_S5, // todo: usar de baseline?
     CAPT_BTN_COUNT
 } capt_button_t;
+
+typedef enum {
+    kAPP_TouchStateInit,
+    kAPP_TouchStateCalib,
+    kAPP_TouchStateDetect
+} app_touch_state_t;
 
 typedef struct {
     uint16_t raw_count[CAPT_BTN_COUNT];
@@ -44,7 +50,7 @@ typedef struct {
     uint16_t frame_delta[CAPT_BTN_COUNT];
     uint8_t frame_ready; // bitmap de canais com frame pronto
     uint8_t detection_map; // bitmap de canais com detecção feita
-    //uint8_t proc_done; // bitmap de canais com proc feita
+    app_touch_state_t touch_task_state;
 	uint8_t frame_position;
     capt_button_t current_channel;
     capt_button_t max_delta_key;

@@ -13,7 +13,8 @@ static volatile uint16_t captRawDataBuffer[CAPT_BTN_COUNT];
 const uint16_t captEnabledPins[CAPT_BTN_COUNT] = CAPT_ENABLE_PINS_ARRAY;
 static volatile capt_button_t pending_channel;
 static volatile bool busy_polling = false;
-static uint8_t base_window_count = 0U;
+static uint32_t baseline_accum[CAPT_BTN_COUNT];
+static uint8_t baseline_count[CAPT_BTN_COUNT];
 
 touch_di_cfg_t di_cfg =
 {
@@ -50,6 +51,8 @@ void capt_proc_init(touch_proc_t *data_struct)
 {
     memset(data_struct, 0, sizeof(touch_proc_t));
     memset((void *)captRawDataBuffer, 0, sizeof(captRawDataBuffer));
+    memset((void *)baseline_accum, 0, sizeof(baseline_accum));
+    memset((void *)baseline_count, 0, sizeof(baseline_count));
 }
 
 bool capt_get_sample(touch_proc_t *data_out)
@@ -148,18 +151,29 @@ static void touch_baseline_update(touch_proc_t *data_struct)
     if (data_struct->calibration_done)
         return;
 
-    /* Durante calibração */
-    data_struct->frame_baseline[pending_channel] =
-        data_struct->frame_avg[pending_channel];
+    /* Durante calibração: baseline = média de 4 frame_avg por canal */
+    if (baseline_count[pending_channel] < TOUCH_FRAME_WINDOW)
+    {
+        baseline_accum[pending_channel] += data_struct->frame_avg[pending_channel];
+        baseline_count[pending_channel]++;
+    }
+
+    if (baseline_count[pending_channel] == TOUCH_FRAME_WINDOW)
+    {
+        data_struct->frame_baseline[pending_channel] =
+            (uint16_t)(baseline_accum[pending_channel] / TOUCH_FRAME_WINDOW);
+    }
 
     /* Verifica se todos canais estão prontos */
     if ((data_struct->frame_ready & CH_ALL_MASK) != CH_ALL_MASK)
         return;
 
-    if (base_window_count < TOUCH_FRAME_WINDOW)
+    for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
     {
-        base_window_count++;
-        return;
+        if (baseline_count[ch] < TOUCH_FRAME_WINDOW)
+        {
+            return;
+        }
     }
 
     data_struct->calibration_done = true;

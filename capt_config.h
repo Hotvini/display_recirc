@@ -29,9 +29,9 @@
 /* Definition of peripheral ID */
 #define ACOMP_PERIPHERAL ACOMP
 /* Definition of positive input source used in CMP_SetInputChannels() function */
-#define ACOMP_POSITIVE_INPUT 2U
+#define ACOMP_POSITIVE_INPUT 2U // inverter P e N?
 /* Definition of negative input source used in CMP_SetInputChannels() function */
-#define ACOMP_NEGATIVE_INPUT 0U //ladder ref
+#define ACOMP_NEGATIVE_INPUT 0U // todo: REF - rotear para GND ou outro pino?
 /* CAPT analog tuning profile:
  * 0 = robust/noise-safe, 1 = balanced (default), 2 = higher sensitivity.
  */
