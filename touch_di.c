@@ -12,6 +12,7 @@ void touch_di_init(touch_di_channel_t *ch)
     ch->prev_sample = 0;
     ch->integral = 0;
     ch->filtered = 0;
+    ch->initialized = false;
     ch->detected = false;
 }
 
@@ -26,6 +27,16 @@ void touch_di_process(touch_di_channel_t *ch,
     {
         ch->filtered += (raw - ch->filtered) >> cfg->iir_shift;
         sample = ch->filtered;
+    }
+
+    if (!ch->initialized)
+    {
+        ch->filtered = raw;
+        ch->prev_sample = (cfg->iir_shift > 0) ? ch->filtered : raw;
+        ch->integral = 0;
+        ch->detected = false;
+        ch->initialized = true;
+        return;
     }
 
     /* ---- DERIVATIVE ---- */

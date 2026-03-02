@@ -22,6 +22,13 @@
 #define TOUCH_FRAME_WINDOW     4U // todo: 1U para sistema sem média?
 
 #define CAPT_POLL_TIMEOUT_MS  5U //??
+/* Gate a channel after N consecutive timeouts for this many milliseconds. */
+#define CAPT_TIMEOUT_GATE_HITS 2U
+#define CAPT_TIMEOUT_GATE_MS   80U
+/* DI input source: 0 = frame_avg - baseline, 1 = raw_count - baseline. */
+#define CAPT_DI_USE_RAW_INPUT  0U
+/* Multi-press handling: 0 = return strongest key, 1 = allow multi and return first detected key. */
+#define CAPT_MULTI_PRESS_ENABLE 1U
 
 typedef enum {
     CAPT_BTN_S1, // X0
@@ -48,8 +55,11 @@ typedef struct {
     //uint32_t frame_variance[CAPT_BTN_COUNT];
     //uint16_t frame_stddev[CAPT_BTN_COUNT];
     uint16_t frame_delta[CAPT_BTN_COUNT];
-    uint8_t frame_ready; // bitmap de canais com frame pronto
-    uint8_t detection_map; // bitmap de canais com detecção feita
+    uint32_t gate_until_ms[CAPT_BTN_COUNT];
+    uint8_t timeout_streak[CAPT_BTN_COUNT];
+    bool sample_timed_out[CAPT_BTN_COUNT];
+    bool frame_ready[CAPT_BTN_COUNT];
+    bool detection_map[CAPT_BTN_COUNT];
     app_touch_state_t touch_task_state;
 	uint8_t frame_position;
     capt_button_t current_channel;
@@ -57,14 +67,6 @@ typedef struct {
     capt_button_t min_delta_key;
     bool calibration_done;
 } touch_proc_t;
-
-#define CH_FLAG(ch)        (1U << (ch))
-#define CH_ALL_MASK        ((1U << CAPT_BTN_COUNT) - 1U)
-
-#define SET_FLAG(map,ch)     ((map) |= CH_FLAG(ch))
-#define CLEAR_FLAG(map,ch)   ((map) &= ~CH_FLAG(ch))
-#define TOGGLE_FLAG(map,ch)  ((map) ^= CH_FLAG(ch))
-#define CHECK_FLAG(map,ch)   ((map) & CH_FLAG(ch))
 
 void CMP_CAPT_DriverIRQHandler(void);
 void capt_proc_init(touch_proc_t *data_struct);

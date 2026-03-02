@@ -22,7 +22,10 @@
 
 #define ENABLE_CAPT_INTERRUPTS CAPT_EnableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfPollDoneEnable); // POll Now mode
 
-#define ACOMP_ON 1 //com ou sem acomp
+/* CAPT trigger profile selector. Change only this define to switch mode. */
+#define CAPT_TRIGGER_PROFILE_ACMP 0U
+#define CAPT_TRIGGER_PROFILE_YH   1U
+#define CAPT_TRIGGER_PROFILE      CAPT_TRIGGER_PROFILE_ACMP
 
 #define CONTINUOS_POLL 0 //cont poll vs poll now
 
@@ -72,6 +75,10 @@
  */
 /* Used only when CONTINUOS_POLL == 1 (continuous mode); currently not used. */
 #define CAPT_DELAY_BETWEEN_POLL 60
+
+#if ((CAPT_TRIGGER_PROFILE != CAPT_TRIGGER_PROFILE_ACMP) && (CAPT_TRIGGER_PROFILE != CAPT_TRIGGER_PROFILE_YH))
+    #error "Invalid CAPT_TRIGGER_PROFILE. Use CAPT_TRIGGER_PROFILE_ACMP or CAPT_TRIGGER_PROFILE_YH."
+#endif
 
 void capt_init(void);
 

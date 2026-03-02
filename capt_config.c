@@ -31,13 +31,13 @@ void capt_init(void)
 {
 	static capt_config_t CAPT_config;
 	CAPT_GetDefaultConfig(&CAPT_config);
-#if(ACOMP_ON)
+#if (CAPT_TRIGGER_PROFILE == CAPT_TRIGGER_PROFILE_ACMP)
 {
 		acomp_init();
 		CAPT_config.triggerMode = kCAPT_ComparatorTriggerMode;
 		CAPT_config.XpinsMode   = kCAPT_InactiveXpinsHighZMode;
 }
-#else
+#elif (CAPT_TRIGGER_PROFILE == CAPT_TRIGGER_PROFILE_YH)
 {
 	CAPT_config.triggerMode = kCAPT_YHPortTriggerMode;
 	CAPT_config.XpinsMode   = kCAPT_InactiveXpinsDrivenLowMode;

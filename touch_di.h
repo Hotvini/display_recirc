@@ -9,6 +9,7 @@ typedef struct
     int32_t prev_sample;
     int32_t integral;
     int32_t filtered;      // IIR opcional
+    bool    initialized;
     bool    detected;
 } touch_di_channel_t;
 

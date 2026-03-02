@@ -46,6 +46,8 @@ add_executable(${MCUX_SDK_PROJECT_NAME}
 "${ProjDirPath}/../capt_config.h"
 "${ProjDirPath}/../capt_proc.c"
 "${ProjDirPath}/../capt_proc.h"
+"${ProjDirPath}/../touch_di.c"
+"${ProjDirPath}/../touch_di.h"
 "${ProjDirPath}/../semihost_hardfault.c"
 "${ProjDirPath}/../buzzer.c"
 "${ProjDirPath}/../buzzer.h"
