@@ -16,12 +16,13 @@ static volatile capt_button_t pending_channel;
 static volatile bool busy_polling = false;
 static uint32_t baseline_accum[CAPT_BTN_COUNT];
 static uint8_t baseline_count[CAPT_BTN_COUNT];
+static uint32_t gate_until_ms[CAPT_BTN_COUNT];
 static touch_di_channel_t di_channels[CAPT_BTN_COUNT];
 
-static bool touch_channel_is_gated(const touch_proc_t *data_struct, uint8_t channel)
+static bool touch_channel_is_gated(uint8_t channel)
 {
     uint32_t now = systick_get_ms();
-    return ((int32_t)(now - data_struct->gate_until_ms[channel]) < 0);
+    return ((int32_t)(now - gate_until_ms[channel]) < 0);
 }
 
 static bool touch_all_frames_ready(const touch_proc_t *data_struct)
@@ -36,6 +37,11 @@ static bool touch_all_frames_ready(const touch_proc_t *data_struct)
     return true;
 }
 
+static uint32_t touch_abs_i32(int32_t v)
+{
+    return (uint32_t)((v < 0) ? -v : v);
+}
+
 static int32_t touch_get_di_input(const touch_proc_t *data_struct, uint8_t channel)
 {
 #if (CAPT_DI_USE_RAW_INPUT == 0U)
@@ -43,11 +49,9 @@ static int32_t touch_get_di_input(const touch_proc_t *data_struct, uint8_t chann
 #elif (CAPT_DI_USE_RAW_INPUT == 1U)
     return (int32_t)data_struct->frame_avg[channel] - (int32_t)data_struct->frame_baseline[channel];
 #elif (CAPT_DI_USE_RAW_INPUT == 2U)
-    return (int32_t)data_struct->raw_count[channel];
+    return (int32_t)data_struct->raw_count[channel]; //todo iir aqui?
 #elif (CAPT_DI_USE_RAW_INPUT == 3U)
     return (int32_t)data_struct->frame_avg[channel];
-#elif (CAPT_DI_USE_RAW_INPUT == 4U)
-    return (int32_t)data_struct->frame_delta[channel];
 #else
 #error "Invalid value for CAPT_DI_USE_RAW_INPUT"
 #endif
@@ -55,11 +59,11 @@ static int32_t touch_get_di_input(const touch_proc_t *data_struct, uint8_t chann
 
 touch_di_cfg_t di_cfg =
 {
-    .dt = 8,              // 2–4x ruído
+    .dt = 4,              // 2–4x ruído
     .it = 60,             // sensibilidade
     .leak_num = 99,       // 0.99
     .leak_den = 100,
-    .iir_shift = 0,       // 1/8 - 0 = sem filtro IIR
+    .iir_shift = 2,       // 1/8 - 0 = sem filtro IIR
     .integral_max = 2000
 };
 
@@ -92,6 +96,7 @@ void capt_proc_init(touch_proc_t *data_struct)
     memset((void *)captTimeoutDataBuffer, 0, sizeof(captTimeoutDataBuffer));
     memset((void *)baseline_accum, 0, sizeof(baseline_accum));
     memset((void *)baseline_count, 0, sizeof(baseline_count));
+    memset((void *)gate_until_ms, 0, sizeof(gate_until_ms));
     for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
     {
         touch_di_init(&di_channels[ch]);
@@ -135,7 +140,7 @@ bool capt_get_sample(touch_proc_t *data_out)
 void touch_proc_push_sample(touch_proc_t *data_struct)
 {
     bool timed_out = data_struct->sample_timed_out[pending_channel];
-    bool gated = touch_channel_is_gated(data_struct, pending_channel);
+    bool gated = touch_channel_is_gated(pending_channel);
     uint32_t old = data_struct->frame[pending_channel][data_struct->frame_position];
 
     uint32_t new = data_struct->raw_count[pending_channel];
@@ -149,7 +154,7 @@ void touch_proc_push_sample(touch_proc_t *data_struct)
 
         if (data_struct->timeout_streak[pending_channel] >= CAPT_TIMEOUT_GATE_HITS)
         {
-            data_struct->gate_until_ms[pending_channel] = systick_get_ms() + CAPT_TIMEOUT_GATE_MS;
+            gate_until_ms[pending_channel] = systick_get_ms() + CAPT_TIMEOUT_GATE_MS;
             gated = true;
         }
     }
@@ -217,14 +222,24 @@ static void touch_baseline_update(touch_proc_t *data_struct)
     data_struct->frame_avg[pending_channel] =
         data_struct->frame_sum[pending_channel] / TOUCH_FRAME_WINDOW;
 
-    if (data_struct->sample_timed_out[pending_channel] || touch_channel_is_gated(data_struct, pending_channel))
+    if (data_struct->sample_timed_out[pending_channel] || touch_channel_is_gated(pending_channel))
         return;
 
-    /* Se já calibrado, nada mais a fazer */
+    /* Pós-calibração: rastreio lento de baseline para acompanhar deriva térmica/ambiental. */
     if (data_struct->calibration_done)
-        return;
+    {
+        int32_t err = (int32_t)data_struct->frame_avg[pending_channel] - (int32_t)data_struct->frame_baseline[pending_channel];
+        int32_t abs_err = (err >= 0) ? err : -err;
 
-    /* Durante calibração: baseline = média de 4 frame_avg por canal */
+        if ((uint32_t)abs_err <= CAPT_BASELINE_TRACK_DELTA_MAX)
+        {
+            data_struct->frame_baseline[pending_channel] =
+                (uint16_t)((int32_t)data_struct->frame_baseline[pending_channel] + (err >> CAPT_BASELINE_TRACK_SHIFT));
+        }
+        return;
+    }
+
+    /* Durante calibração inicial: baseline = média de 4 frame_avg por canal */
     if (baseline_count[pending_channel] < TOUCH_FRAME_WINDOW)
     {
         baseline_accum[pending_channel] += data_struct->frame_avg[pending_channel];
@@ -252,48 +267,49 @@ static void touch_baseline_update(touch_proc_t *data_struct)
     data_struct->calibration_done = true;
 }
 
-static void touch_proc_delta(touch_proc_t *data_struct)
+// static void touch_proc_delta(touch_proc_t *data_struct)
+// {
+//     if (data_struct->calibration_done && touch_all_frames_ready(data_struct))
+//     {
+//         for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
+//         {
+//             if (touch_channel_is_gated(channel))
+//             {
+//                 data_struct->frame_delta[channel] = 0U;
+//                 continue;
+//             }
+
+//             //uint16_t raw = data_struct->raw_count[channel];
+//             uint16_t avg = data_struct->frame_avg[channel];
+//             uint16_t baseline = data_struct->frame_baseline[channel];
+
+//             //data_struct->frame_delta[channel] = (raw > baseline) ? (raw - baseline) : (baseline - raw);
+//             data_struct->frame_delta[channel] = (avg > baseline) ? (avg - baseline) : (baseline - avg);
+
+
+//         }
+//     }
+// }
+
+uint8_t touch_detect_keys_mask(const touch_proc_t *data_struct)
 {
-    if (data_struct->calibration_done && touch_all_frames_ready(data_struct))
+    uint8_t mask = 0U;
+
+    for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
     {
-        for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
+        if (data_struct->detection_map[channel])
         {
-            if (touch_channel_is_gated(data_struct, channel))
-            {
-                data_struct->frame_delta[channel] = 0U;
-                continue;
-            }
-
-            //uint16_t raw = data_struct->raw_count[channel];
-            uint16_t avg = data_struct->frame_avg[channel];
-            uint16_t baseline = data_struct->frame_baseline[channel];
-
-            //data_struct->frame_delta[channel] = (raw > baseline) ? (raw - baseline) : (baseline - raw);
-            data_struct->frame_delta[channel] = (avg > baseline) ? (avg - baseline) : (baseline - avg);
-
-
-            if (channel == 0)
-            {
-                data_struct->max_delta_key = channel;
-                data_struct->min_delta_key = channel;
-            }
-
-            if (data_struct->frame_delta[channel] > data_struct->frame_delta[data_struct->max_delta_key])
-            {
-                data_struct->max_delta_key = channel;
-            }
-            if (data_struct->frame_delta[channel] < data_struct->frame_delta[data_struct->min_delta_key])
-            {
-                data_struct->min_delta_key = channel;
-            }
+            mask |= (uint8_t)(1U << channel);
         }
     }
+
+    return mask;
 }
 
 uint8_t touch_detect_key(touch_proc_t *data_struct)
 {
     touch_baseline_update(data_struct);
-    touch_proc_delta(data_struct);
+    //touch_proc_delta(data_struct);
 
     for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
     {
@@ -306,14 +322,13 @@ uint8_t touch_detect_key(touch_proc_t *data_struct)
     }
 
     uint8_t first_key = CAPT_BTN_COUNT;
-#if (CAPT_MULTI_PRESS_ENABLE == 0U)
-    uint8_t best_key = CAPT_BTN_COUNT;
-    uint16_t best_delta = 0U;
-#endif
+    uint32_t min_var = UINT32_MAX;
+    uint32_t max_var = 0U;
+    uint8_t min_var_key = CAPT_BTN_COUNT;
 
     for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
     {
-        bool invalid = data_struct->sample_timed_out[channel] || touch_channel_is_gated(data_struct, channel);
+        bool invalid = data_struct->sample_timed_out[channel] || touch_channel_is_gated(channel);
         if (invalid)
         {
             touch_di_init(&di_channels[channel]);
@@ -323,6 +338,17 @@ uint8_t touch_detect_key(touch_proc_t *data_struct)
         int32_t signed_delta = touch_get_di_input(data_struct, channel);
         touch_di_process(&di_channels[channel], signed_delta, &di_cfg);
 
+        uint32_t abs_integral = touch_abs_i32(di_channels[channel].integral);
+        if (abs_integral < min_var)
+        {
+            min_var = abs_integral;
+            min_var_key = channel;
+        }
+        if (abs_integral > max_var)
+        {
+            max_var = abs_integral;
+        }
+
         if (touch_di_is_detected(&di_channels[channel]))
         {
             data_struct->detection_map[channel] = true;
@@ -331,20 +357,45 @@ uint8_t touch_detect_key(touch_proc_t *data_struct)
             {
                 first_key = channel;
             }
-
-#if (CAPT_MULTI_PRESS_ENABLE == 0U)
-            if (best_key == CAPT_BTN_COUNT || data_struct->frame_delta[channel] > best_delta)
-            {
-                best_key = channel;
-                best_delta = data_struct->frame_delta[channel];
-            }
-#endif
         }
     }
 
-#if (CAPT_MULTI_PRESS_ENABLE == 1U)
-    return first_key;
-#else
-    return best_key;
+#if (CAPT_DI_INVERT_MINVAR_MODE == 1U)
+    for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
+    {
+        data_struct->detection_map[channel] = false;
+    }
+
+    if (min_var_key < CAPT_BTN_COUNT &&
+        max_var >= CAPT_DI_INVERT_ACTIVITY_MIN &&
+        (max_var - min_var) >= CAPT_DI_INVERT_SPREAD_MIN)
+    {
+        data_struct->detection_map[min_var_key] = true;
+        first_key = min_var_key;
+    }
+    else
+    {
+        first_key = CAPT_BTN_COUNT;
+    }
 #endif
+
+    if (touch_detect_keys_mask(data_struct) == 0U)
+    {
+        return CAPT_BTN_COUNT;
+    }
+
+    return first_key;
+}
+
+void capt_proc_get_di_snapshot(touch_di_channel_t out[CAPT_BTN_COUNT])
+{
+    if (out == NULL)
+    {
+        return;
+    }
+
+    for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
+    {
+        out[ch] = di_channels[ch];
+    }
 }

@@ -1,10 +1,19 @@
 #include "touch_di.h"
 
+#define TOUCH_DI_RELEASE_RATIO_NUM 3
+#define TOUCH_DI_RELEASE_RATIO_DEN 4
+#define TOUCH_DI_INTEGRAL_DEADBAND 2
+
 static inline int32_t clamp(int32_t v, int32_t min, int32_t max)
 {
     if (v < min) return min;
     if (v > max) return max;
     return v;
+}
+
+static inline int32_t abs_i32(int32_t v)
+{
+    return (v < 0) ? -v : v;
 }
 
 void touch_di_init(touch_di_channel_t *ch)
@@ -54,19 +63,33 @@ void touch_di_process(touch_di_channel_t *ch,
                          -cfg->integral_max,
                           cfg->integral_max);
 
-    /* ---- DETECTION ---- */
-    if ((ch->integral > cfg->it) ||
-        (ch->integral < -cfg->it))
+    /* ---- DETECTION WITH HYSTERESIS ---- */
+    int32_t abs_integral = abs_i32(ch->integral);
+    int32_t it_on = cfg->it;
+    int32_t it_off = (cfg->it * TOUCH_DI_RELEASE_RATIO_NUM) / TOUCH_DI_RELEASE_RATIO_DEN;
+
+    if (ch->detected)
     {
-        ch->detected = true;
+        if (abs_integral <= it_off)
+        {
+            ch->detected = false;
+        }
     }
     else
     {
-        ch->detected = false;
+        if (abs_integral >= it_on)
+        {
+            ch->detected = true;
+        }
+    }
 
-        /* ---- LEAK (apenas quando não detectado) ---- */
-        ch->integral =
-            (ch->integral * cfg->leak_num) / cfg->leak_den;
+    /* ---- LEAK (continuous) ---- */
+    ch->integral = (ch->integral * cfg->leak_num) / cfg->leak_den;
+
+    /* ---- DEAD-BAND AROUND ZERO ---- */
+    if (abs_i32(ch->integral) <= TOUCH_DI_INTEGRAL_DEADBAND)
+    {
+        ch->integral = 0;
     }
 }
 

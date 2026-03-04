@@ -35,10 +35,8 @@
 #define ACOMP_POSITIVE_INPUT 2U // inverter P e N?
 /* Definition of negative input source used in CMP_SetInputChannels() function */
 #define ACOMP_NEGATIVE_INPUT 0U // todo: REF - rotear para GND ou outro pino?
-/* CAPT analog tuning profile:
- * 0 = robust/noise-safe, 1 = balanced (default), 2 = higher sensitivity.
- */
-#define ACMP_TUNE_PROFILE 0U
+
+#define ACMP_TUNE_PROFILE 0U //todo testar outros ladders junto ao freemaster
 
 #if (ACMP_TUNE_PROFILE == 0U)
     #define ACOMP_LADDER_VALUE 10U
