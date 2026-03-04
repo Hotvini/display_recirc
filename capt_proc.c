@@ -38,10 +38,18 @@ static bool touch_all_frames_ready(const touch_proc_t *data_struct)
 
 static int32_t touch_get_di_input(const touch_proc_t *data_struct, uint8_t channel)
 {
-#if (CAPT_DI_USE_RAW_INPUT == 1U)
+#if (CAPT_DI_USE_RAW_INPUT == 0U)
     return (int32_t)data_struct->raw_count[channel] - (int32_t)data_struct->frame_baseline[channel];
-#else
+#elif (CAPT_DI_USE_RAW_INPUT == 1U)
     return (int32_t)data_struct->frame_avg[channel] - (int32_t)data_struct->frame_baseline[channel];
+#elif (CAPT_DI_USE_RAW_INPUT == 2U)
+    return (int32_t)data_struct->raw_count[channel];
+#elif (CAPT_DI_USE_RAW_INPUT == 3U)
+    return (int32_t)data_struct->frame_avg[channel];
+#elif (CAPT_DI_USE_RAW_INPUT == 4U)
+    return (int32_t)data_struct->frame_delta[channel];
+#else
+#error "Invalid value for CAPT_DI_USE_RAW_INPUT"
 #endif
 }
 
@@ -51,7 +59,7 @@ touch_di_cfg_t di_cfg =
     .it = 60,             // sensibilidade
     .leak_num = 99,       // 0.99
     .leak_den = 100,
-    .iir_shift = 3,       // 1/8
+    .iir_shift = 0,       // 1/8 - 0 = sem filtro IIR
     .integral_max = 2000
 };
 

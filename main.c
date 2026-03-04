@@ -16,6 +16,7 @@
 #include "buzzer.h"
 #include "capt_proc.h"
 #include "display_hal.h"
+#include "freemaster.h"
 
 
 /* ===================== Display maps ===================== */
@@ -55,6 +56,90 @@ static void leds_all_off(void)
 
 
 static touch_proc_t touchDetect;
+static volatile uint8_t fm_key = CAPT_BTN_COUNT;
+static volatile uint8_t fm_channel = 0U;
+static volatile uint8_t fm_calib_done = 0U;
+static volatile uint8_t fm_frame_ready_map = 0U;
+static volatile uint8_t fm_detection_map = 0U;
+static volatile uint16_t fm_raw[CAPT_BTN_COUNT];
+static volatile uint16_t fm_avg[CAPT_BTN_COUNT];
+static volatile uint16_t fm_baseline[CAPT_BTN_COUNT];
+static volatile uint16_t fm_delta[CAPT_BTN_COUNT];
+static volatile uint16_t fm_raw0, fm_raw1, fm_raw2, fm_raw3, fm_raw4;
+static volatile uint16_t fm_avg0, fm_avg1, fm_avg2, fm_avg3, fm_avg4;
+static volatile uint16_t fm_baseline0, fm_baseline1, fm_baseline2, fm_baseline3, fm_baseline4;
+static volatile uint16_t fm_delta0, fm_delta1, fm_delta2, fm_delta3, fm_delta4;
+
+FMSTR_TSA_TABLE_BEGIN(touch_watch_table)
+    FMSTR_TSA_RO_VAR(fm_key, FMSTR_TSA_UINT8)
+    FMSTR_TSA_RO_VAR(fm_channel, FMSTR_TSA_UINT8)
+    FMSTR_TSA_RO_VAR(fm_calib_done, FMSTR_TSA_UINT8)
+    FMSTR_TSA_RO_VAR(fm_frame_ready_map, FMSTR_TSA_UINT8)
+    FMSTR_TSA_RO_VAR(fm_detection_map, FMSTR_TSA_UINT8)
+    FMSTR_TSA_RO_VAR(fm_raw, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_avg, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_baseline, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_delta, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_raw0, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_raw1, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_raw2, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_raw3, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_raw4, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_avg0, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_avg1, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_avg2, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_avg3, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_avg4, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_baseline0, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_baseline1, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_baseline2, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_baseline3, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_baseline4, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_delta0, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_delta1, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_delta2, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_delta3, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_delta4, FMSTR_TSA_UINT16)
+FMSTR_TSA_TABLE_END()
+
+FMSTR_TSA_TABLE_LIST_BEGIN()
+    FMSTR_TSA_TABLE(touch_watch_table)
+FMSTR_TSA_TABLE_LIST_END()
+
+static void fmstr_touch_update(const touch_proc_t *touch, uint8_t key)
+{
+    uint8_t frame_ready_map = 0U;
+    uint8_t detection_map = 0U;
+
+    fm_key = key;
+    fm_channel = (uint8_t)touch->current_channel;
+    fm_calib_done = touch->calibration_done ? 1U : 0U;
+
+    for (uint8_t ch = 0U; ch < CAPT_BTN_COUNT; ch++)
+    {
+        if (touch->frame_ready[ch])
+        {
+            frame_ready_map |= (uint8_t)(1U << ch);
+        }
+        if (touch->detection_map[ch])
+        {
+            detection_map |= (uint8_t)(1U << ch);
+        }
+
+        fm_raw[ch] = touch->raw_count[ch];
+        fm_avg[ch] = touch->frame_avg[ch];
+        fm_baseline[ch] = touch->frame_baseline[ch];
+        fm_delta[ch] = touch->frame_delta[ch];
+    }
+
+    fm_raw0 = fm_raw[0]; fm_raw1 = fm_raw[1]; fm_raw2 = fm_raw[2]; fm_raw3 = fm_raw[3]; fm_raw4 = fm_raw[4];
+    fm_avg0 = fm_avg[0]; fm_avg1 = fm_avg[1]; fm_avg2 = fm_avg[2]; fm_avg3 = fm_avg[3]; fm_avg4 = fm_avg[4];
+    fm_baseline0 = fm_baseline[0]; fm_baseline1 = fm_baseline[1]; fm_baseline2 = fm_baseline[2]; fm_baseline3 = fm_baseline[3]; fm_baseline4 = fm_baseline[4];
+    fm_delta0 = fm_delta[0]; fm_delta1 = fm_delta[1]; fm_delta2 = fm_delta[2]; fm_delta3 = fm_delta[3]; fm_delta4 = fm_delta[4];
+
+    fm_frame_ready_map = frame_ready_map;
+    fm_detection_map = detection_map;
+}
 
 //static uint16_t captRawData[CAPT_BTN_COUNT];
 //static app_touch_state_t appTouchState = kAPP_TouchStateInit;
@@ -76,6 +161,7 @@ int main(void)
 
     capt_init();
 	capt_proc_init(&touchDetect);
+    FMSTR_Init();
 
 	//leds_all_on();
 	//grace_all_on();
@@ -96,6 +182,7 @@ int main(void)
 					grace_digit_set(thermo_digits[1], seven_seg_symbols[SEG_A]);
 					grace_digit_set(thermo_digits[2], seven_seg_symbols[SEG_L]);
 					tm1629a_display_refresh(); // display state
+                    fmstr_touch_update(&touchDetect, CAPT_BTN_COUNT);
 					touchDetect.touch_task_state = kAPP_TouchStateCalib;
 					break;
 
@@ -110,6 +197,7 @@ int main(void)
 					//grace_digit_set(thermo_digits[2], seven_seg_symbols[SEG_D]);
 					//tm1629a_display_refresh();
 					//lastTouchTime = systick_get_ms();
+                    fmstr_touch_update(&touchDetect, CAPT_BTN_COUNT);
 					touchDetect.touch_task_state = kAPP_TouchStateDetect;
 					break;
 
@@ -128,6 +216,7 @@ int main(void)
 					grace_digit_set(clock_digits[2], seven_seg_symbols[(display_count / 10) % 10]);
 					grace_digit_set(clock_digits[3], seven_seg_symbols[(display_count) % 10]);
 					tm1629a_display_refresh();
+                    fmstr_touch_update(&touchDetect, key);
 
 					//touch_proc_compute_delta(&touchDetect);
 					//int key_raw = touch_detect_key(&touchDetect);
@@ -175,9 +264,11 @@ int main(void)
 
 				break;
 				default:
+                    fmstr_touch_update(&touchDetect, CAPT_BTN_COUNT);
 					touchDetect.touch_task_state = kAPP_TouchStateInit;
 					break;
 			}
 		}
+        FMSTR_Poll();
     }
 }

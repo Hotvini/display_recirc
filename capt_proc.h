@@ -21,14 +21,14 @@
 
 #define TOUCH_FRAME_WINDOW     4U // todo: 1U para sistema sem média?
 
-#define CAPT_POLL_TIMEOUT_MS  5U //??
+#define CAPT_POLL_TIMEOUT_MS  5U
 /* Gate a channel after N consecutive timeouts for this many milliseconds. */
 #define CAPT_TIMEOUT_GATE_HITS 2U
 #define CAPT_TIMEOUT_GATE_MS   80U
-/* DI input source: 0 = frame_avg - baseline, 1 = raw_count - baseline. */
-#define CAPT_DI_USE_RAW_INPUT  0U
+/* DI input source: 0 = raw_count - baseline, 1 = frame_avg - baseline, 2 = raw_count */
+#define CAPT_DI_USE_RAW_INPUT  2U
 /* Multi-press handling: 0 = return strongest key, 1 = allow multi and return first detected key. */
-#define CAPT_MULTI_PRESS_ENABLE 1U
+#define CAPT_MULTI_PRESS_ENABLE 0U // todo: multi-press should return bitmask/array of detected keys instead of just first/strongest?
 
 typedef enum {
     CAPT_BTN_S1, // X0
