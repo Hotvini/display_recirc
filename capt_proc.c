@@ -5,25 +5,21 @@
  *      Author: vinicius.andrade
  */
 #include "capt_proc.h"
-#include <limits.h>
 #include <string.h>
-#include <math.h>
 
 static volatile uint16_t captRawDataBuffer[CAPT_BTN_COUNT];
 static volatile bool captTimeoutDataBuffer[CAPT_BTN_COUNT];
 const uint16_t captEnabledPins[CAPT_BTN_COUNT] = CAPT_ENABLE_PINS_ARRAY;
 static volatile capt_button_t pending_channel;
 static volatile bool busy_polling = false;
+static volatile capt_touch_data_t last_touch_data;
 static uint32_t baseline_accum[CAPT_BTN_COUNT];
 static uint8_t baseline_count[CAPT_BTN_COUNT];
-static uint32_t gate_until_ms[CAPT_BTN_COUNT];
 static touch_di_channel_t di_channels[CAPT_BTN_COUNT];
-
-static bool touch_channel_is_gated(uint8_t channel)
-{
-    uint32_t now = systick_get_ms();
-    return ((int32_t)(now - gate_until_ms[channel]) < 0);
-}
+static int16_t baseline_stable_ref[CAPT_BTN_COUNT];
+static int32_t baseline_stable_sum[CAPT_BTN_COUNT];
+static uint8_t baseline_stable_count[CAPT_BTN_COUNT];
+static int32_t baseline_track_accum[CAPT_BTN_COUNT];
 
 static bool touch_all_frames_ready(const touch_proc_t *data_struct)
 {
@@ -40,6 +36,36 @@ static bool touch_all_frames_ready(const touch_proc_t *data_struct)
 static uint32_t touch_abs_i32(int32_t v)
 {
     return (uint32_t)((v < 0) ? -v : v);
+}
+
+static bool touch_has_common_mode_drift(const touch_proc_t *data_struct, uint8_t ref_channel, int32_t ref_err)
+{
+    uint8_t similar_channels = 0U;
+
+    for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
+    {
+        int32_t err;
+        int32_t diff;
+
+        if (ch == ref_channel)
+        {
+            continue;
+        }
+
+        err = (int32_t)data_struct->frame_avg[ch] - (int32_t)data_struct->frame_baseline[ch];
+        diff = err - ref_err;
+        if (diff < 0)
+        {
+            diff = -diff;
+        }
+
+        if ((uint32_t)diff <= CAPT_BASELINE_COMMON_MODE_TOL)
+        {
+            similar_channels++;
+        }
+    }
+
+    return (similar_channels > 0U);
 }
 
 static int32_t touch_get_di_input(const touch_proc_t *data_struct, uint8_t channel)
@@ -59,12 +85,12 @@ static int32_t touch_get_di_input(const touch_proc_t *data_struct, uint8_t chann
 
 touch_di_cfg_t di_cfg =
 {
-    .dt = 4,              // 2–4x ruído
-    .it = 60,             // sensibilidade
-    .leak_num = 99,       // 0.99
-    .leak_den = 100,
-    .iir_shift = 2,       // 1/8 - 0 = sem filtro IIR
-    .integral_max = 2000
+    .dt = CAPT_DI_DT,                  // 2–4x ruído
+    .it = CAPT_DI_IT,                  // sensibilidade
+    .leak_num = CAPT_DI_LEAK_NUM,      // 0.99
+    .leak_den = CAPT_DI_LEAK_DEN,
+    .iir_shift = CAPT_DI_IIR_SHIFT,    // 1/8 - 0 = sem filtro IIR
+    .integral_max = CAPT_DI_INTEGRAL_MAX
 };
 
 void CMP_CAPT_DriverIRQHandler(void)
@@ -77,6 +103,7 @@ void CMP_CAPT_DriverIRQHandler(void)
         capt_touch_data_t data;
         if (CAPT_GetTouchData(CAPT_PERIPHERAL, &data))
         {
+            last_touch_data = data;
             if (data.XpinsIndex == pending_channel)
             {
                 captRawDataBuffer[data.XpinsIndex] = data.count;
@@ -96,7 +123,11 @@ void capt_proc_init(touch_proc_t *data_struct)
     memset((void *)captTimeoutDataBuffer, 0, sizeof(captTimeoutDataBuffer));
     memset((void *)baseline_accum, 0, sizeof(baseline_accum));
     memset((void *)baseline_count, 0, sizeof(baseline_count));
-    memset((void *)gate_until_ms, 0, sizeof(gate_until_ms));
+    memset((void *)baseline_stable_ref, 0, sizeof(baseline_stable_ref));
+    memset((void *)baseline_stable_sum, 0, sizeof(baseline_stable_sum));
+    memset((void *)baseline_stable_count, 0, sizeof(baseline_stable_count));
+    memset((void *)baseline_track_accum, 0, sizeof(baseline_track_accum));
+    memset((void *)&last_touch_data, 0, sizeof(last_touch_data));
     for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
     {
         touch_di_init(&di_channels[ch]);
@@ -139,35 +170,8 @@ bool capt_get_sample(touch_proc_t *data_out)
  * -------------------------------------------------------------------------- */
 void touch_proc_push_sample(touch_proc_t *data_struct)
 {
-    bool timed_out = data_struct->sample_timed_out[pending_channel];
-    bool gated = touch_channel_is_gated(pending_channel);
     uint32_t old = data_struct->frame[pending_channel][data_struct->frame_position];
-
     uint32_t new = data_struct->raw_count[pending_channel];
-
-    if (timed_out)
-    {
-        if (data_struct->timeout_streak[pending_channel] < UINT8_MAX)
-        {
-            data_struct->timeout_streak[pending_channel]++;
-        }
-
-        if (data_struct->timeout_streak[pending_channel] >= CAPT_TIMEOUT_GATE_HITS)
-        {
-            gate_until_ms[pending_channel] = systick_get_ms() + CAPT_TIMEOUT_GATE_MS;
-            gated = true;
-        }
-    }
-    else
-    {
-        data_struct->timeout_streak[pending_channel] = 0U;
-    }
-
-    if (timed_out || gated)
-    {
-        /* Freeze window content on invalid sample; keep pipeline cadence running. */
-        new = old;
-    }
 
     data_struct->frame[pending_channel][data_struct->frame_position] = new;
 
@@ -212,29 +216,79 @@ void touch_proc_push_sample(touch_proc_t *data_struct)
 //     }
 // }
 
-static void touch_baseline_update(touch_proc_t *data_struct)
+void touch_avg_update(touch_proc_t *data_struct)
 {
     /* Canal ainda não fechou janela */
     if (!data_struct->frame_ready[pending_channel])
+    {
         return;
+    }
 
-    /* Atualiza média */
     data_struct->frame_avg[pending_channel] =
         data_struct->frame_sum[pending_channel] / TOUCH_FRAME_WINDOW;
+}
 
-    if (data_struct->sample_timed_out[pending_channel] || touch_channel_is_gated(pending_channel))
+void touch_baseline_update(touch_proc_t *data_struct)
+{
+    /* Canal ainda não fechou janela */
+    if (!data_struct->frame_ready[pending_channel])
+    {
         return;
+    }
 
     /* Pós-calibração: rastreio lento de baseline para acompanhar deriva térmica/ambiental. */
     if (data_struct->calibration_done)
     {
         int32_t err = (int32_t)data_struct->frame_avg[pending_channel] - (int32_t)data_struct->frame_baseline[pending_channel];
         int32_t abs_err = (err >= 0) ? err : -err;
+        int32_t stable_diff = err - (int32_t)baseline_stable_ref[pending_channel];
+
+        if (stable_diff < 0)
+        {
+            stable_diff = -stable_diff;
+        }
+
+        if ((uint32_t)stable_diff <= CAPT_BASELINE_STABLE_TOL)
+        {
+            if (baseline_stable_count[pending_channel] < UINT8_MAX)
+            {
+                baseline_stable_count[pending_channel]++;
+            }
+            baseline_stable_sum[pending_channel] += err;
+        }
+        else
+        {
+            baseline_stable_ref[pending_channel] = (int16_t)err;
+            baseline_stable_sum[pending_channel] = err;
+            baseline_stable_count[pending_channel] = 1U;
+        }
 
         if ((uint32_t)abs_err <= CAPT_BASELINE_TRACK_DELTA_MAX)
         {
+            int32_t accum = baseline_track_accum[pending_channel] + err;
+            int32_t adjust = accum / (int32_t)(1U << CAPT_BASELINE_TRACK_SHIFT);
+
+            if (adjust != 0)
+            {
+                data_struct->frame_baseline[pending_channel] =
+                    (uint16_t)((int32_t)data_struct->frame_baseline[pending_channel] + adjust);
+                accum -= adjust * (int32_t)(1U << CAPT_BASELINE_TRACK_SHIFT);
+            }
+
+            baseline_track_accum[pending_channel] = accum;
+        }
+        else if (baseline_stable_count[pending_channel] >= CAPT_BASELINE_STABLE_FRAMES &&
+                 !touch_di_is_detected(&di_channels[pending_channel]) &&
+                 touch_has_common_mode_drift(data_struct, pending_channel, err))
+        {
+            int32_t stable_mean = baseline_stable_sum[pending_channel] / (int32_t)baseline_stable_count[pending_channel];
+
             data_struct->frame_baseline[pending_channel] =
-                (uint16_t)((int32_t)data_struct->frame_baseline[pending_channel] + (err >> CAPT_BASELINE_TRACK_SHIFT));
+                (uint16_t)((int32_t)data_struct->frame_baseline[pending_channel] + stable_mean);
+            baseline_stable_ref[pending_channel] = 0;
+            baseline_stable_sum[pending_channel] = 0;
+            baseline_stable_count[pending_channel] = 0U;
+            baseline_track_accum[pending_channel] = 0;
         }
         return;
     }
@@ -267,29 +321,21 @@ static void touch_baseline_update(touch_proc_t *data_struct)
     data_struct->calibration_done = true;
 }
 
-// static void touch_proc_delta(touch_proc_t *data_struct)
-// {
-//     if (data_struct->calibration_done && touch_all_frames_ready(data_struct))
-//     {
-//         for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
-//         {
-//             if (touch_channel_is_gated(channel))
-//             {
-//                 data_struct->frame_delta[channel] = 0U;
-//                 continue;
-//             }
+void touch_proc_delta(touch_proc_t *data_struct)
+{
+    if (data_struct->calibration_done && touch_all_frames_ready(data_struct))
+    {
+        for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
+        {
+            //uint16_t raw = data_struct->raw_count[channel];
+            uint16_t avg = data_struct->frame_avg[channel];
+            uint16_t baseline = data_struct->frame_baseline[channel];
 
-//             //uint16_t raw = data_struct->raw_count[channel];
-//             uint16_t avg = data_struct->frame_avg[channel];
-//             uint16_t baseline = data_struct->frame_baseline[channel];
-
-//             //data_struct->frame_delta[channel] = (raw > baseline) ? (raw - baseline) : (baseline - raw);
-//             data_struct->frame_delta[channel] = (avg > baseline) ? (avg - baseline) : (baseline - avg);
-
-
-//         }
-//     }
-// }
+            //data_struct->frame_delta[channel] = (raw > baseline) ? (raw - baseline) : (baseline - raw);
+            data_struct->frame_delta[channel] = (avg > baseline) ? (avg - baseline) : (baseline - avg);
+        }
+    }
+}
 
 uint8_t touch_detect_keys_mask(const touch_proc_t *data_struct)
 {
@@ -308,9 +354,6 @@ uint8_t touch_detect_keys_mask(const touch_proc_t *data_struct)
 
 uint8_t touch_detect_key(touch_proc_t *data_struct)
 {
-    touch_baseline_update(data_struct);
-    //touch_proc_delta(data_struct);
-
     for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
     {
         data_struct->detection_map[channel] = false;
@@ -328,13 +371,6 @@ uint8_t touch_detect_key(touch_proc_t *data_struct)
 
     for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
     {
-        bool invalid = data_struct->sample_timed_out[channel] || touch_channel_is_gated(channel);
-        if (invalid)
-        {
-            touch_di_init(&di_channels[channel]);
-            continue;
-        }
-
         int32_t signed_delta = touch_get_di_input(data_struct, channel);
         touch_di_process(&di_channels[channel], signed_delta, &di_cfg);
 
@@ -398,4 +434,18 @@ void capt_proc_get_di_snapshot(touch_di_channel_t out[CAPT_BTN_COUNT])
     {
         out[ch] = di_channels[ch];
     }
+}
+
+void capt_proc_get_last_touch_data(capt_touch_data_t *out)
+{
+    if (out == NULL)
+    {
+        return;
+    }
+
+    out->yesTimeOut = last_touch_data.yesTimeOut;
+    out->yesTouch = last_touch_data.yesTouch;
+    out->XpinsIndex = last_touch_data.XpinsIndex;
+    out->sequenceNumber = last_touch_data.sequenceNumber;
+    out->count = last_touch_data.count;
 }

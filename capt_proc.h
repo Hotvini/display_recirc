@@ -21,16 +21,22 @@
 #define TOUCH_FRAME_WINDOW     8U // todo: 1U para sistema sem média - média maior = menor ruído e maior latência
 
 #define CAPT_POLL_TIMEOUT_MS  5U // timeout em polling mode - dar erro mas não deve rolar
-/* Gate a channel after N consecutive timeouts for this many milliseconds. */
-#define CAPT_TIMEOUT_GATE_HITS 2U
-#define CAPT_TIMEOUT_GATE_MS   80U
 /* Post-calibration baseline tracking: baseline += (avg-baseline)>>shift. */
-#define CAPT_BASELINE_TRACK_SHIFT      3U // todo se perde todo 
+#define CAPT_BASELINE_TRACK_SHIFT      4U // todo se perde todo
 /* Track baseline only when |avg-baseline| is below this limit. */
 #define CAPT_BASELINE_TRACK_DELTA_MAX  40U
+#define CAPT_BASELINE_STABLE_TOL       2U
+#define CAPT_BASELINE_STABLE_FRAMES    24U
+#define CAPT_BASELINE_COMMON_MODE_TOL  8U
 
 /* DI input source: 0 = raw_count - baseline, 1 = frame_avg - baseline, 2 = raw_count */
-#define CAPT_DI_USE_RAW_INPUT  3U
+#define CAPT_DI_USE_RAW_INPUT  1U
+#define CAPT_DI_DT                 2U
+#define CAPT_DI_IT                 24
+#define CAPT_DI_LEAK_NUM           97U
+#define CAPT_DI_LEAK_DEN           100U
+#define CAPT_DI_IIR_SHIFT          1U
+#define CAPT_DI_INTEGRAL_MAX       512
 /* Inverted DI mode: detect the channel with smallest DI variation while others vary. */
 #define CAPT_DI_INVERT_MINVAR_MODE    1U
 /* Minimum "other channels activity" to enable inverted decision. */
@@ -62,9 +68,8 @@ typedef struct {
     uint16_t frame_baseline[CAPT_BTN_COUNT];
     //uint32_t frame_variance[CAPT_BTN_COUNT];
     //uint16_t frame_stddev[CAPT_BTN_COUNT];
-    //uint16_t frame_delta[CAPT_BTN_COUNT];
+    uint16_t frame_delta[CAPT_BTN_COUNT];
     uint8_t frame_position;
-    uint8_t timeout_streak[CAPT_BTN_COUNT];
     bool sample_timed_out[CAPT_BTN_COUNT];
     bool frame_ready[CAPT_BTN_COUNT];
     bool detection_map[CAPT_BTN_COUNT];
@@ -77,8 +82,12 @@ void CMP_CAPT_DriverIRQHandler(void);
 void capt_proc_init(touch_proc_t *data_struct);
 bool capt_get_sample(touch_proc_t *data_out);
 void touch_proc_push_sample(touch_proc_t *data_struct);
+void touch_avg_update(touch_proc_t *data_struct);
+void touch_baseline_update(touch_proc_t *data_struct);
+void touch_proc_delta(touch_proc_t *data_struct);
 uint8_t touch_detect_keys_mask(const touch_proc_t *data_struct);
 uint8_t touch_detect_key(touch_proc_t *data_struct);
 void capt_proc_get_di_snapshot(touch_di_channel_t out[CAPT_BTN_COUNT]);
+void capt_proc_get_last_touch_data(capt_touch_data_t *out);
 
 #endif /* CAPT_PROC_H_ */
