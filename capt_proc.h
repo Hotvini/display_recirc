@@ -10,15 +10,13 @@
 #include "capt_config.h"
 #include "touch_di.h"
 
-/* Used only when CONTINUOS_POLL == 1 (continuous mode); currently not used. */
-//#define CAPT_ENABLE_PINS (kCAPT_X0Pin | kCAPT_X1Pin | kCAPT_X2Pin | kCAPT_X3Pin | kCAPT_X4Pin)
-//#define CAPT_ENABLE_PINS (kCAPT_X4Pin) //debug
+/* Per-channel pin mask used by Poll-Now mode. */
 #define CAPT_ENABLE_PINS_ARRAY {kCAPT_X0Pin, \
                                 kCAPT_X1Pin, \
                                 kCAPT_X2Pin, \
                                 kCAPT_X3Pin}
 
-#define TOUCH_FRAME_WINDOW     8U // todo: 1U para sistema sem média - média maior = menor ruído e maior latência
+#define TOUCH_FRAME_WINDOW     3U // todo: 1U para sistema sem média - média maior = menor ruído e maior latência
 
 #define CAPT_POLL_TIMEOUT_MS  5U // timeout em polling mode - dar erro mas não deve rolar
 /* Post-calibration baseline tracking: baseline += (avg-baseline)>>shift. */
@@ -35,7 +33,7 @@
 #define CAPT_DI_IT                 24
 #define CAPT_DI_LEAK_NUM           97U
 #define CAPT_DI_LEAK_DEN           100U
-#define CAPT_DI_IIR_SHIFT          1U
+#define CAPT_DI_IIR_SHIFT          0U
 #define CAPT_DI_INTEGRAL_MAX       512
 /* Inverted DI mode: detect the channel with smallest DI variation while others vary. */
 #define CAPT_DI_INVERT_MINVAR_MODE    1U
@@ -68,7 +66,7 @@ typedef struct {
     uint16_t frame_baseline[CAPT_BTN_COUNT];
     //uint32_t frame_variance[CAPT_BTN_COUNT];
     //uint16_t frame_stddev[CAPT_BTN_COUNT];
-    uint16_t frame_delta[CAPT_BTN_COUNT];
+    int32_t frame_delta[CAPT_BTN_COUNT];
     uint8_t frame_position;
     bool sample_timed_out[CAPT_BTN_COUNT];
     bool frame_ready[CAPT_BTN_COUNT];

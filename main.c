@@ -64,7 +64,7 @@ static volatile capt_touch_data_t fm_capt_touch_data;
 static volatile uint16_t fm_raw0, fm_raw1, fm_raw2, fm_raw3;
 static volatile uint16_t fm_avg0, fm_avg1, fm_avg2, fm_avg3;
 static volatile uint16_t fm_baseline0, fm_baseline1, fm_baseline2, fm_baseline3;
-static volatile uint16_t fm_delta0, fm_delta1, fm_delta2, fm_delta3;
+static volatile int32_t fm_delta0, fm_delta1, fm_delta2, fm_delta3;
 static volatile int32_t fm_di_integral0, fm_di_integral1, fm_di_integral2, fm_di_integral3;
 static volatile int32_t fm_di_filtered0, fm_di_filtered1, fm_di_filtered2, fm_di_filtered3;
 static volatile uint8_t fm_di_detected_map = 0U;
@@ -92,10 +92,10 @@ FMSTR_TSA_TABLE_BEGIN(touch_watch_table)
     FMSTR_TSA_RO_VAR(fm_baseline1, FMSTR_TSA_UINT16)
     FMSTR_TSA_RO_VAR(fm_baseline2, FMSTR_TSA_UINT16)
     FMSTR_TSA_RO_VAR(fm_baseline3, FMSTR_TSA_UINT16)
-    FMSTR_TSA_RO_VAR(fm_delta0, FMSTR_TSA_UINT16)
-    FMSTR_TSA_RO_VAR(fm_delta1, FMSTR_TSA_UINT16)
-    FMSTR_TSA_RO_VAR(fm_delta2, FMSTR_TSA_UINT16)
-    FMSTR_TSA_RO_VAR(fm_delta3, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_delta0, FMSTR_TSA_SINT32)
+    FMSTR_TSA_RO_VAR(fm_delta1, FMSTR_TSA_SINT32)
+    FMSTR_TSA_RO_VAR(fm_delta2, FMSTR_TSA_SINT32)
+    FMSTR_TSA_RO_VAR(fm_delta3, FMSTR_TSA_SINT32)
     FMSTR_TSA_RO_VAR(fm_di_integral0, FMSTR_TSA_SINT32)
     FMSTR_TSA_RO_VAR(fm_di_integral1, FMSTR_TSA_SINT32)
     FMSTR_TSA_RO_VAR(fm_di_integral2, FMSTR_TSA_SINT32)

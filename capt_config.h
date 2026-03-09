@@ -15,47 +15,56 @@
 #include "fsl_reset.h"
 #include "systick.h"
 
-/* Currently unused in Poll-Now flow; kept for optional critical sections/debug. */
+/* CAPT trigger profile selector. Change only this define to switch mode. */
+#define CAPT_TRIGGER_PROFILE_ACMP 0U
+#define CAPT_TRIGGER_PROFILE_YH   1U
+#define CAPT_TRIGGER_PROFILE      CAPT_TRIGGER_PROFILE_YH
+
+#define CONTINUOS_POLL 0 //cont poll vs poll now
+
+/* Active X channels in continuous mode and in Poll-Now calls. */
+#define CAPT_ENABLE_PINS (kCAPT_X0Pin | kCAPT_X1Pin | kCAPT_X2Pin | kCAPT_X3Pin)
+
+/* Kept for optional critical sections/debug. */
 #define DISABLE_CAPT_INTERRUPTS                                                                     \
     CAPT_DisableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfYesTouchEnable | kCAPT_InterruptOfNoTouchEnable | \
                                                kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
 
-#define ENABLE_CAPT_INTERRUPTS CAPT_EnableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfPollDoneEnable); // POll Now mode
+#if (CONTINUOS_POLL)
+#define ENABLE_CAPT_INTERRUPTS CAPT_EnableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
 
-/* CAPT trigger profile selector. Change only this define to switch mode. */
-#define CAPT_TRIGGER_PROFILE_ACMP 0U
-#define CAPT_TRIGGER_PROFILE_YH   1U
-#define CAPT_TRIGGER_PROFILE      CAPT_TRIGGER_PROFILE_ACMP
-
-#define CONTINUOS_POLL 0 //cont poll vs poll now
+#else
+//#define ENABLE_CAPT_INTERRUPTS CAPT_EnableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfPollDoneEnable)
+#define ENABLE_CAPT_INTERRUPTS CAPT_EnableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
+#endif
 
 /* Definition of peripheral ID */
 #define ACOMP_PERIPHERAL ACOMP
 /* Definition of positive input source used in CMP_SetInputChannels() function */
 #define ACOMP_POSITIVE_INPUT 2U // inverter P e N?
 /* Definition of negative input source used in CMP_SetInputChannels() function */
-#define ACOMP_NEGATIVE_INPUT 0U // todo: REF - rotear para GND ou outro pino?
+#define ACOMP_NEGATIVE_INPUT 0U // ACOMP internal ladder DAC output
 
-#define ACMP_TUNE_PROFILE 0U //todo testar outros ladders junto ao freemaster
+#define ACMP_TUNE_PROFILE 0U
 
 #if (ACMP_TUNE_PROFILE == 0U)
     #define ACOMP_LADDER_VALUE 10U
     #define CAPT_MEASURE_DELAY kCAPT_MeasureDelayWait9FCLKs
     #define CAPT_RESET_DELAY   kCAPT_ResetDelayWait9FCLKs
-    #define ACOMP_HYSTERESIS   kACOMP_Hysteresis20MVSelection
-    #define ACOMP_SYNC_TO_BUS_CLK true
+    #define ACOMP_HYSTERESIS   kACOMP_HysteresisNoneSelection
+    #define ACOMP_SYNC_TO_BUS_CLK false
 #elif (ACMP_TUNE_PROFILE == 1U)
     #define ACOMP_LADDER_VALUE 8U
     #define CAPT_MEASURE_DELAY kCAPT_MeasureDelayWait9FCLKs
     #define CAPT_RESET_DELAY   kCAPT_ResetDelayWait5FCLKs
     #define ACOMP_HYSTERESIS   kACOMP_Hysteresis20MVSelection
-    #define ACOMP_SYNC_TO_BUS_CLK true
+    #define ACOMP_SYNC_TO_BUS_CLK false
 #else
     #define ACOMP_LADDER_VALUE 6U
     #define CAPT_MEASURE_DELAY kCAPT_MeasureDelayWait3FCLKs
     #define CAPT_RESET_DELAY   kCAPT_ResetDelayWait3FCLKs
     #define ACOMP_HYSTERESIS   kACOMP_Hysteresis20MVSelection
-    #define ACOMP_SYNC_TO_BUS_CLK true
+    #define ACOMP_SYNC_TO_BUS_CLK false
 #endif
 
 /* Definition of peripheral ID */
@@ -71,7 +80,7 @@
 /* Delay between poll round, the delay time between two poll round
  * is CAPT_DELAY_BETWEEN_POLL * 4096 * FCLK period
  */
-/* Used only when CONTINUOS_POLL == 1 (continuous mode); currently not used. */
+/* Used only when CONTINUOS_POLL == 1 (continuous mode). */
 #define CAPT_DELAY_BETWEEN_POLL 60
 
 #if ((CAPT_TRIGGER_PROFILE != CAPT_TRIGGER_PROFILE_ACMP) && (CAPT_TRIGGER_PROFILE != CAPT_TRIGGER_PROFILE_YH))

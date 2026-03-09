@@ -48,15 +48,15 @@ void capt_init(void)
 {
 	CAPT_config.pollCount = CAPT_DELAY_BETWEEN_POLL;
 	CAPT_config.enableXpins = CAPT_ENABLE_PINS;
-	CAPT_config.mDelay       = CAPT_MEASURE_DELAY;
-	CAPT_config.rDelay       = CAPT_RESET_DELAY;
+	CAPT_config.mDelay = CAPT_MEASURE_DELAY;
+	CAPT_config.rDelay = CAPT_RESET_DELAY;
 
 }
 #else
 {
 	CAPT_config.enableXpins = 0;
-	CAPT_config.mDelay       = CAPT_MEASURE_DELAY;
-	CAPT_config.rDelay       = CAPT_RESET_DELAY;
+	CAPT_config.mDelay = CAPT_MEASURE_DELAY;
+	CAPT_config.rDelay = CAPT_RESET_DELAY;
 }
 #endif
 	CAPT_config.clockDivider = CAPT_CLK_DIVIDER;
@@ -65,4 +65,9 @@ void capt_init(void)
 	/* Enable the interrupts. */
 	ENABLE_CAPT_INTERRUPTS;
 	EnableIRQ(CAPT_IRQN);
+
+#if(CONTINUOS_POLL)
+	/* Start automatic round-robin polling on enabled X pins. */
+	CAPT_SetPollMode(CAPT_PERIPHERAL, kCAPT_PollContinuousMode);
+#endif
 }
