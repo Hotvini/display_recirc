@@ -21,6 +21,7 @@
 #define CAPT_TRIGGER_PROFILE      CAPT_TRIGGER_PROFILE_YH
 
 #define CONTINUOS_POLL 0 //cont poll vs poll now
+// todo: corrigir nome para CONTINUOUS_POLL em todo o projeto para reduzir ambiguidade/erro de busca.
 
 /* Active X channels in continuous mode and in Poll-Now calls. */
 #define CAPT_ENABLE_PINS (kCAPT_X0Pin | kCAPT_X1Pin | kCAPT_X2Pin | kCAPT_X3Pin)
@@ -29,6 +30,7 @@
 #define DISABLE_CAPT_INTERRUPTS                                                                     \
     CAPT_DisableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfYesTouchEnable | kCAPT_InterruptOfNoTouchEnable | \
                                                kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
+// todo: remover se macro continuar sem uso pratico (codigo morto de debug/critical section).
 
 #if (CONTINUOS_POLL)
 #define ENABLE_CAPT_INTERRUPTS CAPT_EnableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
@@ -44,6 +46,7 @@
 #define ACOMP_POSITIVE_INPUT 2U // inverter P e N?
 /* Definition of negative input source used in CMP_SetInputChannels() function */
 #define ACOMP_NEGATIVE_INPUT 0U // ACOMP internal ladder DAC output
+// todo: validar canal positivo/negativo no hardware final e limpar comentario de duvida.
 
 #define ACMP_TUNE_PROFILE 0U
 
@@ -76,6 +79,7 @@
 
 /* Calculate the clock divider to make sure CAPT work in 2Mhz FCLK. */
 #define CAPT_CLK_DIVIDER ((CLOCK_GetFroFreq() / 2000000U) - 1U)
+// todo: fixar divisor em init apos clock settle para evitar recalculo por macro e facilitar debug.
 
 /* Delay between poll round, the delay time between two poll round
  * is CAPT_DELAY_BETWEEN_POLL * 4096 * FCLK period

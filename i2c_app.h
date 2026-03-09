@@ -8,6 +8,7 @@
 #ifndef I2C_APP_H_
 #define I2C_APP_H_
 
+// todo: remover header vazio ou declarar interface I2C publica usada pela aplicacao.
 
 
 #endif /* I2C_APP_H_ */

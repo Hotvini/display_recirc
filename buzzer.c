@@ -48,6 +48,7 @@ void buzzer_off(void)
 
 void buzzer_beep_ms(uint32_t ms)
 {
+    // todo: evitar API bloqueante; migrar para beep nao bloqueante por estado/timer.
     buzzer_on();
     delay_ms(ms);
     buzzer_off();
@@ -61,6 +62,7 @@ static void buzzer_set_freq(uint32_t freq)
     }
 
     uint32_t period = BUZZER_CLOCK_FREQ / freq;
+    // todo: validar faixa de freq para evitar periodos invalidos e limitar duty minimo/maximo.
 
     BUZZER_CTIMER->MR[BUZZER_PERIOD] = period;
     BUZZER_CTIMER->MR[BUZZER_MATCH]    = period / 2;
@@ -68,6 +70,7 @@ static void buzzer_set_freq(uint32_t freq)
 
 void buzzer_play_melody(const buzzer_note_t *melody, uint32_t len)
 {
+    // todo: trocar loop com delay bloqueante por scheduler para nao travar loop principal.
     for (uint32_t i = 0; i < len; i++) {
         if (melody[i].freq) {
             buzzer_set_freq(melody[i].freq);
@@ -83,6 +86,7 @@ void buzzer_play_melody(const buzzer_note_t *melody, uint32_t len)
 }
 
 /*
+// todo: remover implementacao antiga comentada abaixo para reduzir ruido no arquivo.
 void buzzer_on(uint32_t freq_hz)
 {
     uint32_t timer_clk;

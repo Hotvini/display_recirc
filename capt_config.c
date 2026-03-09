@@ -12,6 +12,7 @@ static void acomp_init(void)
 {
 	static acomp_config_t ACOMP_config;
 	static acomp_ladder_config_t ACOMP_ladder_config;
+	// todo: trocar buffers static por locais se nao houver necessidade de persistencia; reduz estado global oculto.
 
 	ACOMP_config.enableSyncToBusClk = ACOMP_SYNC_TO_BUS_CLK;
 	ACOMP_config.hysteresisSelection = ACOMP_HYSTERESIS;
@@ -30,6 +31,7 @@ static void acomp_init(void)
 void capt_init(void)
 {
 	static capt_config_t CAPT_config;
+	// todo: remover static se init for chamado uma unica vez; permite stack allocation e facilita teste unitario.
 	CAPT_GetDefaultConfig(&CAPT_config);
 #if (CAPT_TRIGGER_PROFILE == CAPT_TRIGGER_PROFILE_ACMP)
 {
@@ -43,6 +45,7 @@ void capt_init(void)
 	CAPT_config.XpinsMode   = kCAPT_InactiveXpinsDrivenLowMode;
 }
 #endif
+	// todo: remover blocos extras "{" "}" de preprocessor e unificar atribuicoes comuns para reduzir ruido.
 
 #if(CONTINUOS_POLL)
 {
@@ -65,6 +68,7 @@ void capt_init(void)
 	/* Enable the interrupts. */
 	ENABLE_CAPT_INTERRUPTS;
 	EnableIRQ(CAPT_IRQN);
+	// todo: encapsular habilitacao de IRQ em helper unico com assert de configuracao para facilitar manutencao.
 
 #if(CONTINUOS_POLL)
 	/* Start automatic round-robin polling on enabled X pins. */

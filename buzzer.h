@@ -31,6 +31,7 @@
 #define NOTE_A4   440
 #define NOTE_B4   494
 #define NOTE_C5   523
+// todo: remover notas nao utilizadas ou mover para modulo de melodias para reduzir poluicao de header.
 
 typedef struct {
     uint16_t freq;

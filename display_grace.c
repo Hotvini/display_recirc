@@ -19,6 +19,7 @@
 #ifndef  FALSE
 #define  FALSE    (0)
 #endif
+// todo: remover redefinicoes de NULL/TRUE/FALSE e usar stdbool/stddef padrao.
 
 #ifndef  ASSERT_NULL_PTR
 #define  ASSERT_NULL_PTR(x)     \
@@ -73,6 +74,7 @@ static const grace_map_t grace_digit_map[GRACE_DIGIT_COUNT] = {
 
 static int grace_map_set(const grace_map_t *map,uint8_t index,bool state){
     ASSERT_NULL_PTR(map);
+    // todo: validar faixa de index para cada mapa e evitar acesso fora de limite.
     tm1629a_buffer_update_bit_state(map[index].addr,map[index].mask,state);
     return 0;
 }
@@ -90,6 +92,7 @@ int grace_dot_set(grace_dot_id_t dot, bool state) {
 }
 
 int grace_digit_set(grace_digit_id_t digit, uint8_t value) {
+    // todo: checar digit < GRACE_DIGIT_COUNT antes de indexar.
     uint8_t addr = grace_digit_map[digit].addr;
     uint8_t mask = grace_digit_map[digit].mask;
     tm1629a_buffer_update_masked(addr, mask, value);
@@ -120,6 +123,7 @@ int grace_all_on(void)
         grace_digit_set((grace_digit_id_t)i, 0x7F);  // todos os segmentos
     }
     tm1629a_display_refresh();
+    // todo: unificar grace_all_on/off em helper unico para evitar duplicacao de loops.
     return 0;
 }
 

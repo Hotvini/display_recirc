@@ -37,8 +37,10 @@ TM1629A_BEGIN
 #define  TM1629A_CONNECT_TYPE_ANODE    1
 #define  TM1629A_CONNECT_TYPE_CATHODE  2
 #define  TM1629A_CONNECT_TYPE          TM1629A_CONNECT_TYPE_CATHODE
+// todo: mover tipo de conexao para configuracao de placa/build para evitar edicao manual deste header.
 
 #define CLK_DELAY_TIME                 20 // tempo de delay do clock em ns
+// todo: recalibrar/parametrizar delay de clock por frequencia real de CPU.
 
 typedef enum {
   DIS_CTRL_DUTY_1_16 = 1, // 0

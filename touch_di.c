@@ -13,6 +13,7 @@ static inline int32_t clamp(int32_t v, int32_t min, int32_t max)
 
 static inline int32_t abs_i32(int32_t v)
 {
+    // todo: tratar INT32_MIN explicitamente para evitar overflow em negacao.
     return (v < 0) ? -v : v;
 }
 
@@ -29,11 +30,13 @@ void touch_di_process(touch_di_channel_t *ch,
                       int32_t raw,
                       const touch_di_cfg_t *cfg)
 {
+    // todo: validar ponteiros ch/cfg e leak_den != 0 para robustez.
     int32_t sample = raw;
 
     /* ---- IIR FILTER (opcional) ---- */
     if (cfg->iir_shift > 0)
     {
+        // todo: limitar iir_shift a faixa segura (0..30) para evitar comportamento indefinido de shift.
         ch->filtered += (raw - ch->filtered) >> cfg->iir_shift;
         sample = ch->filtered;
     }

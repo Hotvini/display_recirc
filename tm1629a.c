@@ -19,6 +19,7 @@
 #ifndef  FALSE
 #define  FALSE    (0)
 #endif
+// todo: remover redefinicoes legadas de NULL/TRUE/FALSE e usar headers padrao.
 
 #ifndef  ASSERT_NULL_PTR
 #define  ASSERT_NULL_PTR(x)     \
@@ -58,6 +59,7 @@ int tm1629a_register_hal_driver(tm1629a_hal_driver_t *hal_driver){
 	ASSERT_NULL_PTR(hal_driver->clk_down);
 	ASSERT_NULL_PTR(hal_driver->data_set);
 	ASSERT_NULL_PTR(hal_driver->data_clr);
+	// todo: validar tambem stb_set/stb_clr para evitar null pointer no start/end.
   driver=hal_driver;
   return 0;
 }
@@ -65,6 +67,7 @@ int tm1629a_register_hal_driver(tm1629a_hal_driver_t *hal_driver){
 static volatile uint16_t clk_delay=0;
 
 static void delay_ns(uint16_t ns){
+  // todo: substituir busy-wait por delay baseado em timer/frequencia real; "ns" aqui nao e deterministico.
   clk_delay=ns;
   while(clk_delay--);
 }
@@ -129,6 +132,7 @@ int tm1629a_display_refresh(void){
 
 int tm1629a_buffer_clean(void){
   uint8_t i;
+  // todo: substituir loop por memset(buffer, 0, sizeof(buffer)) para simplificar.
   for(i=0;i<BUFFER_SIZE;i++){
 	  buffer[i]=0;
   }
@@ -140,6 +144,7 @@ int tm1629a_buffer_update(uint8_t addr,uint8_t *update,uint8_t cnt){
   if((addr+cnt) > BUFFER_SIZE){
     return -1;
   }
+  // todo: avaliar tornar update const uint8_t * para documentar que buffer de entrada nao e alterado.
   #if (TM1629A_CONNECT_TYPE == TM1629A_CONNECT_TYPE_CATHODE)
     uint8_t i;
     for(i=0;i<cnt;i++){
@@ -214,6 +219,7 @@ int tm1629a_init(){
   tm1629a_buffer_clean();
   tm1629a_brightness(DIS_CTRL_DUTY_14_16);
   tm1629a_display_refresh();
+  // todo: expor brilho inicial como parametro de init para evitar valor hardcoded.
   return 0;
 }
 

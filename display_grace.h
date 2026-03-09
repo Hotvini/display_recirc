@@ -24,6 +24,7 @@
 
 #ifndef  __GRACE_H__
 #define  __GRACE_H__
+// todo: remover include guard duplicado e manter apenas DISPLAY_GRACE_H_.
 
 #include "stdint.h"
 

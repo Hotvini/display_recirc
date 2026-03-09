@@ -76,6 +76,8 @@ void BOARD_InitPins(void)
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_22, IOCON_INDEX_PIO0_config);
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_18, IOCON_INDEX_PIO0_config);
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_16, IOCON_INDEX_PIO0_config);
+	// todo: avaliar inicializacao por tabela para reduzir repeticao de IOCON_PinMuxSet.
+	// todo: limpar linhas comentadas de pinos desativados quando mapeamento final estiver fechado.
 
     /* USART0_TXD connect to P0_13 */
     //SWM_SetMovablePinSelect(SWM0, kSWM_USART0_TXD, kSWM_PortPin_P0_13);

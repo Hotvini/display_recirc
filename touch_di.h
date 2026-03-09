@@ -22,6 +22,7 @@ typedef struct
     uint8_t  iir_shift;   // 0 desabilita IIR
     int32_t  integral_max;
 } touch_di_cfg_t;
+// todo: mover parametros de tuning para perfil externo (NVM/build) em vez de recompilacao fixa.
 
 void touch_di_init(touch_di_channel_t *ch);
 

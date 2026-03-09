@@ -51,6 +51,7 @@ static void leds_all_off(void)
     led_ctrl(S4, LED_OFF);
 }
 */
+// todo: remover funcao comentada se nao houver plano de reutilizacao.
 
 /* ===================== Touch context ===================== */
 
@@ -71,6 +72,7 @@ static volatile uint8_t fm_di_detected_map = 0U;
 static volatile uint32_t fm_loop_start_ms = 0U;
 static volatile uint32_t fm_loop_end_ms = 0U;
 static volatile uint32_t fm_loop_duration_ms = 0U;
+// todo: agrupar variaveis FMSTR em structs/arrays para reduzir repeticao e facilitar expansao de canais.
 
 #define TOUCH_CALIB_SETTLE_MS 5000U
 
@@ -108,6 +110,7 @@ FMSTR_TSA_TABLE_BEGIN(touch_watch_table)
     FMSTR_TSA_RO_VAR(fm_loop_start_ms, FMSTR_TSA_UINT32) // todo nao precisa 
     FMSTR_TSA_RO_VAR(fm_loop_end_ms, FMSTR_TSA_UINT32) // nao precisar
     FMSTR_TSA_RO_VAR(fm_loop_duration_ms, FMSTR_TSA_UINT32)
+    // todo: cercar telemetria de loop com #if DEBUG para retirar overhead em build de producao.
     FMSTR_TSA_STRUCT(capt_touch_data_t)
     FMSTR_TSA_MEMBER(capt_touch_data_t, yesTimeOut, FMSTR_TSA_UINT8)
     FMSTR_TSA_MEMBER(capt_touch_data_t, yesTouch, FMSTR_TSA_UINT8)
@@ -147,6 +150,7 @@ static void fmstr_touch_update(const touch_proc_t *touch, uint8_t key)
 
         switch (ch)
         {
+            // todo: substituir switch fixo (0..3) por arrays indexados para reduzir codigo duplicado.
             case 0U:
                 fm_raw0 = touch->raw_count[ch];
                 fm_avg0 = touch->frame_avg[ch];
@@ -220,6 +224,7 @@ int main(void)
         fm_loop_start_ms = loop_start_ms;
 
     	/* ===================== CAPT task ===================== */
+		// todo: extrair politica de escalonamento de canal para funcao dedicada e simplificar leitura do loop.
 		touchDetect.current_channel = (touchDetect.frame_ready[touchDetect.current_channel]) ? (touchDetect.current_channel + 1) % CAPT_BTN_COUNT : touchDetect.current_channel;
     	if (capt_get_sample(&touchDetect))
     	{
@@ -274,6 +279,7 @@ int main(void)
 					grace_digit_set(clock_digits[2], seven_seg_symbols[(key_map >> 2) & 0x1U]);
 					grace_digit_set(clock_digits[1], seven_seg_symbols[(key_map >> 1) & 0x1U]);
 					grace_digit_set(clock_digits[0], seven_seg_symbols[(key_map >> 0) & 0x1U]);
+					// todo: reduzir refresh de display (throttle/change-detect) para baixar consumo e CPU.
 					tm1629a_display_refresh();
                     fmstr_touch_update(&touchDetect, key);
 				    break;

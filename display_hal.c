@@ -47,6 +47,7 @@ tm1629a_hal_driver_t tm_hal = {
     .stb_set  = hal_stb_set,
     .stb_clr  = hal_stb_clr
 };
+// todo: tornar este driver static const se a API tm1629a nao precisar de mutacao em runtime.
 
 const uint8_t seven_seg_symbols[SEG_COUNT] = {
 	/* 0–9 */
@@ -89,6 +90,7 @@ const uint8_t seven_seg_symbols[SEG_COUNT] = {
 	[SEG_BLANK]      = 0x00, // apagado
 	[SEG_DEGREE]     = 0x63  // °
 };
+// todo: mapear simbolos realmente usados e remover entradas nao utilizadas para reduzir manutencao.
 
 void display_hal_init(void)
 {

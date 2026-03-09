@@ -24,5 +24,6 @@ typedef enum {
 
 int led_ctrl(button_led_id_t button, led_state_t state);
 //int buzzer
+// todo: remover comentario legado sem uso.
 
 #endif /* GPIO_APP_H_ */

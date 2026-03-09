@@ -13,6 +13,7 @@ static volatile bool captTimeoutDataBuffer[CAPT_BTN_COUNT];
 static volatile bool captSampleReadyBuffer[CAPT_BTN_COUNT];
 #else
 const uint16_t captEnabledPins[CAPT_BTN_COUNT] = CAPT_ENABLE_PINS_ARRAY;
+// todo: avaliar tornar static const para limitar escopo do modulo.
 static volatile bool busy_polling = false;
 #endif
 static volatile capt_button_t pending_channel;
@@ -111,11 +112,13 @@ touch_di_cfg_t di_cfg =
     .iir_shift = CAPT_DI_IIR_SHIFT,    // 1/8 - 0 = sem filtro IIR
     .integral_max = CAPT_DI_INTEGRAL_MAX
 };
+// todo: tornar configuracao DI const (ou atualizavel por API explicita) para evitar escrita acidental global.
 
 void CMP_CAPT_DriverIRQHandler(void)
 {
 	uint32_t intStat = CAPT_GetInterruptStatusFlags(CAPT_PERIPHERAL);
 	CAPT_ClearInterruptStatusFlags(CAPT_PERIPHERAL, intStat);
+	// todo: reduzir duplicacao dos blocos CAPT_GetTouchData entre modos de polling com helper interno.
 
     if (intStat &
         (kCAPT_InterruptOfYesTouchStatusFlag | kCAPT_InterruptOfNoTouchStatusFlag | kCAPT_InterruptOfTimeOutStatusFlag))
@@ -215,6 +218,7 @@ bool capt_get_sample(touch_proc_t *data_out)
         busy_polling = true;
         CAPT_PollNow(CAPT_PERIPHERAL, captEnabledPins[pending_channel]);
         poll_start_ms = systick_get_ms();
+		// todo: polling bloqueante aqui consome CPU; migrar para fluxo assíncrono por estado/IRQ.
         while (busy_polling)
         {
             if ((systick_get_ms() - poll_start_ms) > CAPT_POLL_TIMEOUT_MS)
@@ -247,6 +251,7 @@ void touch_proc_push_sample(touch_proc_t *data_struct)
     data_struct->frame_sum[pending_channel] += new;
 
     /* Atualiza soma dos quadrados */
+    // todo: remover bloco legado comentado ou reativar via flag de variancia para evitar codigo morto.
     //data_struct->frame_sum_sq[pending_channel] -= (uint64_t)old * old;
     //data_struct->frame_sum_sq[pending_channel] += (uint64_t)new * new;
 
@@ -263,6 +268,7 @@ void touch_proc_push_sample(touch_proc_t *data_struct)
     }
 }
 
+// todo: remover funcao inteira comentada abaixo, ou implementar com flag de compilacao especifica.
 // static void touch_var_std_calc(touch_proc_t *data_struct) // todo fazer para baseline?
 // {
 //     if (data_struct->frame_ready[pending_channel])
@@ -360,7 +366,8 @@ void touch_baseline_update(touch_proc_t *data_struct)
         return;
     }
 
-    /* Durante calibração inicial: baseline = média de 4 frame_avg por canal */
+    /* Durante calibração inicial: baseline = média de N frame_avg por canal */
+    // todo: corrigir comentario antigo ("4") para refletir TOUCH_FRAME_WINDOW configuravel.
     if (baseline_count[pending_channel] < TOUCH_FRAME_WINDOW)
     {
         baseline_accum[pending_channel] += data_struct->frame_avg[pending_channel];
@@ -459,6 +466,7 @@ uint8_t touch_detect_key(touch_proc_t *data_struct)
     }
 
 #if (CAPT_DI_INVERT_MINVAR_MODE == 1U)
+    // todo: evitar limpar detection_map duas vezes; integrar fluxo invertido sem trabalho redundante.
     for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
     {
         data_struct->detection_map[channel] = false;

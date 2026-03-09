@@ -21,6 +21,7 @@
 
 #define DIO_HIGH() GPIO_PortSet(BOARD_INITPINS_DIO_GPIO, BOARD_INITPINS_DIO_PORT, BOARD_INITPINS_DIO_GPIO_PIN_MASK)
 #define DIO_LOW()  GPIO_PortClear(BOARD_INITPINS_DIO_GPIO, BOARD_INITPINS_DIO_PORT, BOARD_INITPINS_DIO_GPIO_PIN_MASK)
+// todo: substituir macros GPIO por funcoes static inline para tipagem e debug melhores.
 
 typedef enum {
     /* Números */

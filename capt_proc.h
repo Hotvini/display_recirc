@@ -15,8 +15,10 @@
                                 kCAPT_X1Pin, \
                                 kCAPT_X2Pin, \
                                 kCAPT_X3Pin}
+// todo: manter apenas uma fonte de verdade para pinos habilitados (este array vs CAPT_ENABLE_PINS).
 
 #define TOUCH_FRAME_WINDOW     3U // todo: 1U para sistema sem média - média maior = menor ruído e maior latência
+// todo: mover janela para perfil por produto/placa (build flag ou NVM) para evitar reteste via recompilacao.
 
 #define CAPT_POLL_TIMEOUT_MS  5U // timeout em polling mode - dar erro mas não deve rolar
 /* Post-calibration baseline tracking: baseline += (avg-baseline)>>shift. */
@@ -29,6 +31,7 @@
 
 /* DI input source: 0 = raw_count - baseline, 1 = frame_avg - baseline, 2 = raw_count */
 #define CAPT_DI_USE_RAW_INPUT  1U
+// todo: consolidar parametros DI em uma struct de configuracao para reduzir macros espalhadas no cabecalho.
 #define CAPT_DI_DT                 2U
 #define CAPT_DI_IT                 24
 #define CAPT_DI_LEAK_NUM           97U
