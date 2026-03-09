@@ -73,6 +73,7 @@ static volatile uint32_t fm_loop_start_ms = 0U;
 static volatile uint32_t fm_loop_end_ms = 0U;
 static volatile uint32_t fm_loop_duration_ms = 0U;
 // todo: agrupar variaveis FMSTR em structs/arrays para reduzir repeticao e facilitar expansao de canais.
+// todo: define para habilitar/desabilitar telemetria FMSTR para reduzir overhead em build de producao.
 
 #define TOUCH_CALIB_SETTLE_MS 5000U
 
