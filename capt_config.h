@@ -18,9 +18,9 @@
 /* CAPT trigger profile selector. Change only this define to switch mode. */
 #define CAPT_TRIGGER_PROFILE_ACMP 0U
 #define CAPT_TRIGGER_PROFILE_YH   1U
-#define CAPT_TRIGGER_PROFILE      CAPT_TRIGGER_PROFILE_YH
+#define CAPT_TRIGGER_PROFILE      CAPT_TRIGGER_PROFILE_ACMP
 
-#define CONTINUOS_POLL 0 //cont poll vs poll now
+#define CONTINUOS_POLL 1 //cont poll vs poll now
 // todo: corrigir nome para CONTINUOUS_POLL em todo o projeto para reduzir ambiguidade/erro de busca.
 
 /* Active X channels in continuous mode and in Poll-Now calls. */
@@ -33,7 +33,10 @@
 // todo: remover se macro continuar sem uso pratico (codigo morto de debug/critical section).
 
 #if (CONTINUOS_POLL)
-#define ENABLE_CAPT_INTERRUPTS CAPT_EnableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
+#define ENABLE_CAPT_INTERRUPTS                                                                     \
+    CAPT_EnableInterrupts(CAPT_PERIPHERAL,                                                         \
+                          kCAPT_InterruptOfYesTouchEnable | kCAPT_InterruptOfNoTouchEnable |      \
+                              kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
 
 #else
 //#define ENABLE_CAPT_INTERRUPTS CAPT_EnableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfPollDoneEnable)
@@ -51,7 +54,7 @@
 #define ACMP_TUNE_PROFILE 0U
 
 #if (ACMP_TUNE_PROFILE == 0U)
-    #define ACOMP_LADDER_VALUE 10U
+    #define ACOMP_LADDER_VALUE 20U
     #define CAPT_MEASURE_DELAY kCAPT_MeasureDelayWait9FCLKs
     #define CAPT_RESET_DELAY   kCAPT_ResetDelayWait9FCLKs
     #define ACOMP_HYSTERESIS   kACOMP_HysteresisNoneSelection

@@ -42,7 +42,7 @@ static void leds_all_on(void)
 	led_ctrl(S4, LED_ON);
 }
 
-/*
+
 static void leds_all_off(void)
 {
     led_ctrl(S1, LED_OFF);
@@ -50,7 +50,7 @@ static void leds_all_off(void)
     led_ctrl(S3, LED_OFF);
     led_ctrl(S4, LED_OFF);
 }
-*/
+
 // todo: remover funcao comentada se nao houver plano de reutilizacao.
 
 /* ===================== Touch context ===================== */
@@ -263,6 +263,24 @@ int main(void)
 				/* ---------- DETECT ---------- */
                 case kAPP_TouchStateDetect:
                 {
+                    static uint32_t led_next_toggle_ms = 0U;
+                    static bool leds_on = false;
+                    uint32_t now_ms = systick_get_ms();
+
+                    if ((int32_t)(now_ms - led_next_toggle_ms) >= 0)
+                    {
+                        leds_on = !leds_on;
+                        led_next_toggle_ms = now_ms + 1000U;
+                        if (leds_on)
+                        {
+                            leds_all_on();
+                        }
+                        else
+                        {
+                            leds_all_off();
+                        }
+                    }
+
                     touch_baseline_update(&touchDetect); // correção lenta
                     touch_proc_delta(&touchDetect);
 					uint8_t key = touch_detect_key(&touchDetect);

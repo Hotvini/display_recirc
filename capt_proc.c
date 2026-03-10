@@ -120,8 +120,15 @@ void CMP_CAPT_DriverIRQHandler(void)
 	CAPT_ClearInterruptStatusFlags(CAPT_PERIPHERAL, intStat);
 	// todo: reduzir duplicacao dos blocos CAPT_GetTouchData entre modos de polling com helper interno.
 
+#if (CONTINUOS_POLL)
     if (intStat &
-        (kCAPT_InterruptOfYesTouchStatusFlag | kCAPT_InterruptOfNoTouchStatusFlag | kCAPT_InterruptOfTimeOutStatusFlag))
+        (kCAPT_InterruptOfYesTouchStatusFlag | kCAPT_InterruptOfNoTouchStatusFlag |
+         kCAPT_InterruptOfTimeOutStatusFlag | kCAPT_InterruptOfPollDoneStatusFlag))
+#else
+    if (intStat &
+        (kCAPT_InterruptOfYesTouchStatusFlag | kCAPT_InterruptOfNoTouchStatusFlag |
+         kCAPT_InterruptOfTimeOutStatusFlag))
+#endif
     {
         capt_touch_data_t data;
         if (CAPT_GetTouchData(CAPT_PERIPHERAL, &data))
