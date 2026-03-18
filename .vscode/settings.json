@@ -10,7 +10,6 @@
   "cmake.useCMakePresets": "always",
   "cmake.buildTask": true,
   "cmake.skipConfigureIfCachePresent": true,
-  "cmake.buildDirectory": "${workspaceFolder}/build",
   "cmake.sourceDirectory": "${workspaceFolder}/armgcc",
   "terminal.integrated.env.windows": {
     "ARMGCC_DIR": "C:/NXP/MCUXpressoIDE_25.6.136/ide/tools",

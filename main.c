@@ -76,6 +76,7 @@ static volatile uint32_t fm_loop_duration_ms = 0U;
 // todo: define para habilitar/desabilitar telemetria FMSTR para reduzir overhead em build de producao.
 
 #define TOUCH_CALIB_SETTLE_MS 5000U
+#define TOUCH_CALIB_MAX_MS    100000U
 
 FMSTR_TSA_TABLE_BEGIN(touch_watch_table)
     FMSTR_TSA_RO_VAR(fm_key, FMSTR_TSA_UINT8)
@@ -226,11 +227,13 @@ int main(void)
 
     	/* ===================== CAPT task ===================== */
 		// todo: extrair politica de escalonamento de canal para funcao dedicada e simplificar leitura do loop.
-		touchDetect.current_channel = (touchDetect.frame_ready[touchDetect.current_channel]) ? (touchDetect.current_channel + 1) % CAPT_BTN_COUNT : touchDetect.current_channel;
     	if (capt_get_sample(&touchDetect))
     	{
 			touch_proc_push_sample(&touchDetect);
             touch_avg_update(&touchDetect);
+            touchDetect.current_channel = (touchDetect.frame_ready[touchDetect.current_channel]) ?
+                                          (touchDetect.current_channel + 1U) % CAPT_BTN_COUNT :
+                                          touchDetect.current_channel;
 			switch (touchDetect.touch_task_state)
 			{
 				/* ---------- INIT ---------- */
@@ -247,59 +250,85 @@ int main(void)
 
 				/* ---------- CALIB ---------- */
 				case kAPP_TouchStateCalib:
+                {
 					//grace_all_on();
 					//grace_all_off();
-                    if ((systick_get_ms() - calib_start_ms) >= TOUCH_CALIB_SETTLE_MS)
+                    uint32_t calib_elapsed_ms = systick_get_ms() - calib_start_ms;
+                    if (calib_elapsed_ms >= TOUCH_CALIB_SETTLE_MS)
                     {
                         touch_baseline_update(&touchDetect);
                     }
                     fmstr_touch_update(&touchDetect, CAPT_BTN_COUNT);
                     if (touchDetect.calibration_done)
                     {
+                        grace_digit_set(thermo_digits[0], seven_seg_symbols[SEG_D]);
+                        grace_digit_set(thermo_digits[1], seven_seg_symbols[SEG_o]);
+                        grace_digit_set(thermo_digits[2], seven_seg_symbols[SEG_1]);
+                        tm1629a_display_refresh();
 					    touchDetect.touch_task_state = kAPP_TouchStateDetect;
                     }
+                    else if (calib_elapsed_ms >= TOUCH_CALIB_MAX_MS)
+                    {
+                        /* Recovery path: force a usable baseline and proceed. */
+                        for (uint8_t ch = 0U; ch < CAPT_BTN_COUNT; ch++)
+                        {
+                            uint16_t seed = touchDetect.frame_avg[ch];
+                            if (seed == 0U)
+                            {
+                                seed = touchDetect.raw_count[ch];
+                            }
+                            touchDetect.frame_baseline[ch] = seed;
+                        }
+                        grace_digit_set(thermo_digits[0], seven_seg_symbols[SEG_D]);
+                        grace_digit_set(thermo_digits[1], seven_seg_symbols[SEG_o]);
+                        grace_digit_set(thermo_digits[2], seven_seg_symbols[SEG_2]);
+                        tm1629a_display_refresh();
+                        touchDetect.calibration_done = true;
+                        touchDetect.touch_task_state = kAPP_TouchStateDetect;
+                    }
 					break;
+                }
 
 				/* ---------- DETECT ---------- */
                 case kAPP_TouchStateDetect:
                 {
-                    static uint32_t led_next_toggle_ms = 0U;
-                    static bool leds_on = false;
-                    uint32_t now_ms = systick_get_ms();
+                    // static uint32_t led_next_toggle_ms = 0U;
+                    // static bool leds_on = false;
+                    // uint32_t now_ms = systick_get_ms();
 
-                    if ((int32_t)(now_ms - led_next_toggle_ms) >= 0)
-                    {
-                        leds_on = !leds_on;
-                        led_next_toggle_ms = now_ms + 1000U;
-                        if (leds_on)
-                        {
-                            leds_all_on();
-                        }
-                        else
-                        {
-                            leds_all_off();
-                        }
-                    }
+                    // if ((int32_t)(now_ms - led_next_toggle_ms) >= 0)
+                    // {
+                    //     leds_on = !leds_on;
+                    //     led_next_toggle_ms = now_ms + 1000U;
+                    //     if (leds_on)
+                    //     {
+                    //         leds_all_on();
+                    //     }
+                    //     else
+                    //     {
+                    //         leds_all_off();
+                    //     }
+                    // }
 
                     touch_baseline_update(&touchDetect); // correção lenta
                     touch_proc_delta(&touchDetect);
 					uint8_t key = touch_detect_key(&touchDetect);
-                    uint8_t key_map = touch_detect_keys_mask(&touchDetect);
+                    // uint8_t key_map = touch_detect_keys_mask(&touchDetect);
 					uint8_t display_channel = (touchDetect.current_channel < CAPT_BTN_COUNT) ? (uint8_t)touchDetect.current_channel : 0U;
-					uint16_t display_avg = touchDetect.frame_avg[display_channel];
+					// uint16_t display_avg = touchDetect.frame_avg[display_channel];
 
-                    /* Thermometer: show channel average value using 3 digits. */
-					grace_digit_set(thermo_digits[0], seven_seg_symbols[(display_avg / 100) % 10]);
-					grace_digit_set(thermo_digits[1], seven_seg_symbols[(display_avg / 10) % 10]);
-					grace_digit_set(thermo_digits[2], seven_seg_symbols[display_avg % 10]);
+                    // /* Thermometer: show channel average value using 3 digits. */
+					// grace_digit_set(thermo_digits[0], seven_seg_symbols[(display_avg / 100) % 10]);
+					// grace_digit_set(thermo_digits[1], seven_seg_symbols[(display_avg / 10) % 10]);
+					// grace_digit_set(thermo_digits[2], seven_seg_symbols[display_avg % 10]);
 
-                    /* Clock: show key-map bits (ch3..ch0), one bit per digit. */
-					grace_digit_set(clock_digits[3], seven_seg_symbols[(key_map >> 3) & 0x1U]);
-					grace_digit_set(clock_digits[2], seven_seg_symbols[(key_map >> 2) & 0x1U]);
-					grace_digit_set(clock_digits[1], seven_seg_symbols[(key_map >> 1) & 0x1U]);
-					grace_digit_set(clock_digits[0], seven_seg_symbols[(key_map >> 0) & 0x1U]);
-					// todo: reduzir refresh de display (throttle/change-detect) para baixar consumo e CPU.
-					tm1629a_display_refresh();
+                    // /* Clock: show key-map bits (ch3..ch0), one bit per digit. */
+					// grace_digit_set(clock_digits[3], seven_seg_symbols[(key_map >> 3) & 0x1U]);
+					// grace_digit_set(clock_digits[2], seven_seg_symbols[(key_map >> 2) & 0x1U]);
+					// grace_digit_set(clock_digits[1], seven_seg_symbols[(key_map >> 1) & 0x1U]);
+					// grace_digit_set(clock_digits[0], seven_seg_symbols[(key_map >> 0) & 0x1U]);
+					// // todo: reduzir refresh de display (throttle/change-detect) para baixar consumo e CPU.
+					// tm1629a_display_refresh();
                     fmstr_touch_update(&touchDetect, key);
 				    break;
                 }
@@ -309,6 +338,10 @@ int main(void)
 					break;
 			}
 		}
+        else
+        {
+            fmstr_touch_update(&touchDetect, fm_key);
+        }
         FMSTR_Poll();
         fm_loop_end_ms = systick_get_ms();
         fm_loop_duration_ms = fm_loop_end_ms - loop_start_ms;

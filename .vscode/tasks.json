@@ -37,6 +37,48 @@
         "$gcc"
       ],
       "detail": "CMake template configure task"
+    },
+    {
+      "type": "shell",
+      "label": "CMake: build",
+      "command": "cmake --build --preset debug",
+      "options": {
+        "cwd": "${workspaceFolder}/armgcc"
+      },
+      "dependsOn": "CMake: configure",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "detail": "Configure + build using armgcc debug preset"
+    },
+    {
+      "type": "shell",
+      "label": "CMake: clean",
+      "command": "cmake --build --preset debug --target clean",
+      "options": {
+        "cwd": "${workspaceFolder}/armgcc"
+      },
+      "dependsOn": "CMake: configure",
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "detail": "Clean using armgcc debug preset"
+    },
+    {
+      "type": "shell",
+      "label": "CMake: configure",
+      "command": "cmake --preset debug",
+      "options": {
+        "cwd": "${workspaceFolder}/armgcc"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "detail": "Configure using armgcc debug preset"
     }
   ]
 }

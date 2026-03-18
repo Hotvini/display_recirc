@@ -17,12 +17,13 @@
                                 kCAPT_X3Pin}
 // todo: manter apenas uma fonte de verdade para pinos habilitados (este array vs CAPT_ENABLE_PINS).
 
-#define TOUCH_FRAME_WINDOW     3U // todo: 1U para sistema sem média - média maior = menor ruído e maior latência
+#define TOUCH_FRAME_WINDOW     5U // todo: 1U para sistema sem média - média maior = menor ruído e maior latência
 // todo: mover janela para perfil por produto/placa (build flag ou NVM) para evitar reteste via recompilacao.
 
-#define CAPT_POLL_TIMEOUT_MS  5U // timeout em polling mode - dar erro mas não deve rolar
+#define CAPT_POLL_TIMEOUT_MS  20U // timeout em polling mode
+
 /* Post-calibration baseline tracking: baseline += (avg-baseline)>>shift. */
-#define CAPT_BASELINE_TRACK_SHIFT      4U // todo se perde todo
+#define CAPT_BASELINE_TRACK_SHIFT      8U // baseline mais lento para não "colar" no avg
 /* Track baseline only when |avg-baseline| is below this limit. */
 #define CAPT_BASELINE_TRACK_DELTA_MAX  40U
 #define CAPT_BASELINE_STABLE_TOL       2U
@@ -30,20 +31,34 @@
 #define CAPT_BASELINE_COMMON_MODE_TOL  8U
 
 /* DI input source: 0 = raw_count - baseline, 1 = frame_avg - baseline, 2 = raw_count */
-#define CAPT_DI_USE_RAW_INPUT  1U
+#define CAPT_DI_USE_RAW_INPUT  2U
 // todo: consolidar parametros DI em uma struct de configuracao para reduzir macros espalhadas no cabecalho.
-#define CAPT_DI_DT                 2U
-#define CAPT_DI_IT                 24
-#define CAPT_DI_LEAK_NUM           97U
+#define CAPT_DI_DT                 0U
+#define CAPT_DI_IT                 40
+#define CAPT_DI_LEAK_NUM           99U
 #define CAPT_DI_LEAK_DEN           100U
-#define CAPT_DI_IIR_SHIFT          0U
-#define CAPT_DI_INTEGRAL_MAX       512
+#define CAPT_DI_IIR_SHIFT          6U
+#define CAPT_DI_INTEGRAL_MAX       1024
 /* Inverted DI mode: detect the channel with smallest DI variation while others vary. */
-#define CAPT_DI_INVERT_MINVAR_MODE    1U
+#define CAPT_DI_INVERT_MINVAR_MODE    0U
 /* Minimum "other channels activity" to enable inverted decision. */
 #define CAPT_DI_INVERT_ACTIVITY_MIN   60U
 /* Minimum spread between max and min variation to accept decision. */
 #define CAPT_DI_INVERT_SPREAD_MIN     20U
+/* Reject common-mode movement before DI processing (helps isolate the pressed key). */
+#define CAPT_DI_COMMON_MODE_REJECT    0U
+/* Final arbitration by strongest DI absolute integral. */
+#define CAPT_DI_DOMINANT_MODE         1U
+#define CAPT_DI_DOMINANT_ACTIVITY_MIN 120U
+#define CAPT_DI_DOMINANT_SPREAD_MIN   50U
+#define CAPT_DI_DOMINANT_RELEASE_MIN  80U
+#define CAPT_DI_DOMINANT_CONFIRM_FRAMES 2U
+/* Per-channel noise normalization (Q8 score = |integral| / noise_floor). */
+#define CAPT_DI_NOISE_SHIFT           4U
+#define CAPT_DI_NOISE_FLOOR           16U
+#define CAPT_DI_NOISE_TRACK_MAX       96U
+#define CAPT_DI_SCORE_MIN_Q8          512U
+#define CAPT_DI_SCORE_SPREAD_MIN_Q8   96U
 
 typedef enum {
     CAPT_BTN_S1, // X0

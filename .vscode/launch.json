@@ -5,6 +5,7 @@
       "name": "Debug LPC804",
       "request": "launch",
       "cwd": "${workspaceFolder}",
+      "preLaunchTask": "CMake: build",
 
       "executable": {
         "elf": "${workspaceFolder}/armgcc/debug/${workspaceFolderBasename}.elf"
@@ -12,10 +13,10 @@
 
       "stopAtSymbol": "main",
 
-      "probeSerialNumber": "ALIPEHOQ25DLE",
+      "probeSerialNumber": "",
 
       "isAttach": false,
-      "skipBuildBeforeDebug": false,
+      "skipBuildBeforeDebug": true,
 
       "gdbInitCommands": [
         "set remotetimeout 600",

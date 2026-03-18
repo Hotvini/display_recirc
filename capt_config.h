@@ -20,7 +20,7 @@
 #define CAPT_TRIGGER_PROFILE_YH   1U
 #define CAPT_TRIGGER_PROFILE      CAPT_TRIGGER_PROFILE_ACMP
 
-#define CONTINUOS_POLL 1 //cont poll vs poll now
+#define CONTINUOS_POLL 0 //cont poll vs poll now
 // todo: corrigir nome para CONTINUOUS_POLL em todo o projeto para reduzir ambiguidade/erro de busca.
 
 /* Active X channels in continuous mode and in Poll-Now calls. */
@@ -39,7 +39,11 @@
                               kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
 
 #else
-//#define ENABLE_CAPT_INTERRUPTS CAPT_EnableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfPollDoneEnable)
+// todo: habilitar yes e no touch ao mesmo tempo para teste
+// #define ENABLE_CAPT_INTERRUPTS                                                                     \
+//     CAPT_EnableInterrupts(CAPT_PERIPHERAL,                                                         \
+//                           kCAPT_InterruptOfYesTouchEnable | kCAPT_InterruptOfNoTouchEnable |      \
+//                               kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
 #define ENABLE_CAPT_INTERRUPTS CAPT_EnableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
 #endif
 
@@ -54,19 +58,19 @@
 #define ACMP_TUNE_PROFILE 0U
 
 #if (ACMP_TUNE_PROFILE == 0U)
-    #define ACOMP_LADDER_VALUE 20U
+    #define ACOMP_LADDER_VALUE 19U
     #define CAPT_MEASURE_DELAY kCAPT_MeasureDelayWait9FCLKs
     #define CAPT_RESET_DELAY   kCAPT_ResetDelayWait9FCLKs
     #define ACOMP_HYSTERESIS   kACOMP_HysteresisNoneSelection
     #define ACOMP_SYNC_TO_BUS_CLK false
 #elif (ACMP_TUNE_PROFILE == 1U)
-    #define ACOMP_LADDER_VALUE 8U
+    #define ACOMP_LADDER_VALUE 20U
     #define CAPT_MEASURE_DELAY kCAPT_MeasureDelayWait9FCLKs
     #define CAPT_RESET_DELAY   kCAPT_ResetDelayWait5FCLKs
     #define ACOMP_HYSTERESIS   kACOMP_Hysteresis20MVSelection
     #define ACOMP_SYNC_TO_BUS_CLK false
 #else
-    #define ACOMP_LADDER_VALUE 6U
+    #define ACOMP_LADDER_VALUE 16U
     #define CAPT_MEASURE_DELAY kCAPT_MeasureDelayWait3FCLKs
     #define CAPT_RESET_DELAY   kCAPT_ResetDelayWait3FCLKs
     #define ACOMP_HYSTERESIS   kACOMP_Hysteresis20MVSelection
@@ -80,8 +84,14 @@
 /* CAPT interrupt handler identifier. */
 #define CAPT_IRQHANDLER CMP_CAPT_DriverIRQHandler
 
-/* Calculate the clock divider to make sure CAPT work in 2Mhz FCLK. */
-#define CAPT_CLK_DIVIDER ((CLOCK_GetFroFreq() / 2000000U) - 1U)
+/* CAPT timing/sensitivity tuning. */
+/* HW limit: timeOutCount range is 0..12 (timeout count = 2^timeOutCount). */
+#define CAPT_TIMEOUT_COUNT 12U
+/* Lower FCLK => longer measurement window (higher sensitivity, slower response). */
+// #define CAPT_FCLK_TARGET_HZ 2000000U
+/* Calculate clock divider from target FCLK. */
+// #define CAPT_CLK_DIVIDER ((CLOCK_GetFroFreq() / CAPT_FCLK_TARGET_HZ) - 1U)
+#define CAPT_CLK_DIVIDER 15U - 1U
 // todo: fixar divisor em init apos clock settle para evitar recalculo por macro e facilitar debug.
 
 /* Delay between poll round, the delay time between two poll round

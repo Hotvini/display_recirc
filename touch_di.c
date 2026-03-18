@@ -2,7 +2,7 @@
 
 #define TOUCH_DI_RELEASE_RATIO_NUM 3
 #define TOUCH_DI_RELEASE_RATIO_DEN 4
-#define TOUCH_DI_INTEGRAL_DEADBAND 2
+#define TOUCH_DI_INTEGRAL_DEADBAND 0
 
 static inline int32_t clamp(int32_t v, int32_t min, int32_t max)
 {
@@ -39,6 +39,12 @@ void touch_di_process(touch_di_channel_t *ch,
         // todo: limitar iir_shift a faixa segura (0..30) para evitar comportamento indefinido de shift.
         ch->filtered += (raw - ch->filtered) >> cfg->iir_shift;
         sample = ch->filtered;
+    }
+    else
+    {
+        /* Keep telemetry coherent when IIR is disabled. */
+        ch->filtered = raw;
+        sample = raw;
     }
 
     if (!ch->initialized)

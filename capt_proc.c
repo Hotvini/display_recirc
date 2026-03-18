@@ -14,7 +14,14 @@ static volatile bool captSampleReadyBuffer[CAPT_BTN_COUNT];
 #else
 const uint16_t captEnabledPins[CAPT_BTN_COUNT] = CAPT_ENABLE_PINS_ARRAY;
 // todo: avaliar tornar static const para limitar escopo do modulo.
-static volatile bool busy_polling = false;
+typedef enum
+{
+    kCaptPollStateIdle = 0,
+    kCaptPollStateWaiting,
+    kCaptPollStateReady
+} capt_poll_state_t;
+static volatile capt_poll_state_t capt_poll_state = kCaptPollStateIdle;
+static uint32_t capt_poll_start_ms = 0U;
 #endif
 static volatile capt_button_t pending_channel;
 static volatile capt_touch_data_t last_touch_data;
@@ -25,6 +32,10 @@ static int32_t baseline_stable_ref[CAPT_BTN_COUNT];
 static int32_t baseline_stable_sum[CAPT_BTN_COUNT];
 static uint8_t baseline_stable_count[CAPT_BTN_COUNT];
 static int32_t baseline_track_accum[CAPT_BTN_COUNT];
+static uint16_t di_noise_floor[CAPT_BTN_COUNT];
+static capt_button_t di_active_key;
+static capt_button_t di_candidate_key;
+static uint8_t di_candidate_frames;
 
 static bool touch_all_frames_ready(const touch_proc_t *data_struct)
 {
@@ -90,17 +101,31 @@ static bool touch_has_common_mode_drift(const touch_proc_t *data_struct, uint8_t
 
 static int32_t touch_get_di_input(const touch_proc_t *data_struct, uint8_t channel)
 {
+    int32_t input;
 #if (CAPT_DI_USE_RAW_INPUT == 0U)
-    return (int32_t)data_struct->raw_count[channel] - (int32_t)data_struct->frame_baseline[channel];
+    input = (int32_t)data_struct->raw_count[channel] - (int32_t)data_struct->frame_baseline[channel];
 #elif (CAPT_DI_USE_RAW_INPUT == 1U)
-    return touch_get_signed_delta_avg(data_struct, channel);
+    input = (int32_t)data_struct->frame_avg[channel] - (int32_t)data_struct->frame_baseline[channel];
 #elif (CAPT_DI_USE_RAW_INPUT == 2U)
-    return (int32_t)data_struct->raw_count[channel]; //todo iir aqui?
+    input = (int32_t)data_struct->raw_count[channel]; //todo iir aqui?
 #elif (CAPT_DI_USE_RAW_INPUT == 3U)
-    return (int32_t)data_struct->frame_avg[channel];
+    input = (int32_t)data_struct->frame_avg[channel];
 #else
 #error "Invalid value for CAPT_DI_USE_RAW_INPUT"
 #endif
+
+#if (CAPT_DI_COMMON_MODE_REJECT == 1U)
+    int32_t common_mode_sum = 0;
+
+    for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
+    {
+        common_mode_sum += touch_get_signed_delta_avg(data_struct, ch);
+    }
+
+    input -= (common_mode_sum / (int32_t)CAPT_BTN_COUNT);
+#endif
+
+    return input;
 }
 
 touch_di_cfg_t di_cfg =
@@ -124,39 +149,32 @@ void CMP_CAPT_DriverIRQHandler(void)
     if (intStat &
         (kCAPT_InterruptOfYesTouchStatusFlag | kCAPT_InterruptOfNoTouchStatusFlag |
          kCAPT_InterruptOfTimeOutStatusFlag | kCAPT_InterruptOfPollDoneStatusFlag))
-#else
-    if (intStat &
-        (kCAPT_InterruptOfYesTouchStatusFlag | kCAPT_InterruptOfNoTouchStatusFlag |
-         kCAPT_InterruptOfTimeOutStatusFlag))
-#endif
     {
         capt_touch_data_t data;
         if (CAPT_GetTouchData(CAPT_PERIPHERAL, &data))
         {
             last_touch_data = data;
-#if (CONTINUOS_POLL)
             if (data.XpinsIndex < CAPT_BTN_COUNT)
             {
                 captRawDataBuffer[data.XpinsIndex] = data.count;
                 captTimeoutDataBuffer[data.XpinsIndex] = data.yesTimeOut;
                 captSampleReadyBuffer[data.XpinsIndex] = true;
             }
-#endif
         }
     }
-
-#if (!CONTINUOS_POLL)
+#else
     if (intStat & kCAPT_InterruptOfPollDoneStatusFlag)
     {
         capt_touch_data_t data;
         if (CAPT_GetTouchData(CAPT_PERIPHERAL, &data))
         {
             last_touch_data = data;
-            if (data.XpinsIndex == pending_channel)
+            if ((capt_poll_state == kCaptPollStateWaiting) &&
+                (data.XpinsIndex == pending_channel))
             {
                 captRawDataBuffer[data.XpinsIndex] = data.count;
                 captTimeoutDataBuffer[data.XpinsIndex] = data.yesTimeOut;
-                busy_polling = false;
+                capt_poll_state = kCaptPollStateReady;
             }
         }
     }
@@ -179,11 +197,20 @@ void capt_proc_init(touch_proc_t *data_struct)
     memset((void *)baseline_stable_sum, 0, sizeof(baseline_stable_sum));
     memset((void *)baseline_stable_count, 0, sizeof(baseline_stable_count));
     memset((void *)baseline_track_accum, 0, sizeof(baseline_track_accum));
+    memset((void *)di_noise_floor, 0, sizeof(di_noise_floor));
     memset((void *)&last_touch_data, 0, sizeof(last_touch_data));
+#if (!CONTINUOS_POLL)
+    capt_poll_state = kCaptPollStateIdle;
+    capt_poll_start_ms = 0U;
+#endif
     for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
     {
         touch_di_init(&di_channels[ch]);
+        di_noise_floor[ch] = CAPT_DI_NOISE_FLOOR;
     }
+    di_active_key = CAPT_BTN_COUNT;
+    di_candidate_key = CAPT_BTN_COUNT;
+    di_candidate_frames = 0U;
 }
 
 bool capt_get_sample(touch_proc_t *data_out)
@@ -207,39 +234,35 @@ bool capt_get_sample(touch_proc_t *data_out)
     captSampleReadyBuffer[channel] = false;
     return true;
 #else
-    if (busy_polling)
+    uint8_t channel = (uint8_t)data_out->current_channel;
+
+    if (channel >= CAPT_BTN_COUNT)
     {
         return false;
     }
 
+    if (capt_poll_state == kCaptPollStateWaiting)
     {
-        uint8_t channel = (uint8_t)data_out->current_channel;
-        uint32_t poll_start_ms;
-
-        if (channel >= CAPT_BTN_COUNT)
+        if ((systick_get_ms() - capt_poll_start_ms) > CAPT_POLL_TIMEOUT_MS)
         {
-            return false;
+            capt_poll_state = kCaptPollStateIdle;
         }
-
-        pending_channel = (capt_button_t)channel;
-        busy_polling = true;
-        CAPT_PollNow(CAPT_PERIPHERAL, captEnabledPins[pending_channel]);
-        poll_start_ms = systick_get_ms();
-		// todo: polling bloqueante aqui consome CPU; migrar para fluxo assíncrono por estado/IRQ.
-        while (busy_polling)
-        {
-            if ((systick_get_ms() - poll_start_ms) > CAPT_POLL_TIMEOUT_MS)
-            {
-                busy_polling = false;
-                return false;
-            }
-        }
-
-        data_out->raw_count[pending_channel] = captRawDataBuffer[pending_channel];
-        data_out->sample_timed_out[pending_channel] = captTimeoutDataBuffer[pending_channel];
+        return false;
     }
 
-    return true;
+    if (capt_poll_state == kCaptPollStateReady)
+    {
+        data_out->raw_count[pending_channel] = captRawDataBuffer[pending_channel];
+        data_out->sample_timed_out[pending_channel] = captTimeoutDataBuffer[pending_channel];
+        capt_poll_state = kCaptPollStateIdle;
+        return true;
+    }
+
+    pending_channel = (capt_button_t)channel;
+    capt_poll_start_ms = systick_get_ms();
+    capt_poll_state = kCaptPollStateWaiting;
+    CAPT_PollNow(CAPT_PERIPHERAL, captEnabledPins[pending_channel]);
+    return false;
 #endif
 }
 
@@ -268,10 +291,6 @@ void touch_proc_push_sample(touch_proc_t *data_struct)
     {
         data_struct->frame_position = 0;
         data_struct->frame_ready[pending_channel] = true;
-    }
-    else
-    {
-        data_struct->frame_ready[pending_channel] = false;
     }
 }
 
@@ -343,7 +362,8 @@ void touch_baseline_update(touch_proc_t *data_struct)
             baseline_stable_count[pending_channel] = 1U;
         }
 
-        if (abs_err <= CAPT_BASELINE_TRACK_DELTA_MAX)
+        if ((abs_err <= CAPT_BASELINE_TRACK_DELTA_MAX) &&
+            !touch_di_is_detected(&di_channels[pending_channel]))
         {
             int32_t accum = baseline_track_accum[pending_channel] + err;
             int32_t adjust = accum / (1 << CAPT_BASELINE_TRACK_SHIFT);
@@ -387,10 +407,6 @@ void touch_baseline_update(touch_proc_t *data_struct)
             (uint16_t)(baseline_accum[pending_channel] / TOUCH_FRAME_WINDOW);
     }
 
-    /* Verifica se todos canais estão prontos */
-    if (!touch_all_frames_ready(data_struct))
-        return;
-
     for (uint8_t ch = 0; ch < CAPT_BTN_COUNT; ch++)
     {
         if (baseline_count[ch] < TOUCH_FRAME_WINDOW)
@@ -430,6 +446,8 @@ uint8_t touch_detect_keys_mask(const touch_proc_t *data_struct)
 
 uint8_t touch_detect_key(touch_proc_t *data_struct)
 {
+    uint32_t abs_integral_per_channel[CAPT_BTN_COUNT];
+
     for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
     {
         data_struct->detection_map[channel] = false;
@@ -444,13 +462,40 @@ uint8_t touch_detect_key(touch_proc_t *data_struct)
     uint32_t min_var = UINT32_MAX;
     uint32_t max_var = 0U;
     uint8_t min_var_key = CAPT_BTN_COUNT;
+    uint32_t dominant_abs = 0U;
+    uint32_t second_abs = 0U;
+    uint32_t dominant_score_q8 = 0U;
+    uint32_t second_score_q8 = 0U;
+    uint8_t dominant_key = CAPT_BTN_COUNT;
 
     for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
     {
-        int32_t signed_delta = touch_get_di_input(data_struct, channel);
-        touch_di_process(&di_channels[channel], signed_delta, &di_cfg);
+        int32_t di_input = touch_get_di_input(data_struct, channel);
+        touch_di_process(&di_channels[channel], di_input, &di_cfg);
 
         uint32_t abs_integral = touch_abs_i32(di_channels[channel].integral);
+        uint32_t score_q8;
+        uint32_t denom;
+        int32_t noise_err;
+
+        abs_integral_per_channel[channel] = abs_integral;
+
+        if ((!touch_di_is_detected(&di_channels[channel])) &&
+            (abs_integral <= CAPT_DI_NOISE_TRACK_MAX))
+        {
+            noise_err = (int32_t)abs_integral - (int32_t)di_noise_floor[channel];
+            di_noise_floor[channel] =
+                (uint16_t)((int32_t)di_noise_floor[channel] + (noise_err >> CAPT_DI_NOISE_SHIFT));
+
+            if (di_noise_floor[channel] < CAPT_DI_NOISE_FLOOR)
+            {
+                di_noise_floor[channel] = CAPT_DI_NOISE_FLOOR;
+            }
+        }
+
+        denom = (uint32_t)di_noise_floor[channel];
+        score_q8 = (denom > 0U) ? ((abs_integral << 8) / denom) : 0U;
+
         if (abs_integral < min_var)
         {
             min_var = abs_integral;
@@ -469,6 +514,27 @@ uint8_t touch_detect_key(touch_proc_t *data_struct)
             {
                 first_key = channel;
             }
+        }
+
+        if (abs_integral >= dominant_abs)
+        {
+            second_abs = dominant_abs;
+            dominant_abs = abs_integral;
+            dominant_key = channel;
+        }
+        else if (abs_integral > second_abs)
+        {
+            second_abs = abs_integral;
+        }
+
+        if (score_q8 >= dominant_score_q8)
+        {
+            second_score_q8 = dominant_score_q8;
+            dominant_score_q8 = score_q8;
+        }
+        else if (score_q8 > second_score_q8)
+        {
+            second_score_q8 = score_q8;
         }
     }
 
@@ -489,6 +555,61 @@ uint8_t touch_detect_key(touch_proc_t *data_struct)
     else
     {
         first_key = CAPT_BTN_COUNT;
+    }
+#endif
+
+#if (CAPT_DI_DOMINANT_MODE == 1U)
+    for (uint8_t channel = 0; channel < CAPT_BTN_COUNT; channel++)
+    {
+        data_struct->detection_map[channel] = false;
+    }
+
+    if ((di_active_key < CAPT_BTN_COUNT) &&
+        (abs_integral_per_channel[di_active_key] >= CAPT_DI_DOMINANT_RELEASE_MIN))
+    {
+        data_struct->detection_map[di_active_key] = true;
+        first_key = (uint8_t)di_active_key;
+    }
+    else
+    {
+        di_active_key = CAPT_BTN_COUNT;
+
+        if ((dominant_key < CAPT_BTN_COUNT) &&
+            (dominant_abs >= CAPT_DI_DOMINANT_ACTIVITY_MIN) &&
+            ((dominant_abs - second_abs) >= CAPT_DI_DOMINANT_SPREAD_MIN) &&
+            (dominant_score_q8 >= CAPT_DI_SCORE_MIN_Q8) &&
+            ((dominant_score_q8 - second_score_q8) >= CAPT_DI_SCORE_SPREAD_MIN_Q8))
+        {
+            if (di_candidate_key == (capt_button_t)dominant_key)
+            {
+                if (di_candidate_frames < UINT8_MAX)
+                {
+                    di_candidate_frames++;
+                }
+            }
+            else
+            {
+                di_candidate_key = (capt_button_t)dominant_key;
+                di_candidate_frames = 1U;
+            }
+
+            if (di_candidate_frames >= CAPT_DI_DOMINANT_CONFIRM_FRAMES)
+            {
+                di_active_key = (capt_button_t)dominant_key;
+                data_struct->detection_map[dominant_key] = true;
+                first_key = dominant_key;
+            }
+            else
+            {
+                first_key = CAPT_BTN_COUNT;
+            }
+        }
+        else
+        {
+            di_candidate_key = CAPT_BTN_COUNT;
+            di_candidate_frames = 0U;
+            first_key = CAPT_BTN_COUNT;
+        }
     }
 #endif
 

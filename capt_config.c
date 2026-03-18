@@ -63,6 +63,7 @@ void capt_init(void)
 }
 #endif
 	CAPT_config.clockDivider = CAPT_CLK_DIVIDER;
+	CAPT_config.timeOutCount = CAPT_TIMEOUT_COUNT;
 	CAPT_Init(CAPT_PERIPHERAL, &CAPT_config);
 
 	/* Enable the interrupts. */
