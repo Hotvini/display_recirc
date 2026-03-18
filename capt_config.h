@@ -54,7 +54,7 @@
 #define ACMP_TUNE_PROFILE 0U
 
 #if (ACMP_TUNE_PROFILE == 0U)
-    #define ACOMP_LADDER_VALUE 19U
+    #define ACOMP_LADDER_VALUE 14U
     #define CAPT_MEASURE_DELAY kCAPT_MeasureDelayWait9FCLKs
     #define CAPT_RESET_DELAY   kCAPT_ResetDelayWait9FCLKs
     #define ACOMP_HYSTERESIS   kACOMP_HysteresisNoneSelection

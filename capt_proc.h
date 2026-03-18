@@ -23,7 +23,7 @@
 #define CAPT_POLL_TIMEOUT_MS  20U // timeout em polling mode
 
 /* Post-calibration baseline tracking: baseline += (avg-baseline)>>shift. */
-#define CAPT_BASELINE_TRACK_SHIFT      8U // baseline mais lento para não "colar" no avg
+#define CAPT_BASELINE_TRACK_SHIFT      6U // baseline mais lento para não "colar" no avg
 /* Track baseline only when |avg-baseline| is below this limit. */
 #define CAPT_BASELINE_TRACK_DELTA_MAX  40U
 #define CAPT_BASELINE_STABLE_TOL       2U
@@ -31,13 +31,13 @@
 #define CAPT_BASELINE_COMMON_MODE_TOL  8U
 
 /* DI input source: 0 = raw_iir - baseline, 1 = frame_avg - baseline, 2 = raw_iir */
-#define CAPT_DI_USE_RAW_INPUT  2U
+#define CAPT_DI_USE_RAW_INPUT  1U
 /* Pre-DI IIR filter over raw_count (0 disables filtering). */
 #define CAPT_DI_INPUT_IIR_SHIFT    2U
 // todo: consolidar parametros DI em uma struct de configuracao para reduzir macros espalhadas no cabecalho.
-#define CAPT_DI_DT                 8U
-#define CAPT_DI_IT                 40U
-#define CAPT_DI_LEAK_NUM           95U
+#define CAPT_DI_DT                 4U
+#define CAPT_DI_IT                 60U
+#define CAPT_DI_LEAK_NUM           99U
 #define CAPT_DI_LEAK_DEN           100U
 #define CAPT_DI_INTEGRAL_MAX       1024
 /* Inverted DI mode: detect the channel with smallest DI variation while others vary. */
