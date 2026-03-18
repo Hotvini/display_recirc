@@ -105,11 +105,11 @@ static int32_t touch_get_di_input(const touch_proc_t *data_struct, uint8_t chann
 #if (CAPT_DI_USE_RAW_INPUT == 0U)
     input = (int32_t)data_struct->raw_count[channel] - (int32_t)data_struct->frame_baseline[channel];
 #elif (CAPT_DI_USE_RAW_INPUT == 1U)
-    input = (int32_t)data_struct->frame_avg[channel] - (int32_t)data_struct->frame_baseline[channel];
+    input = (int32_t)data_struct->raw_iir[channel] - (int32_t)data_struct->frame_baseline[channel];
 #elif (CAPT_DI_USE_RAW_INPUT == 2U)
-    input = (int32_t)data_struct->raw_count[channel]; //todo iir aqui?
+    input = (int32_t)data_struct->raw_iir[channel];
 #elif (CAPT_DI_USE_RAW_INPUT == 3U)
-    input = (int32_t)data_struct->frame_avg[channel];
+    input = (int32_t)data_struct->raw_count[channel];
 #else
 #error "Invalid value for CAPT_DI_USE_RAW_INPUT"
 #endif
@@ -134,7 +134,6 @@ touch_di_cfg_t di_cfg =
     .it = CAPT_DI_IT,                  // sensibilidade
     .leak_num = CAPT_DI_LEAK_NUM,      // 0.99
     .leak_den = CAPT_DI_LEAK_DEN,
-    .iir_shift = CAPT_DI_IIR_SHIFT,    // 1/8 - 0 = sem filtro IIR
     .integral_max = CAPT_DI_INTEGRAL_MAX
 };
 // todo: tornar configuracao DI const (ou atualizavel por API explicita) para evitar escrita acidental global.
@@ -273,6 +272,33 @@ void touch_proc_push_sample(touch_proc_t *data_struct)
 {
     uint32_t old = data_struct->frame[pending_channel][data_struct->frame_position];
     uint32_t new = data_struct->raw_count[pending_channel];
+    int32_t raw = (int32_t)new;
+
+    if (!data_struct->raw_iir_initialized[pending_channel] || (CAPT_DI_INPUT_IIR_SHIFT == 0U))
+    {
+        data_struct->raw_iir[pending_channel] = raw;
+        data_struct->raw_iir_error[pending_channel] = 0;
+        data_struct->raw_iir_initialized[pending_channel] = true;
+    }
+    else
+    {
+        int32_t diff = raw - data_struct->raw_iir[pending_channel];
+        int32_t acc = data_struct->raw_iir_error[pending_channel] + diff;
+        int32_t step;
+
+        if (acc >= 0)
+        {
+            step = acc >> CAPT_DI_INPUT_IIR_SHIFT;
+        }
+        else
+        {
+            step = -(((-acc) >> CAPT_DI_INPUT_IIR_SHIFT));
+        }
+
+        data_struct->raw_iir[pending_channel] += step;
+        data_struct->raw_iir_error[pending_channel] =
+            acc - (step << CAPT_DI_INPUT_IIR_SHIFT);
+    }
 
     data_struct->frame[pending_channel][data_struct->frame_position] = new;
 

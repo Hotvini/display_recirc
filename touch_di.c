@@ -21,7 +21,6 @@ void touch_di_init(touch_di_channel_t *ch)
 {
     ch->prev_sample = 0;
     ch->integral = 0;
-    ch->filtered = 0;
     ch->initialized = false;
     ch->detected = false;
 }
@@ -33,24 +32,9 @@ void touch_di_process(touch_di_channel_t *ch,
     // todo: validar ponteiros ch/cfg e leak_den != 0 para robustez.
     int32_t sample = raw;
 
-    /* ---- IIR FILTER (opcional) ---- */
-    if (cfg->iir_shift > 0)
-    {
-        // todo: limitar iir_shift a faixa segura (0..30) para evitar comportamento indefinido de shift.
-        ch->filtered += (raw - ch->filtered) >> cfg->iir_shift;
-        sample = ch->filtered;
-    }
-    else
-    {
-        /* Keep telemetry coherent when IIR is disabled. */
-        ch->filtered = raw;
-        sample = raw;
-    }
-
     if (!ch->initialized)
     {
-        ch->filtered = raw;
-        ch->prev_sample = (cfg->iir_shift > 0) ? ch->filtered : raw;
+        ch->prev_sample = raw;
         ch->integral = 0;
         ch->detected = false;
         ch->initialized = true;

@@ -27,12 +27,12 @@ static const grace_digit_id_t thermo_digits[] = {
     GRACE_DIGIT2_THERMOMETER
 };
 
-static const grace_digit_id_t clock_digits[] = {
-    GRACE_DIGIT0_CLOCK,
-    GRACE_DIGIT1_CLOCK,
-    GRACE_DIGIT2_CLOCK,
-    GRACE_DIGIT3_CLOCK
-};
+// static const grace_digit_id_t clock_digits[] = {
+//     GRACE_DIGIT0_CLOCK,
+//     GRACE_DIGIT1_CLOCK,
+//     GRACE_DIGIT2_CLOCK,
+//     GRACE_DIGIT3_CLOCK
+// };
 
 static void leds_all_on(void)
 {
@@ -43,13 +43,13 @@ static void leds_all_on(void)
 }
 
 
-static void leds_all_off(void)
-{
-    led_ctrl(S1, LED_OFF);
-    led_ctrl(S2, LED_OFF);
-    led_ctrl(S3, LED_OFF);
-    led_ctrl(S4, LED_OFF);
-}
+// static void leds_all_off(void)
+// {
+//     led_ctrl(S1, LED_OFF);
+//     led_ctrl(S2, LED_OFF);
+//     led_ctrl(S3, LED_OFF);
+//     led_ctrl(S4, LED_OFF);
+// }
 
 // todo: remover funcao comentada se nao houver plano de reutilizacao.
 
@@ -63,11 +63,11 @@ static volatile uint8_t fm_frame_ready_map = 0U;
 static volatile uint8_t fm_detection_map = 0U;
 static volatile capt_touch_data_t fm_capt_touch_data;
 static volatile uint16_t fm_raw0, fm_raw1, fm_raw2, fm_raw3;
+static volatile int32_t fm_raw_iir0, fm_raw_iir1, fm_raw_iir2, fm_raw_iir3;
 static volatile uint16_t fm_avg0, fm_avg1, fm_avg2, fm_avg3;
 static volatile uint16_t fm_baseline0, fm_baseline1, fm_baseline2, fm_baseline3;
 static volatile int32_t fm_delta0, fm_delta1, fm_delta2, fm_delta3;
 static volatile int32_t fm_di_integral0, fm_di_integral1, fm_di_integral2, fm_di_integral3;
-static volatile int32_t fm_di_filtered0, fm_di_filtered1, fm_di_filtered2, fm_di_filtered3;
 static volatile uint8_t fm_di_detected_map = 0U;
 static volatile uint32_t fm_loop_start_ms = 0U;
 static volatile uint32_t fm_loop_end_ms = 0U;
@@ -88,6 +88,10 @@ FMSTR_TSA_TABLE_BEGIN(touch_watch_table)
     FMSTR_TSA_RO_VAR(fm_raw1, FMSTR_TSA_UINT16)
     FMSTR_TSA_RO_VAR(fm_raw2, FMSTR_TSA_UINT16)
     FMSTR_TSA_RO_VAR(fm_raw3, FMSTR_TSA_UINT16)
+    FMSTR_TSA_RO_VAR(fm_raw_iir0, FMSTR_TSA_SINT32)
+    FMSTR_TSA_RO_VAR(fm_raw_iir1, FMSTR_TSA_SINT32)
+    FMSTR_TSA_RO_VAR(fm_raw_iir2, FMSTR_TSA_SINT32)
+    FMSTR_TSA_RO_VAR(fm_raw_iir3, FMSTR_TSA_SINT32)
     FMSTR_TSA_RO_VAR(fm_avg0, FMSTR_TSA_UINT16)
     FMSTR_TSA_RO_VAR(fm_avg1, FMSTR_TSA_UINT16)
     FMSTR_TSA_RO_VAR(fm_avg2, FMSTR_TSA_UINT16)
@@ -104,10 +108,6 @@ FMSTR_TSA_TABLE_BEGIN(touch_watch_table)
     FMSTR_TSA_RO_VAR(fm_di_integral1, FMSTR_TSA_SINT32)
     FMSTR_TSA_RO_VAR(fm_di_integral2, FMSTR_TSA_SINT32)
     FMSTR_TSA_RO_VAR(fm_di_integral3, FMSTR_TSA_SINT32)
-    FMSTR_TSA_RO_VAR(fm_di_filtered0, FMSTR_TSA_SINT32)
-    FMSTR_TSA_RO_VAR(fm_di_filtered1, FMSTR_TSA_SINT32)
-    FMSTR_TSA_RO_VAR(fm_di_filtered2, FMSTR_TSA_SINT32)
-    FMSTR_TSA_RO_VAR(fm_di_filtered3, FMSTR_TSA_SINT32)
     FMSTR_TSA_RO_VAR(fm_di_detected_map, FMSTR_TSA_UINT8)
     FMSTR_TSA_RO_VAR(fm_loop_start_ms, FMSTR_TSA_UINT32) // todo nao precisa 
     FMSTR_TSA_RO_VAR(fm_loop_end_ms, FMSTR_TSA_UINT32) // nao precisar
@@ -155,38 +155,38 @@ static void fmstr_touch_update(const touch_proc_t *touch, uint8_t key)
             // todo: substituir switch fixo (0..3) por arrays indexados para reduzir codigo duplicado.
             case 0U:
                 fm_raw0 = touch->raw_count[ch];
+                fm_raw_iir0 = touch->raw_iir[ch];
                 fm_avg0 = touch->frame_avg[ch];
                 fm_baseline0 = touch->frame_baseline[ch];
                 fm_delta0 = touch->frame_delta[ch];
                 fm_di_integral0 = di_snapshot[ch].integral;
-                fm_di_filtered0 = di_snapshot[ch].filtered;
                 break;
 
             case 1U:
                 fm_raw1 = touch->raw_count[ch];
+                fm_raw_iir1 = touch->raw_iir[ch];
                 fm_avg1 = touch->frame_avg[ch];
                 fm_baseline1 = touch->frame_baseline[ch];
                 fm_delta1 = touch->frame_delta[ch];
                 fm_di_integral1 = di_snapshot[ch].integral;
-                fm_di_filtered1 = di_snapshot[ch].filtered;
                 break;
 
             case 2U:
                 fm_raw2 = touch->raw_count[ch];
+                fm_raw_iir2 = touch->raw_iir[ch];
                 fm_avg2 = touch->frame_avg[ch];
                 fm_baseline2 = touch->frame_baseline[ch];
                 fm_delta2 = touch->frame_delta[ch];
                 fm_di_integral2 = di_snapshot[ch].integral;
-                fm_di_filtered2 = di_snapshot[ch].filtered;
                 break;
 
             default:
                 fm_raw3 = touch->raw_count[ch];
+                fm_raw_iir3 = touch->raw_iir[ch];
                 fm_avg3 = touch->frame_avg[ch];
                 fm_baseline3 = touch->frame_baseline[ch];
                 fm_delta3 = touch->frame_delta[ch];
                 fm_di_integral3 = di_snapshot[ch].integral;
-                fm_di_filtered3 = di_snapshot[ch].filtered;
                 break;
         }
 
@@ -314,7 +314,7 @@ int main(void)
                     touch_proc_delta(&touchDetect);
 					uint8_t key = touch_detect_key(&touchDetect);
                     // uint8_t key_map = touch_detect_keys_mask(&touchDetect);
-					uint8_t display_channel = (touchDetect.current_channel < CAPT_BTN_COUNT) ? (uint8_t)touchDetect.current_channel : 0U;
+					// uint8_t display_channel = (touchDetect.current_channel < CAPT_BTN_COUNT) ? (uint8_t)touchDetect.current_channel : 0U;
 					// uint16_t display_avg = touchDetect.frame_avg[display_channel];
 
                     // /* Thermometer: show channel average value using 3 digits. */

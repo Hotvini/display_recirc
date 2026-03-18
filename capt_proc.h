@@ -17,7 +17,7 @@
                                 kCAPT_X3Pin}
 // todo: manter apenas uma fonte de verdade para pinos habilitados (este array vs CAPT_ENABLE_PINS).
 
-#define TOUCH_FRAME_WINDOW     5U // todo: 1U para sistema sem média - média maior = menor ruído e maior latência
+#define TOUCH_FRAME_WINDOW     3U // todo: 1U para sistema sem média - média maior = menor ruído e maior latência
 // todo: mover janela para perfil por produto/placa (build flag ou NVM) para evitar reteste via recompilacao.
 
 #define CAPT_POLL_TIMEOUT_MS  20U // timeout em polling mode
@@ -30,14 +30,15 @@
 #define CAPT_BASELINE_STABLE_FRAMES    24U
 #define CAPT_BASELINE_COMMON_MODE_TOL  8U
 
-/* DI input source: 0 = raw_count - baseline, 1 = frame_avg - baseline, 2 = raw_count */
+/* DI input source: 0 = raw_iir - baseline, 1 = frame_avg - baseline, 2 = raw_iir */
 #define CAPT_DI_USE_RAW_INPUT  2U
+/* Pre-DI IIR filter over raw_count (0 disables filtering). */
+#define CAPT_DI_INPUT_IIR_SHIFT    2U
 // todo: consolidar parametros DI em uma struct de configuracao para reduzir macros espalhadas no cabecalho.
-#define CAPT_DI_DT                 0U
-#define CAPT_DI_IT                 40
-#define CAPT_DI_LEAK_NUM           99U
+#define CAPT_DI_DT                 8U
+#define CAPT_DI_IT                 40U
+#define CAPT_DI_LEAK_NUM           95U
 #define CAPT_DI_LEAK_DEN           100U
-#define CAPT_DI_IIR_SHIFT          6U
 #define CAPT_DI_INTEGRAL_MAX       1024
 /* Inverted DI mode: detect the channel with smallest DI variation while others vary. */
 #define CAPT_DI_INVERT_MINVAR_MODE    0U
@@ -77,13 +78,13 @@ typedef enum {
 
 typedef struct {
     uint16_t raw_count[CAPT_BTN_COUNT];
+    int32_t raw_iir[CAPT_BTN_COUNT];
+    int32_t raw_iir_error[CAPT_BTN_COUNT];
+    bool raw_iir_initialized[CAPT_BTN_COUNT];
 	uint16_t frame[CAPT_BTN_COUNT][TOUCH_FRAME_WINDOW];
     uint32_t frame_sum[CAPT_BTN_COUNT];
-    //uint64_t frame_sum_sq[CAPT_BTN_COUNT];
 	uint16_t frame_avg[CAPT_BTN_COUNT];
     uint16_t frame_baseline[CAPT_BTN_COUNT];
-    //uint32_t frame_variance[CAPT_BTN_COUNT];
-    //uint16_t frame_stddev[CAPT_BTN_COUNT];
     int32_t frame_delta[CAPT_BTN_COUNT];
     uint8_t frame_position;
     bool sample_timed_out[CAPT_BTN_COUNT];

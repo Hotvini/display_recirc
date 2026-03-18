@@ -40,10 +40,6 @@
 
 #else
 // todo: habilitar yes e no touch ao mesmo tempo para teste
-// #define ENABLE_CAPT_INTERRUPTS                                                                     \
-//     CAPT_EnableInterrupts(CAPT_PERIPHERAL,                                                         \
-//                           kCAPT_InterruptOfYesTouchEnable | kCAPT_InterruptOfNoTouchEnable |      \
-//                               kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
 #define ENABLE_CAPT_INTERRUPTS CAPT_EnableInterrupts(CAPT_PERIPHERAL, kCAPT_InterruptOfTimeOutEnable | kCAPT_InterruptOfPollDoneEnable)
 #endif
 
