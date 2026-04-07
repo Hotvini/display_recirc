@@ -16,7 +16,10 @@
 #include "buzzer.h"
 #include "capt_proc.h"
 #include "display_hal.h"
+#include "freemaster_cfg.h"
+#if APP_USE_FREEMASTER
 #include "freemaster.h"
+#endif
 
 
 /* ===================== Display maps ===================== */
@@ -26,6 +29,9 @@ static const grace_digit_id_t thermo_digits[] = {
     GRACE_DIGIT1_THERMOMETER,
     GRACE_DIGIT2_THERMOMETER
 };
+
+#define BUZZER_BEEP_INTERVAL_MS 4000U
+#define BUZZER_BEEP_ON_TIME_MS  2000U
 
 // static const grace_digit_id_t clock_digits[] = {
 //     GRACE_DIGIT0_CLOCK,
@@ -40,6 +46,26 @@ static void leds_all_on(void)
 	led_ctrl(S2, LED_ON);
 	led_ctrl(S3, LED_ON);
 	led_ctrl(S4, LED_ON);
+}
+
+static void buzzer_task(void)
+{
+    static uint32_t next_beep_ms = 0U;
+    static uint32_t beep_off_ms = 0U;
+    uint32_t now_ms = systick_get_ms();
+
+    if ((beep_off_ms != 0U) && ((int32_t)(now_ms - beep_off_ms) >= 0))
+    {
+        buzzer_off();
+        beep_off_ms = 0U;
+    }
+
+    if ((int32_t)(now_ms - next_beep_ms) >= 0)
+    {
+        buzzer_on();
+        beep_off_ms = now_ms + BUZZER_BEEP_ON_TIME_MS;
+        next_beep_ms = now_ms + BUZZER_BEEP_INTERVAL_MS;
+    }
 }
 
 
@@ -57,6 +83,7 @@ static void leds_all_on(void)
 
 
 static touch_proc_t touchDetect;
+#if APP_USE_FREEMASTER
 static volatile uint8_t fm_key = CAPT_BTN_COUNT;
 static volatile uint8_t fm_channel = 0U;
 static volatile uint8_t fm_frame_ready_map = 0U;
@@ -72,12 +99,14 @@ static volatile uint8_t fm_di_detected_map = 0U;
 static volatile uint32_t fm_loop_start_ms = 0U;
 static volatile uint32_t fm_loop_end_ms = 0U;
 static volatile uint32_t fm_loop_duration_ms = 0U;
+#endif
 // todo: agrupar variaveis FMSTR em structs/arrays para reduzir repeticao e facilitar expansao de canais.
 // todo: define para habilitar/desabilitar telemetria FMSTR para reduzir overhead em build de producao.
 
 #define TOUCH_CALIB_SETTLE_MS 5000U
 #define TOUCH_CALIB_MAX_MS    100000U
 
+#if APP_USE_FREEMASTER
 FMSTR_TSA_TABLE_BEGIN(touch_watch_table)
     FMSTR_TSA_RO_VAR(fm_key, FMSTR_TSA_UINT8)
     FMSTR_TSA_RO_VAR(fm_channel, FMSTR_TSA_UINT8)
@@ -200,6 +229,13 @@ static void fmstr_touch_update(const touch_proc_t *touch, uint8_t key)
     fm_detection_map = detection_map;
     fm_di_detected_map = di_detected_map;
 }
+#else
+static void fmstr_touch_update(const touch_proc_t *touch, uint8_t key)
+{
+    (void)touch;
+    (void)key;
+}
+#endif
 
 int main(void)
 {
@@ -210,11 +246,14 @@ int main(void)
 
     systick_init();
     buzzer_init();
+    buzzer_play_startup_melody();
 	display_hal_init();
 
     capt_init();
 	capt_proc_init(&touchDetect);
+#if APP_USE_FREEMASTER
     FMSTR_Init();
+#endif
 
 	//leds_all_on();
 	//grace_all_on();
@@ -223,7 +262,10 @@ int main(void)
     {
         uint32_t loop_start_ms = systick_get_ms();
 
+#if APP_USE_FREEMASTER
         fm_loop_start_ms = loop_start_ms;
+#endif
+        buzzer_task();
 
     	/* ===================== CAPT task ===================== */
 		// todo: extrair politica de escalonamento de canal para funcao dedicada e simplificar leitura do loop.
@@ -340,10 +382,14 @@ int main(void)
 		}
         else
         {
+#if APP_USE_FREEMASTER
             fmstr_touch_update(&touchDetect, fm_key);
+#endif
         }
+#if APP_USE_FREEMASTER
         FMSTR_Poll();
         fm_loop_end_ms = systick_get_ms();
         fm_loop_duration_ms = fm_loop_end_ms - loop_start_ms;
+#endif
     }
 }

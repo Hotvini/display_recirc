@@ -35,6 +35,7 @@ typedef struct {
     uint8_t mask;   // bit dentro do byte
 } grace_map_t;
 
+#if DISPLAY_VERSION == 1
 static const grace_map_t grace_icon_map[GRACE_ICON_COUNT] = {
     [GRACE_ICON_WIFI]        = { .addr = 0x0E, .mask = (1 << 0) },
     [GRACE_ICON_PUMP]        = { .addr = 0x0E, .mask = (1 << 1) },
@@ -61,6 +62,35 @@ static const grace_map_t grace_dot_map[GRACE_DOT_COUNT] = {
     [GRACE_DOT0_CLOCK]       = { .addr = 0x09, .mask = (1 << 0) },
     [GRACE_DOT1_CLOCK]       = { .addr = 0x0B, .mask = (1 << 0) },
 };
+
+#elif DISPLAY_VERSION == 2
+static const grace_map_t grace_icon_map[GRACE_ICON_COUNT] = {
+    [GRACE_ICON_WIFI]        = { .addr = 0x01, .mask = 0X03 },
+    [GRACE_ICON_PUMP]        = { .addr = 0x03, .mask = 0X03 },
+    [GRACE_ICON_CELSIUS]     = { .addr = 0x04, .mask = (1 << 7) },
+    [GRACE_ICON_CONFIG_MODE] = { .addr = 0x07, .mask = 0X03 },
+    [GRACE_ICON_MANUAL_MODE] = { .addr = 0x05, .mask = 0X03 },
+    [GRACE_ICON_AUTO_MODE]   = { .addr = 0x0B, .mask = 0X03 },
+    [GRACE_ICON_ALERT]       = { .addr = 0x0D, .mask = 0X03 }, // ((1 << 0) & (1 << 1))
+};
+
+static const grace_map_t grace_week_map[GRACE_WEEK_COUNT] = {
+    [GRACE_WEEK_DOM]        = { .addr = 0x0E, .mask = (1 << 0) },
+    [GRACE_WEEK_SEG]        = { .addr = 0x0E, .mask = (1 << 1) },
+    [GRACE_WEEK_TER]        = { .addr = 0x0E, .mask = (1 << 2) },
+    [GRACE_WEEK_QUA]        = { .addr = 0x0E, .mask = (1 << 3) },
+    [GRACE_WEEK_QUI]        = { .addr = 0x0E, .mask = (1 << 4) },
+    [GRACE_WEEK_SEX]        = { .addr = 0x0E, .mask = (1 << 5) },
+    [GRACE_WEEK_SAB]        = { .addr = 0x0E, .mask = (1 << 6) }
+};
+
+static const grace_map_t grace_dot_map[GRACE_DOT_COUNT] = {
+    [GRACE_DOT0_THERMOMETER] = { .addr = 0x00, .mask = (1 << 7) },
+    [GRACE_DOT1_THERMOMETER] = { .addr = 0x02, .mask = (1 << 7) },
+    [GRACE_DOT0_CLOCK]       = { .addr = 0x08, .mask = (1 << 7) },
+    [GRACE_DOT1_CLOCK]       = { .addr = 0x0A, .mask = (1 << 7) },
+};
+#endif
 
 static const grace_map_t grace_digit_map[GRACE_DIGIT_COUNT] = {
     [GRACE_DIGIT0_THERMOMETER] = { .addr = 0x00, .mask = 0x7F },

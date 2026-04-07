@@ -10,6 +10,59 @@
 #include "fsl_reset.h"
 #include "systick.h"
 
+#define REST      0U
+#define NOTE_A3   220U
+#define NOTE_AS4  466U
+#define NOTE_B4   494U
+#define NOTE_B5   988U
+#define NOTE_C4   262U
+#define NOTE_C5   523U
+#define NOTE_C6   1047U
+#define NOTE_CS5  554U
+#define NOTE_D5   587U
+#define NOTE_D6   1175U
+#define NOTE_DS5  622U
+#define NOTE_E4   330U
+#define NOTE_E5   659U
+#define NOTE_E6   1319U
+#define NOTE_F4   349U
+#define NOTE_F5   698U
+#define NOTE_FS4  370U
+#define NOTE_FS5  740U
+#define NOTE_G4   392U
+#define NOTE_G5   784U
+#define NOTE_GS4  415U
+#define NOTE_GS5  831U
+#define NOTE_A4   440U
+#define NOTE_A5   880U
+#define NOTE_AS5  932U
+
+#define BUZZER_STARTUP_TEMPO            140U
+#define BUZZER_WHOLE_NOTE_MS            ((60000U * 2U) / BUZZER_STARTUP_TEMPO)
+#define BUZZER_NOTE_DURATION_MS(divider) \
+    ((uint16_t)(((divider) > 0) ? \
+    (BUZZER_WHOLE_NOTE_MS / (uint32_t)(divider)) : \
+    ((BUZZER_WHOLE_NOTE_MS / (uint32_t)(-(divider))) * 3U / 2U)))
+#define BUZZER_NOTE(note, divider)      { (uint16_t)(note), BUZZER_NOTE_DURATION_MS(divider) }
+
+static const buzzer_note_t buzzer_startup_melody[] = {
+    BUZZER_NOTE(NOTE_B4, -4), BUZZER_NOTE(NOTE_E5, -4), BUZZER_NOTE(NOTE_B4, -4), BUZZER_NOTE(NOTE_E5, -4),
+    BUZZER_NOTE(NOTE_B4, 8), BUZZER_NOTE(NOTE_E5, -4), BUZZER_NOTE(NOTE_B4, 8), BUZZER_NOTE(REST, 8), BUZZER_NOTE(NOTE_AS4, 8), BUZZER_NOTE(NOTE_B4, 8),
+    BUZZER_NOTE(NOTE_B4, 8), BUZZER_NOTE(NOTE_AS4, 8), BUZZER_NOTE(NOTE_B4, 8), BUZZER_NOTE(NOTE_A4, 8), BUZZER_NOTE(REST, 8), BUZZER_NOTE(NOTE_GS4, 8), BUZZER_NOTE(NOTE_A4, 8), BUZZER_NOTE(NOTE_G4, 8),
+    BUZZER_NOTE(NOTE_G4, 4), BUZZER_NOTE(NOTE_E4, -2),
+    BUZZER_NOTE(NOTE_B4, -4), BUZZER_NOTE(NOTE_E5, -4), BUZZER_NOTE(NOTE_B4, -4), BUZZER_NOTE(NOTE_E5, -4),
+    BUZZER_NOTE(NOTE_B4, 8), BUZZER_NOTE(NOTE_E5, -4), BUZZER_NOTE(NOTE_B4, 8), BUZZER_NOTE(REST, 8), BUZZER_NOTE(NOTE_AS4, 8), BUZZER_NOTE(NOTE_B4, 8),
+    BUZZER_NOTE(NOTE_A4, -4), BUZZER_NOTE(NOTE_A4, -4), BUZZER_NOTE(NOTE_GS4, 8), BUZZER_NOTE(NOTE_A4, -4),
+    BUZZER_NOTE(NOTE_D5, 8), BUZZER_NOTE(NOTE_C5, -4), BUZZER_NOTE(NOTE_B4, -4), BUZZER_NOTE(NOTE_A4, -4),
+    BUZZER_NOTE(NOTE_B4, -4), BUZZER_NOTE(NOTE_E5, -4), BUZZER_NOTE(NOTE_B4, -4), BUZZER_NOTE(NOTE_E5, -4),
+    BUZZER_NOTE(NOTE_B4, 8), BUZZER_NOTE(NOTE_E5, -4), BUZZER_NOTE(NOTE_B4, 8), BUZZER_NOTE(REST, 8), BUZZER_NOTE(NOTE_AS4, 8), BUZZER_NOTE(NOTE_B4, 8),
+    BUZZER_NOTE(NOTE_D5, 4), BUZZER_NOTE(NOTE_D5, -4), BUZZER_NOTE(NOTE_B4, 8), BUZZER_NOTE(NOTE_A4, -4),
+    BUZZER_NOTE(NOTE_G4, -4), BUZZER_NOTE(NOTE_E4, -2),
+    BUZZER_NOTE(NOTE_E4, 2), BUZZER_NOTE(NOTE_G4, 2),
+    BUZZER_NOTE(NOTE_B4, 2), BUZZER_NOTE(NOTE_D5, 2),
+    BUZZER_NOTE(NOTE_F5, -4), BUZZER_NOTE(NOTE_E5, -4), BUZZER_NOTE(NOTE_AS4, 8), BUZZER_NOTE(NOTE_AS4, 8), BUZZER_NOTE(NOTE_B4, 4), BUZZER_NOTE(NOTE_G4, 4),
+};
+
 void buzzer_init(void)
 {
 	ctimer_config_t config;
@@ -79,10 +132,15 @@ void buzzer_play_melody(const buzzer_note_t *melody, uint32_t len)
             buzzer_off();
         }
 
-        SDK_DelayAtLeastUs(melody[i].dur_ms * 1000,BUZZER_CLOCK_FREQ);
+        delay_ms(melody[i].dur_ms);
     }
 
     buzzer_off();
+}
+
+void buzzer_play_startup_melody(void)
+{
+    buzzer_play_melody(buzzer_startup_melody, sizeof(buzzer_startup_melody) / sizeof(buzzer_startup_melody[0]));
 }
 
 /*

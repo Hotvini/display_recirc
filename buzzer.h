@@ -18,7 +18,7 @@
 
 #define BUZZER_PERIOD kCTIMER_Match_1
 
-#define BUZZER_FREQ_HZ      3000   // 3 kHz
+#define BUZZER_FREQ_HZ      2000   // 3 kHz
 #define BUZZER_DUTY         50     // 50%
 
 #define BUZZER_CLOCK_FREQ   CLOCK_GetFreq(kCLOCK_MainClk)
@@ -43,5 +43,6 @@ void buzzer_on(void);
 void buzzer_off(void);
 void buzzer_beep_ms(uint32_t ms);
 void buzzer_play_melody(const buzzer_note_t *melody, uint32_t len);
+void buzzer_play_startup_melody(void);
 
 #endif /* BUZZER_H_ */

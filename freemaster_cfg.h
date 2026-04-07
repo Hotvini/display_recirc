@@ -1,11 +1,14 @@
 #ifndef __FREEMASTER_CFG_H
 #define __FREEMASTER_CFG_H
 
+/* App-level switch: set to 1 to build FreeMASTER support, 0 to compile it out. */
+#define APP_USE_FREEMASTER     0
+
 /* Target CPU family used by the FreeMASTER core. */
 #define FMSTR_PLATFORM_CORTEX_M 1
 
 /* Master on/off switch for the FreeMASTER integration. */
-#define FMSTR_DISABLE           0
+#define FMSTR_DISABLE           (APP_USE_FREEMASTER ? 0 : 1)
 
 /* Interrupt-driven servicing is disabled; polling is used instead. */
 #define FMSTR_LONG_INTR         0

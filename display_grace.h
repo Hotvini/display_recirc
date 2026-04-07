@@ -38,6 +38,8 @@
 
 GRACE_BEGIN
 
+#define DISPLAY_VERSION 2U
+
 typedef enum {
     GRACE_ICON_WIFI,
     GRACE_ICON_PUMP,
