@@ -12,7 +12,7 @@
 !!GlobalInfo
 product: Clocks v17.0
 processor: LPC804
-package_id: LPC804M101JHI33
+package_id: LPC804M101JDH20
 mcu_data: ksdk2_0
 processor_version: 25.06.10
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/

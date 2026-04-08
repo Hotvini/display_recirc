@@ -44,38 +44,16 @@ void BOARD_InitPins(void)
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_17, IOCON_INDEX_PIO0_config);
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_13, IOCON_INDEX_PIO0_config);
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_12, IOCON_INDEX_PIO0_config);
-	//IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_5, IOCON_INDEX_PIO0_config);
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_4, IOCON_INDEX_PIO0_config);
-	//IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_3, IOCON_INDEX_PIO0_config);
-	//IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_2, IOCON_INDEX_PIO0_config);
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_11, IOCON_INDEX_PIO0_config);
-
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_10, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_21, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_29, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_28, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_27, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_26, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_20, IOCON_INDEX_PIO0_config);
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_15, IOCON_INDEX_PIO0_config);
-
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_1, IOCON_INDEX_PIO0_config);
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_9, IOCON_INDEX_PIO0_config);
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_8, IOCON_INDEX_PIO0_config);
-	//vdd
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_30, IOCON_INDEX_PIO0_config);
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_7, IOCON_INDEX_PIO0_config);
-	//vrefp
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_0, IOCON_INDEX_PIO0_config);
-
 	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_14, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_19, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_25, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_24, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_23, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_22, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_18, IOCON_INDEX_PIO0_config);
-	IOCON_PinMuxSet(IOCON, IOCON_INDEX_PIO0_16, IOCON_INDEX_PIO0_config);
 	// todo: avaliar inicializacao por tabela para reduzir repeticao de IOCON_PinMuxSet.
 	// todo: limpar linhas comentadas de pinos desativados quando mapeamento final estiver fechado.
 
@@ -89,29 +67,20 @@ void BOARD_InitPins(void)
     /* I2C0_SCL connect to P0_17 */
     SWM_SetMovablePinSelect(SWM0, kSWM_I2C0_SCL, kSWM_PortPin_P0_17);
 
-    /* TimerMatchChannel0 connect to P0_8 */
-    SWM_SetMovablePinSelect(SWM0, kSWM_T0_MAT_CHN0, kSWM_PortPin_P0_8);
+    /* TimerMatchChannel0 connect to P0_14 */
+    SWM_SetMovablePinSelect(SWM0, kSWM_T0_MAT_CHN0, kSWM_PortPin_P0_14);
 
-    /* CAPT_X0 connect to P0_20 */
-    SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_X0, kSWM_PortPin_P0_20);
+    /* CAPT_X0 connect to P0_15 */
+    SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_X0, kSWM_PortPin_P0_15);
 
-    /* CAPT_X1 connect to P0_26 */
-    SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_X1, kSWM_PortPin_P0_26);
+    /* CAPT_X1 connect to P0_1 */
+    SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_X1, kSWM_PortPin_P0_1);
 
-    /* CAPT_X2 connect to P0_21 */
-    SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_X2, kSWM_PortPin_P0_21);
+    /* CAPT_X2 connect to P0_9 */
+    SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_X2, kSWM_PortPin_P0_9);
 
-    /* CAPT_X3 connect to P0_10 */
-    SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_X3, kSWM_PortPin_P0_10);
-
-    /* CAPT_X4 connect to P0_30 */
-    SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_X4, kSWM_PortPin_P0_30);
-
-    /* CAPT_YL connect to P0_15 */
-    SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_YL, kSWM_PortPin_P0_15);
-
-    /* CAPT_YH connect to P0_9 */
-    SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_YH, kSWM_PortPin_P0_9);
+    /* CAPT_X3 connect to P0_8 */
+    SWM_SetMovablePinSelect(SWM0, kSWM_CAPT_X3, kSWM_PortPin_P0_8);
 
     /* ACMP_INPUT2 connect to P0_1 */
     SWM_SetFixedPinSelect(SWM0, kSWM_ACMP_INPUT2, true);
@@ -133,24 +102,6 @@ void BOARD_InitPins(void)
         .outputLogic = 1U,
     };
     GPIO_PinInit(BOARD_INITPINS_DIO_GPIO, BOARD_INITPINS_DIO_PORT, BOARD_INITPINS_DIO_PIN, &DIO_config);
-
-    gpio_pin_config_t LED_S2_config = {
-        .pinDirection = kGPIO_DigitalOutput,
-        .outputLogic = 0U,
-    };
-    GPIO_PinInit(BOARD_INITPINS_LED_S2_GPIO, BOARD_INITPINS_LED_S2_PORT, BOARD_INITPINS_LED_S2_PIN, &LED_S2_config);
-
-    gpio_pin_config_t LED_S3_config = {
-        .pinDirection = kGPIO_DigitalOutput,
-        .outputLogic = 0U,
-    };
-    GPIO_PinInit(BOARD_INITPINS_LED_S3_GPIO, BOARD_INITPINS_LED_S3_PORT, BOARD_INITPINS_LED_S3_PIN, &LED_S3_config);
-
-    gpio_pin_config_t LED_S4_config = {
-        .pinDirection = kGPIO_DigitalOutput,
-        .outputLogic = 0U,
-    };
-    GPIO_PinInit(BOARD_INITPINS_LED_S4_GPIO, BOARD_INITPINS_LED_S4_PORT, BOARD_INITPINS_LED_S4_PIN, &LED_S4_config);
 
     gpio_pin_config_t CLK_config = {
         .pinDirection = kGPIO_DigitalOutput,

@@ -43,9 +43,6 @@ static const grace_digit_id_t thermo_digits[] = {
 static void leds_all_on(void)
 {
 	led_ctrl(S1, LED_ON);
-	led_ctrl(S2, LED_ON);
-	led_ctrl(S3, LED_ON);
-	led_ctrl(S4, LED_ON);
 }
 
 static void buzzer_task(void)
@@ -72,9 +69,6 @@ static void buzzer_task(void)
 // static void leds_all_off(void)
 // {
 //     led_ctrl(S1, LED_OFF);
-//     led_ctrl(S2, LED_OFF);
-//     led_ctrl(S3, LED_OFF);
-//     led_ctrl(S4, LED_OFF);
 // }
 
 // todo: remover funcao comentada se nao houver plano de reutilizacao.

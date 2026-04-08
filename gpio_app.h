@@ -10,9 +10,6 @@
 
 typedef enum {
     S1,
-    S2,
-    S3,
-    S4,
     S_COUNT
 } button_led_id_t;
 
