@@ -23,26 +23,9 @@
 
 #define BUZZER_CLOCK_FREQ   CLOCK_GetFreq(kCLOCK_MainClk)
 
-#define NOTE_C4   262
-#define NOTE_D4   294
-#define NOTE_E4   330
-#define NOTE_F4   349
-#define NOTE_G4   392
-#define NOTE_A4   440
-#define NOTE_B4   494
-#define NOTE_C5   523
-// todo: remover notas nao utilizadas ou mover para modulo de melodias para reduzir poluicao de header.
-
-typedef struct {
-    uint16_t freq;
-    uint16_t dur_ms;
-} buzzer_note_t;
-
 void buzzer_init(void);
 void buzzer_on(void);
 void buzzer_off(void);
 void buzzer_beep_ms(uint32_t ms);
-void buzzer_play_melody(const buzzer_note_t *melody, uint32_t len);
-void buzzer_play_startup_melody(void);
 
 #endif /* BUZZER_H_ */

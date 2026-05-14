@@ -65,27 +65,6 @@ static void buzzer_task(void)
     }
 }
 
-static void buzzer_task(void)
-{
-    static uint32_t next_beep_ms = 0U;
-    static uint32_t beep_off_ms = 0U;
-    uint32_t now_ms = systick_get_ms();
-
-    if ((beep_off_ms != 0U) && ((int32_t)(now_ms - beep_off_ms) >= 0))
-    {
-        buzzer_off();
-        beep_off_ms = 0U;
-    }
-
-    if ((int32_t)(now_ms - next_beep_ms) >= 0)
-    {
-        buzzer_on();
-        beep_off_ms = now_ms + BUZZER_BEEP_ON_TIME_MS;
-        next_beep_ms = now_ms + BUZZER_BEEP_INTERVAL_MS;
-    }
-}
-
-
 // static void leds_all_off(void)
 // {
 //     led_ctrl(S1, LED_OFF);
@@ -259,8 +238,7 @@ int main(void)
     BOARD_InitBootClocks();
 
     systick_init();
-    buzzer_init();
-    buzzer_play_startup_melody();
+    //buzzer_init();
 	display_hal_init();
 
     capt_init();
@@ -279,7 +257,7 @@ int main(void)
 #if APP_USE_FREEMASTER
         fm_loop_start_ms = loop_start_ms;
 #endif
-        buzzer_task();
+        //buzzer_task();
 
     	/* ===================== CAPT task ===================== */
 		// todo: extrair politica de escalonamento de canal para funcao dedicada e simplificar leitura do loop.
